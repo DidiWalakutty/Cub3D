@@ -1,2 +1,4 @@
 # Cub3D
-A ray-casting game, inspired by the Wolfenstein 3D game.
+
+Welcome to our Cub3D!
+This collab group project was created with [Yaz]([link](https://github.com/Y4ZK4Y)).
