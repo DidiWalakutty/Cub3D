@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/10/26 12:25:48 by ykarimi       #+#    #+#                 */
-/*   Updated: 2024/11/26 18:44:30 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/20 18:39:01 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
+//#define READ_BUFFER_SIZE 1024
+
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -24,6 +26,9 @@
 # include <limits.h>
 # include <stdint.h>
 # include <stdbool.h>
+# include <stdio.h>
+# include <errno.h>
+
 
 /*
 ** Character Class Tests
@@ -88,6 +93,14 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+// typedef struct s_reader
+// {
+// 	int		fd;
+// 	char	buffer[READ_BUFFER_SIZE];
+// 	int		buffer_pos;
+// 	int		buffer_size;
+// }				t_reader;
+
 /*
 ** The Bonus Functions
 */
@@ -109,5 +122,9 @@ char	*remove_returned_line(char *remaining_buffer, int *flag);
 char	*ftt_strjoin(char *s1, char *s2);
 char	*allocate_memory(int i);
 void	copy_characters(char *remaining_buffer, char *extracted_line);
+
+/* ft_fgets */
+// char	*custom_fgets(char *dest, int size, t_reader *reader);
+// void	file_reader_init(t_reader *reader, int fd);
 
 #endif
