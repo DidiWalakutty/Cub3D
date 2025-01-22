@@ -2,8 +2,8 @@ NAME := cub3d
 
 # Compilation
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
-MLX42FLAGS = -lglfw
+CFLAGS := -Wall 
+#MLX42FLAGS = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_INCLUDES := -I./lib/libft/include
 MLX_INCLUDES := -I./lib/MLX42/include/MLX42
 cub3d_INCLUDES := -I./include
@@ -16,13 +16,29 @@ SRC_DIR := src
 INC_DIR := include
 LIBFT := lib/libft/libft.a
 MLX42 = lib/MLX42/build/libmlx42.a
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/**/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+
+# OS Spe
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    MLX42FLAGS = -lglfw -lm -ldl -lX11 -lpthread
+endif
+
+ifeq ($(UNAME_S),Darwin)
+    MLX42FLAGS = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+endif
+
+ifeq ($(OS),Windows_NT)
+    CC := gcc
+    CFLAGS := -Wall -Wextra -Werror
+    MLX42FLAGS = -lglfw3 -lgdi32 -lopengl32
+endif
 
 all: $(NAME)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(BUILD_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(LIBFT) $(MLX42) $(OBJS)
