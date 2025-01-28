@@ -6,29 +6,11 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:14 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 14:40:21 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 17:06:49 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void cleanup(t_cub3d *game)
-{
-    if (game->input)
-    {
-        if (game->input->map)
-        {
-            if (game->input->map->player)
-                free(game->input->map->player);
-            free(game->input->map);
-        }
-        free(game->input);
-    }
-    if (game->map_data)
-        free(game->map_data);
-    if (game->player)
-        free(game->player);
-}
 
 int	main(int argc, char *argv[])
 {
@@ -43,10 +25,9 @@ int	main(int argc, char *argv[])
 	ft_bzero(game.input, sizeof(t_input));
 	if (parse_file(argv, game.input) == 1)
 	{
-		free(game.input);
+		cleanup(&game);
 		return (1);
 	}
-	// temporary cleanup
-	cleanup(&game);
+	cleanup(&game); // temporary cleanup
 	return (0);
 }

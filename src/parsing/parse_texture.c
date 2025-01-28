@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 12:16:54 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 17:54:52 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	bool has_xpm_extension(const char *filename)
 	ext_len = ft_strlen(ext);
 	len = ft_strlen(filename);
 	if (len < ext_len)
-		return (false);
+		return (print_error("Texture doesn't have xpm extension."), false);
 	return (ft_strncmp(filename + len - ext_len, ext, ext_len) == 0);
 }
 
@@ -46,15 +46,18 @@ static	bool has_xpm_extension(const char *filename)
 static	bool set_texture(char *line, char **texture, const char *prefix, t_input *content)
 {
 	char	*texture_path;
+	char	*trimmed;
 
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 	{
 		texture_path = ft_strdup(line + ft_strlen(prefix));
-		if (!has_xpm_extension(texture_path))
+		trimmed = ft_strtrim(texture_path, " \t\n\r");
+		free(texture_path);
+		if (!has_xpm_extension(trimmed))
 		{
-			printf("Texture does not have .xpm extension: %s\n", texture_path);
-			free(texture_path);
-			return false;
+			//printf("Texture does not have .xpm extension: %s\n", texture_path);
+			//free(texture_path);
+			return (free(texture_path), false);
 		}
 		// if (is_texture_duplicate(texture_path, content))
 		// {
@@ -68,22 +71,51 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		//     free(texture_path);
 		//     return false;
 		// }
-		*texture = texture_path;
-		printf("Parsed Texture: %s\n", *texture);
-		return true;
+		*texture = trimmed;
+		//printf("Parsed Texture: %s\n", *texture);
+		return (true);
 	}
-	return false;
+	return (false);
 }
-// add white space trimmer
+
+static bool	validate_textures(t_input *content)
+{
+	if (!content->north_texture)
+	{
+		print_error("Missing North Texture.");
+		return (false);
+	}
+	if (!content->south_texture)
+	{
+		print_error("Missing South Texture.");
+		return (false);
+	}
+	if (!content->west_texture)
+	{
+		print_error("Missing West Texture.");
+		return (false);
+	}
+	if (!content->east_texture)
+	{
+		print_error("Missing East Texture.");
+		return (false);
+	}
+	return (true);
+}
+
+
 bool	parse_texture(char *line, t_input *content)
 {
 	if (set_texture(line, &content->north_texture, "NO ", content) ||
 		set_texture(line, &content->south_texture, "SO ", content) ||
 		set_texture(line, &content->west_texture, "WE ", content) ||
 		set_texture(line, &content->east_texture, "EA ", content))
-	{
-		return true;
-	}
-	printf("Failed to parse texture line: %s\n", line);
-	return false;
+		{
+			if (!validate_textures(content))
+				return (false);
+			else
+				return (true);
+		}
+	print_error("Failed to parse texture line");
+	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 14:00:19 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 18:05:36 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,124 @@ bool	is_valid_map_char(char c)
 	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
 
-bool	is_map_surrounded_by_walls(char **map)
+bool is_map_surrounded_by_walls(char **map)
 {
-	size_t	row_index;
-	size_t	col_index;
+    size_t row_index;
+    size_t col_index;
+    size_t last_row_index;
+    size_t last_col_index;
 
-	row_index = 0;
-	while (map[row_index])
+    // Calculate the last row and column indices
+    last_row_index = 0;
+    while (map[last_row_index])
+        last_row_index++;
+    last_row_index--;
+
+    // Trim trailing whitespace lines
+    while (last_row_index > 0 && ft_strlen(ft_strtrim(map[last_row_index], " \t\n\r")) == 0)
+        last_row_index--;
+
+    last_col_index = ft_strlen(map[0]) - 1;
+
+    // Check the first and last rows
+    for (col_index = 0; col_index <= last_col_index; col_index++)
+    {
+        if (map[0][col_index] != '1')
+        {
+            printf("First row not surrounded by walls at col_index: %zu, char: %c\n", col_index, map[0][col_index]);
+            return (print_error("Map is not surrounded by walls."), false);
+        }
+        if (map[last_row_index][col_index] != '1')
+        {
+            printf("Last row not surrounded by walls at col_index: %zu, char: %c\n", col_index, map[last_row_index][col_index]);
+            return (print_error("Map is not surrounded by walls."), false);
+        }
+    }
+
+    // Check the first and last columns of each row
+    for (row_index = 0; row_index <= last_row_index; row_index++)
+    {
+        if (map[row_index][0] != '1')
+        {
+            printf("First column not surrounded by walls at row_index: %zu, char: %c\n", row_index, map[row_index][0]);
+            return (print_error("Map is not surrounded by walls."), false);
+        }
+        if (map[row_index][last_col_index] != '1')
+        {
+            printf("Last column not surrounded by walls at row_index: %zu, char: %c\n", row_index, map[row_index][last_col_index]);
+            return (print_error("Map is not surrounded by walls."), false);
+        }
+    }
+
+    return true;
+}
+
+
+// bool	is_map_surrounded_by_walls(char **map)
+// {
+// 	size_t	row_index;
+// 	size_t	col_index;
+
+// 	row_index = 0;
+// 	while (map[row_index])
+// 	{
+// 		col_index = 0;
+// 		while (map[row_index][col_index])
+// 		{
+// 			if ((row_index == 0 || row_index == ft_strlen(map[row_index]) - 1 || col_index == 0 || col_index == ft_strlen(map[row_index]) - 1) && map[row_index][col_index] != '1')
+// 				return (print_error("Map is not surrounded by walls."), false);
+// 			col_index++;
+// 		}
+// 		row_index++;
+// 	}
+// 	return (true);
+// }
+
+
+
+
+bool	validate_map_characters(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
 	{
-		col_index = 0;
-		while (map[row_index][col_index])
+		j = 0;
+		while (map->grid[i][j])
 		{
-			if ((row_index == 0 || row_index == ft_strlen(map[row_index]) - 1 || col_index == 0 || col_index == ft_strlen(map[row_index]) - 1) && map[row_index][col_index] != '1')
-				return (false);
-			col_index++;
+			if (!is_valid_map_char(map->grid[i][j]))
+            {
+                print_error("Invalid map character.");
+                return (false);
+            }
+			j++;
 		}
-		row_index++;
-	}
-	return (true);
-}
-bool	validate_textures(t_input *content)
-{
-	if (!content->north_texture)
-	{
-		printf("Missing North Texture\n");
-		return (false);
-	}
-	if (!content->south_texture)
-	{
-		printf("Missing South Texture\n");
-		return (false);
-	}
-	if (!content->west_texture)
-	{
-		printf("Missing West Texture\n");
-		return (false);
-	}
-	if (!content->east_texture)
-	{
-		printf("Missing East Texture\n");
-		return (false);
+		i++;
 	}
 	return (true);
 }
 
+
+bool	is_map_last_in_file(char **lines, t_map *map)
+{
+    int		i;
+	char	*trimmed_line;
+	
+	i = map->last_index + 1;
+    while (lines[i])
+    {
+        trimmed_line = ft_strtrim(lines[i], " \t\n\r");
+        if (trimmed_line[0] != '\0' && !is_valid_map_char(trimmed_line[0]))
+        {
+			print_error("Map is not last in file.");
+            //printf("Illegal map content found after the map at line %d: %s\n", i, trimmed_line);
+            free(trimmed_line);
+            return (false);
+        }
+        free(trimmed_line);
+        i++;
+    }
+    return (true);
+}
