@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/01/22 18:43:32 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/01/28 14:24:04 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,22 @@
 # include "MLX42.h"
 # include "libft.h"
 
+typedef struct s_player
+{
+	int		x;
+	int		y;
+	char	orientation;
+	int		player_count;
+
+}	t_player;
+
 
 typedef struct s_map
 {
-	char	**grid;
-	// int		width;
-	// int		height;
+	char		**grid;
+	int			width;
+	int			height;
+	t_player	*player;
 	
 }		t_map;
 
@@ -45,18 +55,14 @@ typedef struct s_input
 
 }	t_input;
 
-// typedef struct s_player
-// {
 
-// }	t_player;
-
-// typedef struct s_cub3d
-// {
-// 	t_map		*map_data;
-// 	t_player	*player;
-// 	mlx_t		*mlx;
-	
-// }	t_cub3d;
+typedef struct s_cub3d
+{
+	t_input		*input;
+	t_map		*map_data;
+	t_player	*player;
+	mlx_t		*mlx;
+}	t_cub3d;
 
 
 /* Input Handling */
@@ -78,8 +84,17 @@ bool	is_valid_map_char(char c);
 bool	is_map_surrounded_by_walls(char **map);
 bool 	validate_textures(t_input *content);
 
-/* Error Handling Functions */
+/* Map Population */
+void	get_map_dimensions(t_map *map);
+int		populate_map(t_input *file_data);
+void	set_player_spawning_point(t_map *map, t_player *player);
+int		check_player_spawning_point(t_player *player);
+
+/* Error Handling */
 void	print_error(char *errormsg);
+
+/* Print for testing */
 void	print_parsed_content(t_input *content);
+void	print_map(char **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 12:16:44 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 14:36:35 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,19 @@ bool	extract_elements_from_file(char **lines, t_input *content, int *map_start_i
 	return (true);
 }
 
+int	init_map(t_input *file_data)
+{
+	file_data->map = malloc(sizeof(t_map));
+	if (!file_data->map)
+		return (-1);
+	ft_bzero(file_data->map, sizeof(t_map));
+	return (0);
+}
 
+
+/*
+not sure if i need to keep the end_index isntead (whihc one makes more sense and is more handy)
+*/
 int	parse_file(char *argv[], t_input *file_data)
 {
 	char	**lines;
@@ -110,16 +122,29 @@ int	parse_file(char *argv[], t_input *file_data)
 		printf("Map content is missing or invalid\n");
 		result = 1;
 	}
-	else if (!parse_map(lines, file_data, map_start_index))
-	{
-		printf("Parse map failed\n");
-		result = 1;
-	}
 	else
 	{
-		printf("Parsing completed successfully.\n");
+		if (init_map(file_data) == 1)
+		{
+			printf("Memory allocation for map failed\n");
+			return (1);
+		}
+		if (!parse_map(lines, file_data, map_start_index))
+		{
+			printf("Parse map failed\n");
+			result = 1;
+		}
+		else
+		{
+			printf("Parsing completed successfully.\n");
+		}
 	}
-	// populate map data
+	
+	if (populate_map(file_data) == 1)
+	{
+		printf("populating map failed\n");
+		return (1);
+	}
 	printf("-----------------\n\n");
 	print_parsed_content(file_data);
 	printf("-----------------\n\n");

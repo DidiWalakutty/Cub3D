@@ -6,12 +6,15 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:48 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 12:16:50 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 12:49:19 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
+might need to improve logic
+*/
 bool	is_map_last_in_file(char **lines, int map_start_index)
 {
 	int i = map_start_index;
@@ -57,8 +60,6 @@ bool	parse_map(char **lines, t_input *content, int map_start_index)
 		printf("Error: Map content is not the last part of the file\n");
 		return (false);
 	}
-
-	content->map = malloc(sizeof(t_map));
 	content->map->grid = lines + map_start_index;
 	if (!is_map_surrounded_by_walls(content->map->grid))
 	{

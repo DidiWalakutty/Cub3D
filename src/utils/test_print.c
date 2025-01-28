@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:09 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 12:17:10 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/28 13:58:56 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,17 @@ void	print_parsed_content(t_input *content)
 			printf("%s\n", content->map->grid[i]);
 			i++;
 		}
+	}
+}
+
+void	print_map(char **map)
+{
+	int row_index = 0;
+
+	printf("Map:\n");
+	while (map[row_index])
+	{
+		printf("%s\n", map[row_index]);
+		row_index++;
 	}
 }
