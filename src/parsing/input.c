@@ -1,19 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   input.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:23 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/01/29 12:31:42 by ykarimi       ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int	validate_map_extension(const char *filename)
+static bool	is_file_empty(char *file_content)
+{
+	while (*file_content)
+	{
+		if (!ft_isspace((unsigned char)*file_content))
+			return (false);
+		file_content++;
+	}
+	return (print_error("File is empty."), true);
+}
+
+static bool	is_file_extension_valid(const char *filename)
 {
 	size_t	len;
 
 	len = ft_strlen(filename);
 	if (len < 4 || ft_strncmp(filename + len - 4, ".cub", 4))
-		return (print_error("Map extension is not correct."), 1);
-	return (0);
+		return (print_error("File extension is not valid."), false);
+	return (true);
 }
 
 /*
 might need to improve the logic of this function, and/or get_next_line
 */
-char	*read_file(const char *pathname)
+static char	*read_file(const char *pathname)
 {
 	int		fd;
 	char	*line;
@@ -42,20 +65,16 @@ int	handle_input(const char *filename, char ***lines)
 {
 	char	*file_content;
 
+	if (!is_file_extension_valid(filename))
+		return (1);
 	file_content = read_file(filename);
 	if (!file_content)
 		return (1);
-	printf("File content:\n%s\n", file_content);
 	if (is_file_empty(file_content))
-	{
-		printf("File is empty\n");
-		free(file_content);
-		return (1);
-	}
+		return (free(file_content), 1);
 	*lines = ft_split(file_content, '\n');
 	free(file_content);
 	if (!*lines)
-		return 1;
-	printf("Split was successful\n");
+		return (1);
 	return (0);
 }
