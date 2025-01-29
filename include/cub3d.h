@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 12:45:04 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:48:36 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ bool	is_map_surrounded_by_walls(t_map *map);
 bool 	validate_textures(t_input *content);
 
 /* Map Population */
-void	get_map_dimensions(t_map *map);
-int		populate_map(t_input *file_data);
 void	set_player_spawning_point(t_map *map, t_player *player);
 int		check_player_spawning_point(t_player *player);
 

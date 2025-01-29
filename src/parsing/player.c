@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/29 12:42:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:43:47 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:48:00 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ void	set_player_spawning_point(t_map *map, t_player *player)
 				//map->grid[row_index][col_index] = '0'; // Replace player position with empty space
 				//printf("p count: %d\n", player_count);
 				player_count++;
-				//return ;
 			}
 			col_index++;
 		}
 		row_index++;
 	}
-	player->player_count = player_count;
+	//player->player_count = player_count;
 	//printf("player orientation: %c\n", player->orientation);
 	//printf("player count from inside first spawn func: %d\n", player_count);
 	//printf("player x pos: %d, player y: %d\n", player->x, player->y);
@@ -51,9 +50,9 @@ int	check_player_spawning_point(t_player *player)
 	if (player->player_count != 1)
 	{
 		if (player->player_count  == 0)
-			printf("No player\n");
+			print_error("No player.");
 		else
-			printf("Multiple players\n");
+			print_error("Multiple players.");
 		return (1);
 	}
 	return (0);
