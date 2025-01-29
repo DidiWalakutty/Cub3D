@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:14 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 11:50:59 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:27:18 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char *argv[])
 	ft_bzero(game.input, sizeof(t_input));
 	if (parse_file(argv, game.input) == 1)
 	{
-		printf("fail\n");
 		cleanup(&game);
 		return (1);
 	}

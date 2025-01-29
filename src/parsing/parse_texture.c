@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 11:54:54 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:39:40 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static	bool has_xpm_extension(const char *filename)
 		return (print_error("Texture doesn't have xpm extension."), false);
 	return (ft_strncmp(filename + len - ext_len, ext, ext_len) == 0);
 }
-
 // static bool texture_exists(const char *filename)
 // {
 //     struct stat buffer;
@@ -43,6 +42,7 @@ static	bool has_xpm_extension(const char *filename)
 // 		(content->west_texture && ft_strncmp(texture, content->west_texture, len) == 0) ||
 // 		(content->east_texture && ft_strncmp(texture, content->east_texture, len) == 0);
 // }
+
 static	bool set_texture(char *line, char **texture, const char *prefix, t_input *content)
 {
 	char	*texture_path;
@@ -54,11 +54,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		trimmed = ft_strtrim(texture_path, " \t\n\r");
 		free(texture_path);
 		if (!has_xpm_extension(trimmed))
-		{
-			//printf("Texture does not have .xpm extension: %s\n", texture_path);
-			//free(texture_path);
 			return (free(trimmed), false);
-		}
 		// if (is_texture_duplicate(texture_path, content))
 		// {
 		// 	printf("Duplicate texture: %s\n", texture_path);
@@ -73,7 +69,6 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		// }
 		*texture = trimmed;
 		free(trimmed);
-		//printf("Parsed Texture: %s\n", *texture);
 		return (true);
 	}
 	return (false);
@@ -83,28 +78,21 @@ bool	validate_textures(t_input *content)
 {
 	if (!content->north_texture)
 	{
-		//printf("north text: %s\n", content->south_texture);
-
 		print_error("Missing North Texture.");
 		return (false);
 	}
 	if (!content->south_texture)
 	{
-		//printf("south text: %s\n", content->south_texture);
 		print_error("Missing South Texture.");
 		return (false);
 	}
 	if (!content->west_texture)
 	{
-		//printf("west text: %s\n", content->south_texture);
-
 		print_error("Missing West Texture.");
 		return (false);
 	}
 	if (!content->east_texture)
 	{
-		//printf("east text: %s\n", content->south_texture);
-
 		print_error("Missing East Texture.");
 		return (false);
 	}
@@ -114,7 +102,6 @@ bool	validate_textures(t_input *content)
 
 bool	parse_texture(char *line, t_input *content)
 {
-	//printf("in parse texture func, line: %s\n", line);
 	if (set_texture(line, &content->north_texture, "NO ", content) ||
 		set_texture(line, &content->south_texture, "SO ", content) ||
 		set_texture(line, &content->west_texture, "WE ", content) ||

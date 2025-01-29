@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:58 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 15:44:51 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:39:53 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	populate_map(t_input *file_data)
 {
 	t_player	*player;
 
-	get_map_dimensions(file_data->map); // get hight and width of the map - what else?
+	get_map_dimensions(file_data->map);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (1);

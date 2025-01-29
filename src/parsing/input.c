@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:23 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 16:50:15 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:31:42 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,11 @@ int	handle_input(const char *filename, char ***lines)
 	file_content = read_file(filename);
 	if (!file_content)
 		return (1);
-	//printf("File content:\n%s\n", file_content);
 	if (is_file_empty(file_content))
 		return (free(file_content), 1);
 	*lines = ft_split(file_content, '\n');
 	free(file_content);
 	if (!*lines)
 		return (1);
-	//printf("Split was successful\n");
 	return (0);
 }

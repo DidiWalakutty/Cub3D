@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 11:50:24 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:45:04 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,10 @@ typedef struct s_cub3d
 int		handle_input(const char *filename, char ***lines);
 int		parse_file(char *argv[], t_input *file_data);
 bool	extract_elements(char **lines, t_input *content);
-//bool	parse_map(char **lines, t_input *content);
 bool	parse_texture(char *line, t_input *content);
 bool	parse_color(char *line, int *color);
-bool is_map_last_in_file(char **lines, t_map *map);
-//bool	is_map_last_in_file(char **lines, int map_start_index);
+bool 	is_map_last_in_file(char **lines, t_map *map);
 bool	handle_map(t_input *file_data, char **lines);
-
 
 /* Map Validation */
 bool	is_valid_map_char(char c);

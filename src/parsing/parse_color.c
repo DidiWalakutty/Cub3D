@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:35 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:01:17 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:37:35 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,25 @@ static bool	free_rgb_values(char **rgb, int count)
 	free(rgb);
 	return (false);
 }
-static	bool split_rgb_values(char *line, char ***rgb)
+static	bool	split_rgb_values(char *line, char ***rgb)
 {
 	int	i;
 
 	i = 0;
 	*rgb = ft_split(line + 2, ',');
 	if (!*rgb)
-
 		return (false);
 	while (i < 3)
 	{
 		if (!(*rgb)[i])
-		{
 			return (free_rgb_values(*rgb, i));
-		}
 		i++;
 	}
 	return (true);
 }
 
 /* check for very large numbers */
-static	bool validate_rgb_values(char **rgb, int *color)
+static	bool	validate_rgb_values(char **rgb, int *color)
 {
 	int	i;
 
@@ -72,27 +69,6 @@ static	bool validate_rgb_values(char **rgb, int *color)
 	return (true);
 }
 
-// bool	parse_color(char *line, int *color)
-// {
-// 	char	**rgb;
-// 	char	*trimmed_line;
-
-// 	//printf("Parsing color line: %s\n", line);
-// 	trimmed_line = ft_strtrim(line, " \t\n\r");
-// 	if (!split_rgb_values(trimmed_line, &rgb))
-// 	{
-// 		free(trimmed_line);
-// 		return false;
-// 	}
-// 	if (!validate_rgb_values(rgb, color))
-// 	{
-// 		free(trimmed_line);
-// 		return false;
-// 	}
-// 	printf("Parsed Color: %d, %d, %d\n", color[0], color[1], color[2]);
-// 	free(trimmed_line);
-// 	return true;
-// }
 
 bool	parse_color(char *line, int *color)
 {
