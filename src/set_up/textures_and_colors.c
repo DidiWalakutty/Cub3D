@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   textures.c                                         :+:    :+:            */
+/*   textures_and_colors.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 15:09:04 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/29 20:51:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,35 @@ bool	load_wall_textures(t_cub3d *cub3d)
 		!cub3d->textures->east || !cub3d->textures->west)
 		return (false);
 	return (true);
-}	
+}
+
+static void	draw_background(t_cub3d *cub3d)
+{
+	mlx_image_t	*mlx_img;
+	int			x;
+	int			y;
+
+	x = 0;
+	mlx_img = cub3d->render.floor_and_ceiling;
+	while (x < S_WIDTH)
+	{
+		y = 0;
+		while (y < S_HEIGTH) { 
+			if (y < (S_HEIGTH / 2)) {
+				mlx_put_pixel(mlx_img, x, y, cub3d->textures->ceiling_color);
+			} else {
+				mlx_put_pixel(mlx_img, x, y, cub3d->textures->floor_color);
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
+
+void	fill_background(t_cub3d *cub3d)
+{
+	cub3d->textures->ceiling_color = get_rgba(cub3d->input->ceiling_colors, 255);
+	cub3d->textures->floor_color = get_rgba(cub3d->input->floor_colors, 255);
+	draw_background(cub3d);
+}

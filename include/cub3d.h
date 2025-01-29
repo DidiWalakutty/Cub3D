@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 15:49:47 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/29 20:51:50 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,11 @@ typedef struct s_textures
 	int32_t			ceiling_color;
 }	t_textures;
 
-// Used to calculate the angles of rays from the player's viewpoint.
-// Determines the distance from the player to each wall.
-typedef struct s_ray
-{
-	
-}	t_ray;
-
 // Renders the game world, incl walls, floors, ceiling onto the screen.
 // Info like players pos, direction, raycasting results. The engine
 // determines the appropriate colors to render the walls.
 typedef struct s_render
 {
-	t_ray		ray;
 	mlx_image_t	*wall;
 	mlx_image_t	*floor_and_ceiling;
 }	t_render;
@@ -104,7 +96,6 @@ typedef struct s_cub3d
 	t_input		*input;
 	t_map		*map_data;
 	t_player	*player;
-	// t_ray		*ray;
 	t_render	render;
 	mlx_t		*mlx;
 	t_textures	*textures;
@@ -134,11 +125,13 @@ int		check_player_spawning_point(t_player *player);
 void	run_cub3d(t_cub3d *cub3d);
 
 /*Set Up*/
-void	set_mlx_and_variables(t_cub3d *cub3d);
-int32_t	rgba_to_int(int colors[3], int32_t a);
+void	init_settings(t_cub3d *cub3d);
+int32_t	get_rgba(int colors[3], int32_t a);
+bool	alloc_execution_structs(t_cub3d *cub3d);
 
 /*Images and Textures*/
 bool	load_wall_textures(t_cub3d *cub3d);
+void	fill_background(t_cub3d *cub3d);
 
 /* Error Handling */
 void	print_error(char *errormsg);

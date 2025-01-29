@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:23:18 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 17:17:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ static void free_grid(char **grid)
         i++;
     }
     free(grid);
+}
+
+void	end_game(t_cub3d *game, char *error_message)
+{
+	printf("Error: %s\n", error_message);
+	cleanup(game);
 }
 
 void	cleanup(t_cub3d *game)

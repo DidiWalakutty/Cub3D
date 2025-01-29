@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:00:43 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 15:51:35 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/29 20:32:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,16 @@
 // 	return (cub3d);
 // }
 
-int32_t	rgba_to_int(int colors[3], int32_t a)
+int32_t	get_rgba(int colors[3], int32_t a)
 {
 	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | a);
 }
+
+bool	alloc_execution_structs(t_cub3d *cub3d)
+{
+	cub3d->textures = malloc(sizeof(t_textures));
+	if (!cub3d->textures)
+		return (false);
+	ft_bzero(cub3d->textures, sizeof(t_textures));
+	return (true);
+}	
