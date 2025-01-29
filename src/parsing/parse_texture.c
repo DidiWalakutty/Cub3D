@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 10:31:31 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 11:54:54 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		{
 			//printf("Texture does not have .xpm extension: %s\n", texture_path);
 			//free(texture_path);
-			return (free(texture_path), false);
+			return (free(trimmed), false);
 		}
 		// if (is_texture_duplicate(texture_path, content))
 		// {
@@ -72,6 +72,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		//     return false;
 		// }
 		*texture = trimmed;
+		free(trimmed);
 		//printf("Parsed Texture: %s\n", *texture);
 		return (true);
 	}

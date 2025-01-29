@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 11:50:12 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:23:56 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ bool is_map_surrounded_by_walls(t_map *map)
         }
     }
 
-    return true;
+    return (true);
 }
 
 
@@ -145,7 +145,7 @@ bool	validate_map_characters(t_map *map)
 		{
 			if (!is_valid_map_char(map->grid[i][j]))
             {
-                printf("map char: %c\n", map->grid[i][j]);
+                //printf("map char: %c\n", map->grid[i][j]);
                 print_error("Invalid map character.");
                 return (false);
             }
@@ -176,5 +176,6 @@ bool	is_map_last_in_file(char **lines, t_map *map)
         free(trimmed_line);
         i++;
     }
+    //free(trimmed_line);
     return (true);
 }

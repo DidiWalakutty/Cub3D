@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 11:50:33 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:21:59 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,6 @@ bool	handle_map(t_input *file_data, char **lines)
 {
 	if (init_map(file_data) == 1)
 		return (false);
-    //printf("@@@@@@@print lines@@@@@@");
-    //print_map(lines);
-    //printf("@@@@@@@@\n");
 	get_map_properties(lines, file_data->map);
 	if (!is_map_last_in_file(lines, file_data->map))
 		return (false);
@@ -115,13 +112,9 @@ bool	handle_map(t_input *file_data, char **lines)
     }
 	if (!populate_grid(lines, file_data->map))
         return (false);
-    //printf("@@@@@@printing grid:@@@@@2\n");
-    //print_map(file_data->map->grid);
-    // printf("@@@@@@@@\n");
 	if (!validate_map_characters(file_data->map))
         return (false);
 	if (!is_map_surrounded_by_walls(file_data->map))
         return (false);
-    printf("heyo");
     return (true);
 }

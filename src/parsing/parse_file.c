@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 11:43:09 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 12:18:50 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,18 @@ bool	extract_elements(char **lines, t_input *content)
 	return (true);
 }
 
+static void	free_lines(char **lines)
+{
+    int	i;
 
+	i = 0;
+    while (lines[i])
+    {
+        free(lines[i]);
+        i++;
+    }
+    free(lines);
+}
 
 /*
 not sure if i need to keep the end_index isntead (whihc one makes more sense and is more handy)
@@ -66,7 +77,11 @@ int	parse_file(char *argv[], t_input *file_data)
 	result = 0;
 	result = handle_input(argv[1], &lines);
 	if (result != 0)
+	{
+		if (lines)
+            free_lines(lines);
 		return (result);
+	}
 	if (!extract_elements(lines, file_data))
 		result = 1;
 	else
@@ -75,7 +90,9 @@ int	parse_file(char *argv[], t_input *file_data)
 			result = 1;
 	}
 	if (!validate_textures(file_data))
-		result = 1;
-	printf("result: %d\n", result);
+		result = 1;	
+	if (lines)
+        free_lines(lines);
+	printf("status of parsing_file function: %d\n", result);
 	return (result);
 }
