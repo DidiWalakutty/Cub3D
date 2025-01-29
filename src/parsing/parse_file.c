@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 10:31:21 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 11:43:09 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ int	parse_file(char *argv[], t_input *file_data)
 		result = 1;
 	else
 	{
-		if(handle_map(file_data, lines))
+		if(!handle_map(file_data, lines))
 			result = 1;
 	}
 	if (!validate_textures(file_data))
-		return (false);
+		result = 1;
+	printf("result: %d\n", result);
 	return (result);
 }
