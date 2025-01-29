@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 18:05:36 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 10:17:10 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ bool	validate_map_characters(t_map *map)
 		{
 			if (!is_valid_map_char(map->grid[i][j]))
             {
+                printf("map char: %c\n", map->grid[i][j]);
                 print_error("Invalid map character.");
                 return (false);
             }

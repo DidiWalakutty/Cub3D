@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/28 18:06:49 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 10:49:45 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	handle_map(t_input *file_data, char **lines);
 bool	is_valid_map_char(char c);
 bool	validate_map_characters(t_map *map);
 bool	is_map_surrounded_by_walls(char **map);
-//bool 	validate_textures(t_input *content);
+bool 	validate_textures(t_input *content);
 
 /* Map Population */
 void	get_map_dimensions(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 18:05:54 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 10:31:21 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	extract_elements(char **lines, t_input *content)
 	while (lines[i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
+		//printf("trimmed line in extract func: %s\n", trimmed_line);
 		if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 		{
 			if (!parse_color(trimmed_line, content->floor_colors))
@@ -41,6 +42,7 @@ bool	extract_elements(char **lines, t_input *content)
 		}
 		else if (is_texture_prefix(trimmed_line))
 		{
+			//printf("trimmed line in extract func before pars text: %s\n", trimmed_line);
 			if (!parse_texture(trimmed_line, content))
 				return (free(trimmed_line), false);
 		}
@@ -72,5 +74,7 @@ int	parse_file(char *argv[], t_input *file_data)
 		if(handle_map(file_data, lines))
 			result = 1;
 	}
+	if (!validate_textures(file_data))
+		return (false);
 	return (result);
 }
