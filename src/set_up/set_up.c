@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 20:51:56 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/29 23:11:12 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,6 @@ static void	set_variables(t_cub3d *cub3d)
 	// cub3d->player.rotation = 
 }
 
-
-
-
-
 // mlx_new_image: Creates and allocates a new image buffer.
 // mlx_image_to_window: Draws a new instance of an image, 
 // it will then share the same pixel buffer as the image. Returns -1 if failed
@@ -80,6 +76,7 @@ void	init_settings(t_cub3d *cub3d)
 {
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Couldn't allocate structs");
+	set_mlx_images();
 	// cub3d->render.wall = mlx_new_image(cub3d->mlx, S_WIDTH, S_HEIGTH);
 	cub3d->render.floor_and_ceiling = mlx_new_image(cub3d->mlx, \
 													S_WIDTH, S_HEIGTH);

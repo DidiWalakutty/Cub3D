@@ -6,15 +6,18 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 20:50:17 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/29 23:10:18 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycaster(t_cub3d *cub3d)
+void	render(void *data)
 {
-	int	x;
+	t_cub3d	*cub3d;
+	// mlx state?
+	// all info for map/render/player. What struct?
+	size_t	x;
 
 	x = 0;
 	while (x < S_WIDTH)
@@ -23,24 +26,28 @@ void	raycaster(t_cub3d *cub3d)
 	}
 }
 
-void test()
+void keys(void *param)
 {
+	t_cub3d	*cub3d;
+	
+	cub3d = param;
+	// mlx state
+	// if x key is down, move: up, down, left, right.
+	// turn and ESC button.
 }
 
 // TODO:
 // if time: minimap
-// raycaster
-// MLX hooks and loop
 void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false);	// creates window
 	if (!cub3d->mlx)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
-	printf("after init\n");
-	// raycaster
 	// if time left: mini_map
-	mlx_loop_hook(cub3d->mlx, test, NULL);
+	mlx_loop_hook(cub3d->mlx, keys, cub3d);
+	mlx_loop_hook(cub3d->mlx, &render, void(*cub3d));
+	// something else?
 	mlx_loop(cub3d->mlx);
 }
 
