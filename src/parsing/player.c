@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/29 12:42:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:48:00 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/01/29 14:20:36 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_player_spawning_point(t_map *map, t_player *player)
 		}
 		row_index++;
 	}
-	//player->player_count = player_count;
+	player->player_count = player_count;
 	//printf("player orientation: %c\n", player->orientation);
 	//printf("player count from inside first spawn func: %d\n", player_count);
 	//printf("player x pos: %d, player y: %d\n", player->x, player->y);
