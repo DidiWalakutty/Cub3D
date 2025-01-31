@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 20:51:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/31 17:14:07 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,27 @@
 # define S_LOWER_HALF 600	// lower half of screen
 # define FOV 60				// field of view
 # define PI 3.1415926		// PI
+# define SPEED				// move speed
+# define ROTATE				// rotate speed
 
-typedef struct s_vectr
+typedef struct s_dvectr
 {
 	double	x;
 	double	y;
-}	t_vectr;
+}	t_dvectr;
+
+typedef struct s_ivect
+{
+	int		x;
+	int		y;
+}	t_ivectr;
+
+typedef struct s_draw
+{
+	int32_t	height;
+	int32_t	start;
+	int32_t	end;
+}	t_draw;
 
 typedef struct s_player
 {
@@ -46,9 +61,6 @@ typedef struct s_player
 	int		player_count;
 	float	fov;
 	float	rotation;
-	t_vectr	position;
-	t_vectr	direction;
-	t_vectr	plane;
 }	t_player;
 
 typedef struct s_map
@@ -89,6 +101,10 @@ typedef struct s_render
 {
 	mlx_image_t	*wall;
 	mlx_image_t	*floor_and_ceiling;
+	t_dvectr	plane;
+	t_dvectr	player_pos;
+	t_dvectr	player_direction;
+	t_draw		line;
 }	t_render;
 
 typedef struct s_cub3d
@@ -96,7 +112,7 @@ typedef struct s_cub3d
 	t_input		*input;
 	t_map		*map_data;
 	t_player	*player;
-	t_render	render;
+	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
 }	t_cub3d;
@@ -123,11 +139,13 @@ int		check_player_spawning_point(t_player *player);
 
 /*Execution*/
 void	run_cub3d(t_cub3d *cub3d);
+void	keys(void *param);
+void	render(void *data);
 
 /*Set Up*/
 void	init_settings(t_cub3d *cub3d);
-int32_t	get_rgba(int colors[3], int32_t a);
 bool	alloc_execution_structs(t_cub3d *cub3d);
+t_render	*set_variables(t_cub3d *cub3d);
 
 /*Images and Textures*/
 bool	load_wall_textures(t_cub3d *cub3d);

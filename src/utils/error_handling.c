@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 17:17:21 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/31 17:29:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	print_error(char *errormsg)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-static void free_grid(char **grid)
+static void	free_grid(char **grid)
 {
-    int i = 0;
+    int	i;
+
+	i = 0;
     while (grid[i])
     {
         free(grid[i]);
@@ -34,6 +36,7 @@ void	end_game(t_cub3d *game, char *error_message)
 {
 	printf("Error: %s\n", error_message);
 	cleanup(game);
+	// end mlx
 }
 
 void	cleanup(t_cub3d *game)
