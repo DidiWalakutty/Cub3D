@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/31 17:14:07 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/31 17:55:42 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_player
 	char	orientation;
 	int		player_count;
 	float	fov;
-	float	rotation;
 }	t_player;
 
 typedef struct s_map
@@ -105,6 +104,7 @@ typedef struct s_render
 	t_dvectr	player_pos;
 	t_dvectr	player_direction;
 	t_draw		line;
+	float		fov;
 }	t_render;
 
 typedef struct s_cub3d
@@ -143,9 +143,9 @@ void	keys(void *param);
 void	render(void *data);
 
 /*Set Up*/
-void	init_settings(t_cub3d *cub3d);
+void	init_settings(t_cub3d *cub3d, t_player *player);
 bool	alloc_execution_structs(t_cub3d *cub3d);
-t_render	*set_variables(t_cub3d *cub3d);
+t_render	*set_variables(t_cub3d *cub3d, t_player *player);
 
 /*Images and Textures*/
 bool	load_wall_textures(t_cub3d *cub3d);

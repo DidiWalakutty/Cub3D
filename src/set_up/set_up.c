@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/31 17:36:36 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/01/31 18:17:10 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 	if (mlx_image_to_window(cub3d->mlx, cub3d->render->floor_and_ceiling, \
 															0, 0) == -1)
 		end_game(cub3d, "Couldn't output image to window");
+	printf("fill background\n");
 	fill_background(cub3d);
-	if (load_wall_textures(cub3d) == false)					// loads wall images
-		end_game(cub3d, "Couldn't load textures");
+	printf("after fill background\n");
+	// if (load_wall_textures(cub3d) == false)					// loads wall images
+	// 	end_game(cub3d, "Couldn't load textures");
 }
 
 // mlx_new_image: Creates and allocates a new image buffer.
 // mlx_image_to_window: Draws a new instance of an image, 
 // it will then share the same pixel buffer as the image. Returns -1 if failed
-void	init_settings(t_cub3d *cub3d)
+void	init_settings(t_cub3d *cub3d, t_player *player)
 {
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Couldn't allocate structs");
 	initiate_mlx_images(cub3d);
-	cub3d->render = set_variables(cub3d);
-	if (!cub3d->render)
-		end_game(cub3d, "Couldn't alloc render struct");
+	// cub3d->render = set_variables(cub3d, player);
+	// if (!cub3d->render)
+	// 	end_game(cub3d, "Couldn't alloc render struct");
 }

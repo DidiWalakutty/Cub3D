@@ -1,7 +1,7 @@
 NAME := cub3d
 
 # Compilation
-CC := cc -g
+CC := cc
 CFLAGS := -Wall -g
 #MLX42FLAGS = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_INCLUDES := -I./lib/libft/include
