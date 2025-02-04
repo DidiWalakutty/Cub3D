@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/31 17:55:42 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/03 14:40:48 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,13 @@ typedef struct s_textures
 // determines the appropriate colors to render the walls.
 typedef struct s_render
 {
-	mlx_image_t	*wall;
+	mlx_image_t	*scene;
 	mlx_image_t	*floor_and_ceiling;
 	t_dvectr	plane;
 	t_dvectr	player_pos;
 	t_dvectr	player_direction;
+	double		camera_column;
+	t_ivectr	map_pos;
 	t_draw		line;
 	float		fov;
 }	t_render;
@@ -140,7 +142,7 @@ int		check_player_spawning_point(t_player *player);
 /*Execution*/
 void	run_cub3d(t_cub3d *cub3d);
 void	keys(void *param);
-void	render(void *data);
+void	raycaster(void *data);
 
 /*Set Up*/
 void	init_settings(t_cub3d *cub3d, t_player *player);
