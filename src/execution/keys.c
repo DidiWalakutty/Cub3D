@@ -6,39 +6,65 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/04 15:38:18 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 16:48:26 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// player_dir.x/y = how much the player moves
-// * speed the player moves * direction (forward or backwards)
-// player_pos.x/y: above is added to this amount to get new pos.
+// Calculates the player's new position based on movement direction and speed. 
+// If the path is clear, updates the player's position.
 static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 {
 	t_render	*render;
 	t_dvectr	update;
 
 	render = cub3d->render;
-	update->x = render->player_pos.x + render->player_direction.x * SPEED * dir; 
-	update->y = render->player_pos.y + render->player_direction.y * SPEED * dir;
-	// check if new row is valid
-	if (path_clear(cub3d->map.grid, render.player_pos, update, cub3d.player_dir))
+	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir; 
+	update.y = render->player_pos.y + render->player_dir.y * SPEED * dir;
+
+	if (path_clear(cub3d->map_data->grid, render->player_pos, update, \
+					render->player_dir))
 	{
-		cub3d.player_pos.x = update.x;
-		cub3d.player_pos.y = update.y;
+		render->player_pos.x = update.x;
+		render->player_pos.y = update.y;
 	}
 }
 
 static void	move_left_right(const t_cub3d *cub3d, char dir)
 {
+	t_render	*render;
+	t_dvectr	update;
 
+	render = cub3d->render;
+	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir;
+	update.y = render->player_pos.y - render->player_dir.y * SPEED * dir;
+
+	if (path_clear(cub3d->map_data->grid, render->player_pos, update, \
+					render->player_dir))
+	{
+		render->player_pos.x = update.x;
+		render->player_pos.y = update.y;
+	}
 }
 
 static void turning(const t_cub3d *cub3d, char side)
 {
+	t_dvectr	old_dir;
+	double		plane;
+	t_render	*render;
 
+	render = cub3d->render;
+	old_dir.y = render->player_dir.y;
+	render->player_dir.y = render->player_dir.y * cos(ROTATE_S * side) - \
+									render->player_dir.x * sin(ROTATE_S * side);
+	render->player_dir.x = old_dir.y * sin(ROTATE_S * side) + \
+									render->player_dir.x * cos(ROTATE_S * side);
+	plane = render->plane.y;
+	render->plane.y = render->plane.y * cos(ROTATE_S * side) - \
+						render->plane.x * sin(ROTATE_S * side);
+	render->plane.x = plane * sin(ROTATE_S * side) + \
+						render->plane.x * cos(ROTATE_S * side);
 }
 
 // Calculate new player position based on

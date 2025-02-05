@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/04 14:35:47 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 16:48:26 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static void	set_n_and_s(t_render *render, t_player *player)
 {
 	if (player->orientation == 'N')
 	{
-		render->player_direction.x = 0;
-		render->player_direction.y = -1;
+		render->player_dir.x = 0;
+		render->player_dir.y = -1;
 		render->plane.x = -0.66;
 		render->plane.y = 0;
 	}
 	else
 	{
-		render->player_direction.x = 0;
-		render->player_direction.y = 1;
+		render->player_dir.x = 0;
+		render->player_dir.y = 1;
 		render->plane.x = 0.66;
 		render->plane.y = 0;
 	}
@@ -40,15 +40,15 @@ static void	set_direction_and_plane(t_render *render, t_player *player)
 		set_n_and_s(render, player);
 	else if (player->orientation == 'E')
 	{
-		render->player_direction.x = 1;
-		render->player_direction.y = 0;
+		render->player_dir.x = 1;
+		render->player_dir.y = 0;
 		render->plane.x = 0;
 		render->plane.y = -0.66;
 	}
 	else if (player->orientation == 'W')
 	{
-		render->player_direction.x = -1;
-		render->player_direction.y = 0;
+		render->player_dir.x = -1;
+		render->player_dir.y = 0;
 		render->plane.x = 0;
 		render->plane.y = 0.66;
 	}

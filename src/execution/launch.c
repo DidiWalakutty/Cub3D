@@ -6,14 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/04 15:09:05 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 17:13:30 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 // Do we need to reset the image/screen?
-void	raycaster(void *data)
+static void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
 	mlx_t		*mlx;
@@ -23,12 +23,13 @@ void	raycaster(void *data)
 	cub3d = data;
 	mlx = cub3d->mlx;
 	render = cub3d->render;
-	ft_memset(render->scene->pixels, 0, S_WIDTH * S_HEIGTH * sizeof(int32_t)); // clears the image/scene 
+	// clears the image/scene 
+	ft_memset(render->scene->pixels, 0, S_WIDTH * S_HEIGTH * sizeof(int32_t));
 
 	screen_col = 0;
 	while (screen_col < S_WIDTH)
 	{
-		update_raycast_vars(cub3d, render, screen_col);
+		create_ray(cub3d, render, screen_col);
 		// set floor/ceiling (heigth?), textures
 		screen_col++;
 	}
@@ -45,9 +46,6 @@ void	test()
 // raycaster/render
 // MLX hooks and loop
 
-// Keys: continuously runs, checking for key input.
-//       updates the plane, direction and player info.
-// Raycaster: adjusts direction based on plane, direction and player info 
 void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false); // creates window
@@ -56,7 +54,6 @@ void	run_cub3d(t_cub3d *cub3d)
 	init_settings(cub3d, cub3d->input->map->player);
 	// if time left: mini_map
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
-	// CONTINUE HERE AFTER KEYS
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void*)cub3d);
 	// mlx_loop_hook(cub3d->mlx, test, cub3d); // As long as raycaster isn't functioning, use this to test background
 	mlx_loop(cub3d->mlx);

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/31 17:28:32 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 14:43:15 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 bool	load_wall_textures(t_cub3d *cub3d)
 {
+	// xmp_t
 	cub3d->textures->north = mlx_load_png(cub3d->input->north_texture);
 	cub3d->textures->south = mlx_load_png(cub3d->input->south_texture);
 	cub3d->textures->east = mlx_load_png(cub3d->input->east_texture);
