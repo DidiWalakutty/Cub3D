@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/03 14:46:51 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/04 15:09:05 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	test()
 // raycaster/render
 // MLX hooks and loop
 
-// Difference between raycast code and keys code.
+// Keys: continuously runs, checking for key input.
+//       updates the plane, direction and player info.
+// Raycaster: adjusts direction based on plane, direction and player info 
 void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false); // creates window
@@ -53,7 +55,8 @@ void	run_cub3d(t_cub3d *cub3d)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d, cub3d->input->map->player);
 	// if time left: mini_map
-	mlx_loop_hook(cub3d->mlx, keys, cub3d); // continu with keys after raycasting is up and running
+	mlx_loop_hook(cub3d->mlx, keys, cub3d);
+	// CONTINUE HERE AFTER KEYS
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void*)cub3d);
 	// mlx_loop_hook(cub3d->mlx, test, cub3d); // As long as raycaster isn't functioning, use this to test background
 	mlx_loop(cub3d->mlx);

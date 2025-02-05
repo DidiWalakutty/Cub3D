@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/03 14:40:48 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/04 15:21:02 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -29,10 +30,22 @@
 # define S_HEIGTH 1200		// screen heigth
 # define S_UPPER_HALF 900	// upper half of screen
 # define S_LOWER_HALF 600	// lower half of screen
+
+// Define ray info
 # define FOV 60				// field of view
 # define PI 3.1415926		// PI
-# define SPEED				// move speed
+# define SPEED 0.1			// move speed
 # define ROTATE				// rotate speed
+# define WALL_MARGIN 0.05	// collision buffer for diaganol movement
+
+// Define movement
+# define FORWARD 1
+# define BACKWARDS -1
+# define RIGHT 1
+# define LEFT -1
+# define TURN_RIGHT 1
+# define TURN_LEFT -1
+
 
 typedef struct s_dvectr
 {
@@ -42,8 +55,8 @@ typedef struct s_dvectr
 
 typedef struct s_ivect
 {
-	int		x;
-	int		y;
+	int32_t	x;
+	int32_t	y;
 }	t_ivectr;
 
 typedef struct s_draw
@@ -59,7 +72,6 @@ typedef struct s_player
 	int		y;
 	char	orientation;
 	int		player_count;
-	float	fov;
 }	t_player;
 
 typedef struct s_map
@@ -103,6 +115,9 @@ typedef struct s_render
 	t_dvectr	plane;
 	t_dvectr	player_pos;
 	t_dvectr	player_direction;
+	t_dvectr	ray_direction;
+	t_dvectr	delta_distance;
+	t_dvectr	side_distance;
 	double		camera_column;
 	t_ivectr	map_pos;
 	t_draw		line;

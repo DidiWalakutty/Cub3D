@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/03 12:45:02 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/04 14:35:47 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_render	*set_variables(t_cub3d *cub3d, t_player *player)
 	render = ft_calloc(1, sizeof(*render));
 	if (!render)
 		return (NULL);
-	render->player_pos.x = player->x; // + 0.5 for middle of tile?
-	render->player_pos.y = player->y;
+	render->player_pos.x = player->x + 0.5; // + 0.5 for middle of tile?
+	render->player_pos.y = player->y + 0.5;
 	set_direction_and_plane(render, player);
 	render->fov = (FOV * PI) / 180; // FOV in radians
 	// cub3d->player.rotation = 
