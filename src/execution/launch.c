@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 17:13:30 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 20:43:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ static void	raycaster(void *data)
 	cub3d = data;
 	mlx = cub3d->mlx;
 	render = cub3d->render;
-	// clears the image/scene 
 	ft_memset(render->scene->pixels, 0, S_WIDTH * S_HEIGTH * sizeof(int32_t));
 
 	screen_col = 0;
 	while (screen_col < S_WIDTH)
 	{
 		create_ray(cub3d, render, screen_col);
-		// set floor/ceiling (heigth?), textures
 		screen_col++;
 	}
 	// render output
@@ -45,7 +43,6 @@ void	test()
 // if time: minimap
 // raycaster/render
 // MLX hooks and loop
-
 void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false); // creates window

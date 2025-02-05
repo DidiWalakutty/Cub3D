@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 17:22:04 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/05 20:30:11 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define SPEED 0.1			// move speed
 # define ROTATE_S 0.02			// rotate speed
 # define WALL_MARGIN 0.05	// collision buffer for diaganol movement
-# define X_SIDE 1
-# define Y_SIDE 2
+# define X_SIDE 0
+# define Y_SIDE 1
 
 // Define movement
 # define FORWARD 1
@@ -122,9 +122,10 @@ typedef struct s_render
 	t_dvectr	side_dist;
 	double		camera_column;
 	t_ivectr	map_pos;	// pos in the map
-	t_ivectr	step;
+	t_ivectr	step;		// dir of step
 	t_draw		line;
-	int			wall_side;
+	int			wall_hit;	// x or y-side
+	double		wall_dist;	// player_dist from wall
 	float		fov;
 }	t_render;
 
