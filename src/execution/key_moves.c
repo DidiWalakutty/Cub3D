@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 20:46:34 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/07 21:31:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 	render = cub3d->render;
 	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir; 
 	update.y = render->player_pos.y + render->player_dir.y * SPEED * dir;
-	if (path_clear(cub3d->map_data->grid, render->player_pos, update, \
+	if (path_clear(cub3d->input->map->grid, render->player_pos, update, \
 					render->player_dir))
 	{
 		render->player_pos.x = update.x;
@@ -38,7 +38,7 @@ static void	move_left_right(const t_cub3d *cub3d, char dir)
 	render = cub3d->render;
 	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir;
 	update.y = render->player_pos.y - render->player_dir.y * SPEED * dir;
-	if (path_clear(cub3d->map_data->grid, render->player_pos, update, \
+	if (path_clear(cub3d->input->map->grid, render->player_pos, update, \
 					render->player_dir))
 	{
 		render->player_pos.x = update.x;
@@ -76,17 +76,17 @@ void	keys(void *param)
 	mlx = cub3d->mlx;
 
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
-		move_up_down(mlx, FORWARD);
+		move_up_down(cub3d, FORWARD);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
-		move_up_down(mlx, BACKWARDS);
+		move_up_down(cub3d, BACKWARDS);
 	if (mlx_is_key_down(mlx, MLX_KEY_A))
-		move_left_right(mlx, LEFT);
+		move_left_right(cub3d, LEFT);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
-		move_left_right(mlx, RIGHT);
+		move_left_right(cub3d, RIGHT);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		turning(mlx, TURN_LEFT);
+		turning(cub3d, TURN_LEFT);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		turning(mlx, TURN_RIGHT);
+		turning(cub3d, TURN_RIGHT);
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 	{
 		cleanup(cub3d);

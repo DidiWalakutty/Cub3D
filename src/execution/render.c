@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 20:30:34 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/07 21:40:39 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,33 +62,76 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 			ray->map_pos.y += ray->step.y;
 			ray->wall_hit = Y_SIDE;
 		}
-		if (hit_wall(cub3d->map_data->grid, ray->map_pos.x, ray->map_pos.y))
+		if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x))
 			break ;
 	}
 }
 
 // Calcs the dist from player to wall, so it can calc the height.
 // Also calcs the start and end points of the wall's line.
-static void	set_wall_height(t_render *ray, t_cub3d *cub3d)
-{
-	if (ray->wall_hit == X_SIDE)
-	{
-		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
 		// ray->wall_dist = (ray->map_pos.x - ray->player_pos.x + \
 		// 				(1.0 - (double)ray->step.x) / 2.0) / ray->ray_dir.x;
-	}
-	else
-	{
-		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
+		// 
 		// ray->wall_dist = (ray->map_pos.y - ray->player_pos.y + \
 		// 				(1.0 - (double)ray->step.y) / 2.0) / ray->ray_dir.y;
-	}
+static void	set_wall_height(t_render *ray)
+{
+	if (ray->wall_hit == X_SIDE)
+		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
+	else
+		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
 	if (ray->wall_dist == 0)
 		ray->line.height = S_HEIGTH;
 	else
 		ray->line.height = (int)(S_HEIGTH / ray->wall_dist);
 	ray->line.start = (S_HEIGTH / 2) - (ray->line.height / 2);
+	if (ray->line.start < 0)
+		ray->line.start = 0;
 	ray->line.end = (S_HEIGTH / 2) + (ray->line.height / 2);
+	if (ray->line.end >= S_HEIGTH)
+		ray->line.end = S_HEIGTH - 1;
+}
+
+// tex_col determines which column of the texture should be used
+// for this wall slice.
+// X_SIDE = 0 = vertical wall N/S
+// Y_SIDE = 1 = horizontal wall E/W
+static void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
+{
+	// mlx_texture_t	*tex_img;
+	// t_textures		*text;
+	// int				y;
+
+	// text = cub3d->textures;
+	// segfaults, text is empty
+	if (ray->wall_hit == X_SIDE)
+	{
+		if (ray->ray_dir.y > 0)
+			cub3d->textures->wall_img = cub3d->textures->north;
+		else
+			cub3d->textures->wall_img = cub3d->textures->south;
+	}
+	else if (ray->wall_hit == Y_SIDE)
+	{
+		if (ray->ray_dir.x > 0)
+			cub3d->textures->wall_img = cub3d->textures->west;
+		else
+			cub3d->textures->wall_img = cub3d->textures->east;
+	}
+	// removes integer parts, keeps fractional part
+	// because it tells us where within a single wall block we hit
+	// text->wall_x_pos -= floor(text->wall_x_pos);
+	// calcs which vertical strip of texture we need to use
+	text->x_tex = (int)(text->wall_x_pos * (double)text->wall_img->width);
+	// flips texture, because of mirroring
+	if (ray->wall_hit == X_SIDE && ray->ray_dir.x > 0)
+		text->x_tex = text->wall_img->width - text->x_tex - 1;
+	if (ray->wall_hit == Y_SIDE && ray->ray_dir.y < 0)
+		text->x_tex = text->wall_img->width - text->x_tex - 1;
+	text->pix_step = 1.0 * text->wall_img->height / ray->line.height;	// double check height of this
+	text->tex_pos = (ray->line.start - S_HEIGTH / 2 + ray->line.height) * text->pix_step;
+	fill_background(cub3d);	// use here??
+	loop_screenpixels(ray, text, text->wall_img);
 }
 
 // Generates a new ray.
@@ -111,5 +154,6 @@ void	create_ray(t_cub3d *cub3d, t_render *ray, size_t screen_i)
 		ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
 	update_direction(ray);
 	dda_algorithm(ray, cub3d);
-	set_wall_height(ray, cub3d);
+	set_wall_height(ray);
+	set_wall_textures(ray, cub3d); // cub3d needed?
 }

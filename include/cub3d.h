@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 20:30:11 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/07 21:33:57 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,18 @@ typedef struct s_textures
 	mlx_texture_t	*east;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
+	mlx_texture_t	*wall_img;
 	int32_t			floor_color;
 	int32_t			ceiling_color;
+	double			wall_x_pos;
+	double			pix_step;
+	double			tex_pos;
+	int				x_tex;
+	int				y_tex;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+	uint8_t			a;
 }	t_textures;
 
 // Renders the game world, incl walls, floors, ceiling onto the screen.
@@ -132,7 +142,7 @@ typedef struct s_render
 typedef struct s_cub3d
 {
 	t_input		*input;
-	t_map		*map_data;
+	// t_map		*map_data;
 	t_player	*player;
 	t_render	*render;
 	mlx_t		*mlx;
@@ -165,6 +175,7 @@ void	keys(void *param);
 bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
 bool	hit_wall(char **grid, int32_t x, int32_t y);
 void	create_ray(t_cub3d *cub3d, t_render *ray, size_t screen_i);
+void	loop_screenpixels(t_render *ray, t_textures	*text, mlx_texture_t *wall);
 
 /*Set Up*/
 void	init_settings(t_cub3d *cub3d, t_player *player);

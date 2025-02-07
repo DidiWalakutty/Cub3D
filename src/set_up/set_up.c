@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/03 14:41:01 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/07 20:31:17 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,16 @@ void	init_settings(t_cub3d *cub3d, t_player *player)
 	cub3d->render = set_variables(cub3d, player);
 	if (!cub3d->render)
 		end_game(cub3d, "Couldn't alloc render struct");
+}
+
+bool	load_wall_textures(t_cub3d *cub3d)
+{
+	cub3d->textures->north = mlx_load_png(cub3d->input->north_texture);
+	cub3d->textures->south = mlx_load_png(cub3d->input->south_texture);
+	cub3d->textures->east = mlx_load_png(cub3d->input->east_texture);
+	cub3d->textures->west = mlx_load_png(cub3d->input->west_texture);
+	if (!cub3d->textures->north || !cub3d->textures->south || \
+		!cub3d->textures->east || !cub3d->textures->west)
+		return (false);
+	return (true);
 }

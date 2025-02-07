@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:39:40 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/02/07 21:24:39 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	bool has_xpm_extension(const char *filename)
 	size_t		len;
 	size_t		ext_len;
 
-	ext = ".xpm";
+	ext = ".png";
 	ext_len = ft_strlen(ext);
 	len = ft_strlen(filename);
 	if (len < ext_len)
