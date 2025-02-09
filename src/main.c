@@ -6,11 +6,11 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:14 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/03 12:41:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/09 13:51:29 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
 int	main(int argc, char *argv[])
 {

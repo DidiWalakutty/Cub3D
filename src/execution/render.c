@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/07 21:40:39 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/09 14:06:29 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ static void	set_wall_height(t_render *ray)
 static void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 {
 	// mlx_texture_t	*tex_img;
-	// t_textures		*text;
+	t_textures		*text;
 	// int				y;
 
-	// text = cub3d->textures;
+	text = cub3d->textures;
 	// segfaults, text is empty
 	if (ray->wall_hit == X_SIDE)
 	{
