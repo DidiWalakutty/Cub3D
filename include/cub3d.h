@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/07 21:33:57 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/10 21:44:58 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define PI 3.1415926		// PI
 # define SPEED 0.1			// move speed
 # define ROTATE_S 0.02			// rotate speed
-# define WALL_MARGIN 0.05	// collision buffer for diaganol movement
+// # define WALL_MARGIN 0.05	// collision buffer for diaganol movement
 # define X_SIDE 0
 # define Y_SIDE 1
 
@@ -48,6 +48,7 @@
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
 
+typedef struct	s_cub3d	t_cub3d;
 
 typedef struct s_dvectr
 {
@@ -122,8 +123,6 @@ typedef struct s_textures
 // determines the appropriate colors to render the walls.
 typedef struct s_render
 {
-	mlx_image_t	*scene;
-	mlx_image_t	*floor_and_ceiling;
 	t_dvectr	plane;
 	t_dvectr	player_pos;
 	t_dvectr	player_dir;
@@ -132,15 +131,18 @@ typedef struct s_render
 	t_dvectr	side_dist;
 	double		camera_column;
 	t_ivectr	map_pos;	// pos in the map
-	t_ivectr	step;		// dir of step
+	t_ivectr	map_step;		// dir of step
 	t_draw		line;
-	int			wall_hit;	// x or y-side
+	int			side_hit;	// x or y-side
+	int			wall_x;	
 	double		wall_dist;	// player_dist from wall
 	float		fov;
 }	t_render;
 
 typedef struct s_cub3d
 {
+	mlx_image_t	*scene;
+	mlx_image_t	*floor_and_ceiling;
 	t_input		*input;
 	// t_map		*map_data;
 	t_player	*player;
@@ -174,8 +176,11 @@ void	run_cub3d(t_cub3d *cub3d);
 void	keys(void *param);
 bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
 bool	hit_wall(char **grid, int32_t x, int32_t y);
-void	create_ray(t_cub3d *cub3d, t_render *ray, size_t screen_i);
-void	loop_screenpixels(t_render *ray, t_textures	*text, mlx_texture_t *wall);
+void	create_ray(t_cub3d *cub3d, t_render *ray, int x);
+void	draw_calculations(t_render *ray, t_cub3d *cub3d);
+void	update_direction(t_render *ray);
+void	set_wall_height(t_render *ray);
+uint32_t	color_texture(t_textures *text, double x_info, double y_info);
 
 /*Set Up*/
 void	init_settings(t_cub3d *cub3d, t_player *player);

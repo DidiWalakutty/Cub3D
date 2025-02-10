@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/09 14:04:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/10 21:37:45 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,18 @@
 static void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
-	// mlx_t		*mlx;
 	t_render	*render;
-	size_t		screen_col;
+	int			y;
 
 	cub3d = data;
-	// mlx = cub3d->mlx;
 	render = cub3d->render;
-	// ft_memset(render->scene->pixels, 0, S_WIDTH * S_HEIGTH * sizeof(int32_t));
-
-	screen_col = 0;
-	while (screen_col < S_WIDTH)
+	ft_memset(cub3d->scene->pixels, 0xFF000000, S_WIDTH * S_HEIGTH * sizeof(uint32_t));
+	y = 0;
+	while (y < S_WIDTH)
 	{
-		create_ray(cub3d, render, screen_col);
-		screen_col++;
+		create_ray(cub3d, render, y);
+		y++;
 	}
-	// render output
 }
 
 void	test()

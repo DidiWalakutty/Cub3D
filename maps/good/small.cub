@@ -1,0 +1,12 @@
+F 76,76,76
+C 99,99,99
+
+NO ./textures/Space_N.png
+SO ./textures/Space_S.png
+WE ./textures/Space_W.png
+EA ./textures/Space_E.png
+
+1111
+1S01
+1101
+1111

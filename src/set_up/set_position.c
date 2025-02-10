@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/05 16:48:26 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/10 20:07:09 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ t_render	*set_variables(t_cub3d *cub3d, t_player *player)
 	render->player_pos.y = player->y + 0.5;
 	set_direction_and_plane(render, player);
 	render->fov = (FOV * PI) / 180; // FOV in radians
-	// cub3d->player.rotation = 
 	return (render);
 }

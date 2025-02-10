@@ -6,42 +6,11 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/09 14:06:29 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/10 21:40:57 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// Calcs the step direction and initial side distances for both axes, based
-// on the player_pos and ray_dir. Determines whether the ray is moving up/down
-// or left/right and updates the step values.
-static void	update_direction(t_render *ray)
-{
-	if (ray->ray_dir.x < 0)
-	{
-		ray->step.x = -1;
-		ray->side_dist.x = (ray->player_pos.x - ray->map_pos.x) * \
-							ray->delta_dist.x;
-	}
-	else
-	{
-		ray->step.x = 1;
-		ray->side_dist.x = (ray->player_pos.x + 1.0 - ray->player_pos.x) * \
-							ray->delta_dist.x;
-	}
-	if (ray->ray_dir.y < 0)
-	{
-		ray->step.y = -1;
-		ray->side_dist.y = (ray->player_pos.y - ray->map_pos.y) * \
-							ray->delta_dist.y;
-	}
-	else
-	{
-		ray->step.y = 1;
-		ray->side_dist.y = (ray->player_pos.y + 1.0 - ray->player_pos.y) * \
-							ray->delta_dist.y;
-	}
-}
 
 // Calcs side distances and if the ray hits a wall.
 // Determines which direction (x or y) to step in next. 
@@ -53,43 +22,19 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
-			ray->map_pos.x += ray->step.x;
-			ray->wall_hit = X_SIDE;
+			ray->map_pos.x += ray->map_step.x;
+			ray->side_hit = X_SIDE;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
-			ray->map_pos.y += ray->step.y;
-			ray->wall_hit = Y_SIDE;
+			ray->map_pos.y += ray->map_step.y;
+			ray->side_hit = Y_SIDE;
 		}
-		if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x))
+		if (cub3d->input->map->grid[ray->map_pos.y][ray->map_pos.x] == '1')
 			break ;
+		// if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x)) // in case hit wall sucks agian
 	}
-}
-
-// Calcs the dist from player to wall, so it can calc the height.
-// Also calcs the start and end points of the wall's line.
-		// ray->wall_dist = (ray->map_pos.x - ray->player_pos.x + \
-		// 				(1.0 - (double)ray->step.x) / 2.0) / ray->ray_dir.x;
-		// 
-		// ray->wall_dist = (ray->map_pos.y - ray->player_pos.y + \
-		// 				(1.0 - (double)ray->step.y) / 2.0) / ray->ray_dir.y;
-static void	set_wall_height(t_render *ray)
-{
-	if (ray->wall_hit == X_SIDE)
-		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
-	else
-		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
-	if (ray->wall_dist == 0)
-		ray->line.height = S_HEIGTH;
-	else
-		ray->line.height = (int)(S_HEIGTH / ray->wall_dist);
-	ray->line.start = (S_HEIGTH / 2) - (ray->line.height / 2);
-	if (ray->line.start < 0)
-		ray->line.start = 0;
-	ray->line.end = (S_HEIGTH / 2) + (ray->line.height / 2);
-	if (ray->line.end >= S_HEIGTH)
-		ray->line.end = S_HEIGTH - 1;
 }
 
 // tex_col determines which column of the texture should be used
@@ -98,52 +43,80 @@ static void	set_wall_height(t_render *ray)
 // Y_SIDE = 1 = horizontal wall E/W
 static void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 {
-	// mlx_texture_t	*tex_img;
-	t_textures		*text;
-	// int				y;
+	t_textures	*texture;
 
-	text = cub3d->textures;
-	// segfaults, text is empty
-	if (ray->wall_hit == X_SIDE)
+	texture = cub3d->textures;
+	if (ray->side_hit == X_SIDE)
 	{
 		if (ray->ray_dir.y > 0)
-			cub3d->textures->wall_img = cub3d->textures->north;
+			texture->wall_img = texture->north;
 		else
-			cub3d->textures->wall_img = cub3d->textures->south;
+			texture->wall_img = texture->south;
 	}
-	else if (ray->wall_hit == Y_SIDE)
+	else if (ray->side_hit == Y_SIDE)
 	{
 		if (ray->ray_dir.x > 0)
-			cub3d->textures->wall_img = cub3d->textures->west;
+			texture->wall_img = texture->west;
 		else
-			cub3d->textures->wall_img = cub3d->textures->east;
+			texture->wall_img = texture->east;
 	}
 	// removes integer parts, keeps fractional part
 	// because it tells us where within a single wall block we hit
 	// text->wall_x_pos -= floor(text->wall_x_pos);
 	// calcs which vertical strip of texture we need to use
-	text->x_tex = (int)(text->wall_x_pos * (double)text->wall_img->width);
+	texture->x_tex = (int)(texture->wall_x_pos \
+							* (double)texture->wall_img->width);
 	// flips texture, because of mirroring
-	if (ray->wall_hit == X_SIDE && ray->ray_dir.x > 0)
-		text->x_tex = text->wall_img->width - text->x_tex - 1;
-	if (ray->wall_hit == Y_SIDE && ray->ray_dir.y < 0)
-		text->x_tex = text->wall_img->width - text->x_tex - 1;
-	text->pix_step = 1.0 * text->wall_img->height / ray->line.height;	// double check height of this
-	text->tex_pos = (ray->line.start - S_HEIGTH / 2 + ray->line.height) * text->pix_step;
-	fill_background(cub3d);	// use here??
-	loop_screenpixels(ray, text, text->wall_img);
+	if (ray->side_hit == X_SIDE && ray->ray_dir.x > 0)
+		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
+		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+}
+
+
+void	draw_line_loops(t_cub3d *cub3d, t_textures *text, int x)
+{
+	int32_t		draw_start;
+	int32_t		draw_end;
+	uint32_t	color;
+	t_render	*r;
+
+	r = cub3d->render;
+	draw_start = r->line.start;
+	draw_end = r->line.end;
+	// color = color_texture(text, text->x_tex, text->y_tex);
+	while (draw_start < draw_end && draw_start < S_HEIGTH)
+	{
+		text->y_tex = (int)text->tex_pos & (text->wall_img->height - 1);
+		text->tex_pos += text->pix_step;
+		color = color_texture(text, text->x_tex, text->y_tex);
+		mlx_put_pixel(cub3d->scene, x, draw_start, 0x000000ff);
+		draw_start++;
+	}
+	// int y = S_HEIGTH / 2;
+	// int n;
+	// while (y < S_HEIGTH - 1)
+	// {
+	// 	// n = 0;
+	// 	// while(n < S_WIDTH - 1)
+	// 	// {
+	// 		mlx_put_pixel(cub3d->scene, y, 0, 35);
+	// 		// n++;
+	// 	// }
+	// 	y++;
+	// }
 }
 
 // Generates a new ray.
 // Calcs the camera coordinate, updates ray direction and sets pos in map.
 // Calcs the delta distance (how much a ray moves in each step) for x and y.
-void	create_ray(t_cub3d *cub3d, t_render *ray, size_t screen_i)
+void	create_ray(t_cub3d *cub3d, t_render *ray, int x)
 {
-	ray->camera_column = 2 * ((double)screen_i / (double)S_WIDTH) - 1;
-	ray->ray_dir.x = ray->player_dir.x + (ray->plane.x * ray->camera_column);
-	ray->ray_dir.y = ray->player_dir.y + (ray->plane.y * ray->camera_column);
+	ray->camera_column = 2 * (x / (double)S_WIDTH) - 1;
 	ray->map_pos.x = (int32_t)ray->player_pos.x;
 	ray->map_pos.y = (int32_t)ray->player_pos.y;
+	ray->ray_dir.x = ray->player_dir.x + (ray->plane.x * ray->camera_column);
+	ray->ray_dir.y = ray->player_dir.y + (ray->plane.y * ray->camera_column);
 	if (ray->ray_dir.x == 0)
 		ray->delta_dist.x = (double)INFINITY;
 	else
@@ -155,5 +128,7 @@ void	create_ray(t_cub3d *cub3d, t_render *ray, size_t screen_i)
 	update_direction(ray);
 	dda_algorithm(ray, cub3d);
 	set_wall_height(ray);
-	set_wall_textures(ray, cub3d); // cub3d needed?
+	set_wall_textures(ray, cub3d);
+	draw_calculations(ray, cub3d);
+	draw_line_loops(cub3d, cub3d->textures, x);
 }

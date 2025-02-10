@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/07 21:16:56 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/10 20:51:16 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	draw_background(t_cub3d *cub3d)
 	int			y;
 
 	x = 0;
-	mlx_img = cub3d->render->floor_and_ceiling;
+	mlx_img = cub3d->floor_and_ceiling;
 	while (x < S_WIDTH)
 	{
 		y = 0;
@@ -47,7 +47,7 @@ void	fill_background(t_cub3d *cub3d)
 	draw_background(cub3d);
 }
 
-static uint32_t	color_texture(t_textures *text, double x_info, double y_info)
+uint32_t	color_texture(t_textures *text, double x_info, double y_info)
 {
 	uint8_t	*pixels;
 	int		x;
@@ -63,25 +63,4 @@ static uint32_t	color_texture(t_textures *text, double x_info, double y_info)
 	text->b = pixels[index + 2];
 	text->a = pixels[index + 3];
 	return ((uint32_t)(text->r << 24 | text->g << 16 | text->b << 8 | text->a));
-}
-
-void	loop_screenpixels(t_render *ray, t_textures	*text, mlx_texture_t *wall)
-{
-	int32_t		draw_start;
-	int32_t		draw_end;
-	uint32_t	color;
-	int			i;
-
-	draw_start = ray->line.start;
-	draw_end = ray->line.end;
-	i = 0;
-	// while (draw_start < draw_end && draw_start < S_HEIGTH)
-	while (i < draw_end)
-	{
-		text->y_tex = (int)text->tex_pos & (wall->height - 1);
-		text->tex_pos += text->pix_step;
-		color = color_texture(text, text->x_tex, text->y_tex);
-		mlx_put_pixel(ray->scene, i, ray->line.start, color);
-		i++;
-	}
 }
