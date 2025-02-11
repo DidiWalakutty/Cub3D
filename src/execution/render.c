@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/10 21:40:57 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:24:32 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,46 +33,9 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 		}
 		if (cub3d->input->map->grid[ray->map_pos.y][ray->map_pos.x] == '1')
 			break ;
-		// if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x)) // in case hit wall sucks agian
+		// if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x))
 	}
 }
-
-// tex_col determines which column of the texture should be used
-// for this wall slice.
-// X_SIDE = 0 = vertical wall N/S
-// Y_SIDE = 1 = horizontal wall E/W
-static void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
-{
-	t_textures	*texture;
-
-	texture = cub3d->textures;
-	if (ray->side_hit == X_SIDE)
-	{
-		if (ray->ray_dir.y > 0)
-			texture->wall_img = texture->north;
-		else
-			texture->wall_img = texture->south;
-	}
-	else if (ray->side_hit == Y_SIDE)
-	{
-		if (ray->ray_dir.x > 0)
-			texture->wall_img = texture->west;
-		else
-			texture->wall_img = texture->east;
-	}
-	// removes integer parts, keeps fractional part
-	// because it tells us where within a single wall block we hit
-	// text->wall_x_pos -= floor(text->wall_x_pos);
-	// calcs which vertical strip of texture we need to use
-	texture->x_tex = (int)(texture->wall_x_pos \
-							* (double)texture->wall_img->width);
-	// flips texture, because of mirroring
-	if (ray->side_hit == X_SIDE && ray->ray_dir.x > 0)
-		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
-	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
-		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
-}
-
 
 void	draw_line_loops(t_cub3d *cub3d, t_textures *text, int x)
 {
@@ -84,27 +47,15 @@ void	draw_line_loops(t_cub3d *cub3d, t_textures *text, int x)
 	r = cub3d->render;
 	draw_start = r->line.start;
 	draw_end = r->line.end;
-	// color = color_texture(text, text->x_tex, text->y_tex);
 	while (draw_start < draw_end && draw_start < S_HEIGTH)
 	{
 		text->y_tex = (int)text->tex_pos & (text->wall_img->height - 1);
 		text->tex_pos += text->pix_step;
 		color = color_texture(text, text->x_tex, text->y_tex);
-		mlx_put_pixel(cub3d->scene, x, draw_start, 0x000000ff);
+		mlx_put_pixel(cub3d->scene, x, draw_start, color);
+		// mlx_put_pixel(cub3d->scene, x, draw_start, 0x000000ff);
 		draw_start++;
 	}
-	// int y = S_HEIGTH / 2;
-	// int n;
-	// while (y < S_HEIGTH - 1)
-	// {
-	// 	// n = 0;
-	// 	// while(n < S_WIDTH - 1)
-	// 	// {
-	// 		mlx_put_pixel(cub3d->scene, y, 0, 35);
-	// 		// n++;
-	// 	// }
-	// 	y++;
-	// }
 }
 
 // Generates a new ray.
@@ -120,12 +71,12 @@ void	create_ray(t_cub3d *cub3d, t_render *ray, int x)
 	if (ray->ray_dir.x == 0)
 		ray->delta_dist.x = (double)INFINITY;
 	else
-		ray->delta_dist.x = fabs(1 / ray->ray_dir.x);
+		ray->delta_dist.x = fabs((float)1 / ray->ray_dir.x);
 	if (ray->ray_dir.y == 0)
 		ray->delta_dist.y = (double)INFINITY;
 	else
-		ray->delta_dist.y = fabs(1 / ray->ray_dir.y);
-	update_direction(ray);
+		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
+	update_side_dist(ray);
 	dda_algorithm(ray, cub3d);
 	set_wall_height(ray);
 	set_wall_textures(ray, cub3d);

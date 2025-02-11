@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/10 20:51:16 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:22:59 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void	fill_background(t_cub3d *cub3d)
 	draw_background(cub3d);
 }
 
+static uint32_t	get_rrgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
 uint32_t	color_texture(t_textures *text, double x_info, double y_info)
 {
 	uint8_t	*pixels;
@@ -62,5 +67,5 @@ uint32_t	color_texture(t_textures *text, double x_info, double y_info)
 	text->g = pixels[index + 1];
 	text->b = pixels[index + 2];
 	text->a = pixels[index + 3];
-	return ((uint32_t)(text->r << 24 | text->g << 16 | text->b << 8 | text->a));
+	return (get_rrgba(text->r, text->g, text->b, text->a));
 }

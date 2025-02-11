@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/10 21:44:58 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:13:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef struct s_textures
 	mlx_texture_t	*wall_img;
 	int32_t			floor_color;
 	int32_t			ceiling_color;
-	double			wall_x_pos;
 	double			pix_step;
 	double			tex_pos;
 	int				x_tex;
@@ -144,8 +143,6 @@ typedef struct s_cub3d
 	mlx_image_t	*scene;
 	mlx_image_t	*floor_and_ceiling;
 	t_input		*input;
-	// t_map		*map_data;
-	t_player	*player;
 	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
@@ -178,14 +175,15 @@ bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
 bool	hit_wall(char **grid, int32_t x, int32_t y);
 void	create_ray(t_cub3d *cub3d, t_render *ray, int x);
 void	draw_calculations(t_render *ray, t_cub3d *cub3d);
-void	update_direction(t_render *ray);
+void	update_side_dist(t_render *ray);
 void	set_wall_height(t_render *ray);
+void	set_wall_textures(t_render *ray, t_cub3d *cub3d);
 uint32_t	color_texture(t_textures *text, double x_info, double y_info);
 
 /*Set Up*/
-void	init_settings(t_cub3d *cub3d, t_player *player);
+void	init_settings(t_cub3d *cub3d);
 bool	alloc_execution_structs(t_cub3d *cub3d);
-t_render	*set_variables(t_cub3d *cub3d, t_player *player);
+t_render	*set_variables(t_cub3d *cub3d);
 
 /*Images and Textures*/
 bool	load_wall_textures(t_cub3d *cub3d);

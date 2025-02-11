@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/10 20:07:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 13:52:49 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ static void	set_direction_and_plane(t_render *render, t_player *player)
 
 // Need to check which variables we need in here.
 // Probably angle, FOV etc as well.
-t_render	*set_variables(t_cub3d *cub3d, t_player *player)
+t_render	*set_variables(t_cub3d *cub3d)
 {
 	t_render	*render;
 
 	render = ft_calloc(1, sizeof(*render));
 	if (!render)
 		return (NULL);
-	render->player_pos.x = player->x + 0.5; // + 0.5 for middle of tile?
-	render->player_pos.y = player->y + 0.5;
-	set_direction_and_plane(render, player);
+	render->player_pos.x = (double)cub3d->input->map->player->x; // + 0.5 for middle of tile?
+	render->player_pos.y = (double)cub3d->input->map->player->y;
+	set_direction_and_plane(render, cub3d->input->map->player);
 	render->fov = (FOV * PI) / 180; // FOV in radians
 	return (render);
 }

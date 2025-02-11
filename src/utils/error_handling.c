@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/09 14:06:58 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 13:16:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,4 @@ void	cleanup(t_cub3d *game)
 		}
 		free(game->input);
 	}
-	// if (game->map_data)
-	// 	free(game->map_data);
-	if (game->player)
-		free(game->player);
 }

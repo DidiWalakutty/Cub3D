@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/10 21:38:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 13:54:59 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,22 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 // mlx_new_image: Creates and allocates a new image buffer.
 // mlx_image_to_window: Draws a new instance of an image, 
 // it will then share the same pixel buffer as the image. Returns -1 if failed
-void	init_settings(t_cub3d *cub3d, t_player *player)
+void	init_settings(t_cub3d *cub3d)
 {
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Couldn't allocate structs");
 	initiate_mlx_images(cub3d);
-	cub3d->render = set_variables(cub3d, player);
+	cub3d->render = set_variables(cub3d);
 	if (!cub3d->render)
 		end_game(cub3d, "Couldn't alloc render struct");
 }
 
 bool	load_wall_textures(t_cub3d *cub3d)
 {
-	cub3d->textures->north = mlx_load_png("./textures/Space_N.png");
-	cub3d->textures->south = mlx_load_png("./textures/Space_S.png");
-	cub3d->textures->east = mlx_load_png("./textures/Space_E.png");
-	cub3d->textures->west = mlx_load_png("./textures/Space_W.png");
+	cub3d->textures->north = mlx_load_png("textures/Space_N.png");
+	cub3d->textures->south = mlx_load_png("textures/Space_S.png");
+	cub3d->textures->east = mlx_load_png("textures/Space_E.png");
+	cub3d->textures->west = mlx_load_png("textures/Space_W.png");
 	if (!cub3d->textures->north || !cub3d->textures->south || \
 		!cub3d->textures->east || !cub3d->textures->west)
 		return (false);

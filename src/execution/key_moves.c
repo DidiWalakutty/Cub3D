@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/07 21:31:21 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 12:58:22 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 	t_dvectr	update;
 
 	render = cub3d->render;
-	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir; 
+	printf("current playerpos x: %f - y: %f\n", render->player_pos.x, render->player_pos.y);
+	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir;
 	update.y = render->player_pos.y + render->player_dir.y * SPEED * dir;
+	printf("updated x: %f - y: %f\n", update.x, update.y);
 	if (path_clear(cub3d->input->map->grid, render->player_pos, update, \
 					render->player_dir))
 	{
+		printf("path is clear\n");
 		render->player_pos.x = update.x;
 		render->player_pos.y = update.y;
+		printf("player_posx: %f - player_posy: %f\n", render->player_pos.x, render->player_pos.y);
 	}
 }
 
