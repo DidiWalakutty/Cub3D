@@ -6,11 +6,21 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:11:19 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:51:05 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void place_textures(t_render *ray, t_textures *texture)
+{
+	texture->x_tex = (int)(ray->wall_x * \
+							(double)texture->wall_img->width);
+	if (ray->side_hit == X_SIDE && ray->ray_dir.x > 0)
+		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
+		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+}
 
 // tex_col determines which column of the texture should be used
 // for this wall slice.
@@ -33,16 +43,7 @@ void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 		else
 			texture->wall_img = texture->east;
 	}
-	// removes integer parts, keeps fractional part
-	// because it tells us where within a single wall block we hit
-
-	texture->x_tex = (int)(ray->wall_x * \
-							(double)texture->wall_img->width);
-	// flips texture, because of mirroring
-	if (ray->side_hit == X_SIDE && ray->ray_dir.x > 0)
-		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
-	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
-		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+	place_textures(ray, texture);
 }
 
 // Calcs the side distances from the player to the nearest gridline. 

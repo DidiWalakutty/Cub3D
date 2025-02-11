@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:13:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 15:25:51 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct s_render
 	t_ivectr	map_step;		// dir of step
 	t_draw		line;
 	int			side_hit;	// x or y-side
-	int			wall_x;	
+	double		wall_x;	
 	double		wall_dist;	// player_dist from wall
 	float		fov;
 }	t_render;
@@ -171,14 +171,16 @@ int		check_player_spawning_point(t_player *player);
 /*Execution*/
 void	run_cub3d(t_cub3d *cub3d);
 void	keys(void *param);
-bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
-bool	hit_wall(char **grid, int32_t x, int32_t y);
-void	create_ray(t_cub3d *cub3d, t_render *ray, int x);
+// bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
+bool	path_clear(char **grid, t_map *map, t_dvectr new);
+// bool	hit_wall(char **grid, int32_t x, int32_t y);
+bool	hit_wall(char **grid, t_map *map, int32_t y, int32_t x);
 void	draw_calculations(t_render *ray, t_cub3d *cub3d);
 void	update_side_dist(t_render *ray);
 void	set_wall_height(t_render *ray);
 void	set_wall_textures(t_render *ray, t_cub3d *cub3d);
 uint32_t	color_texture(t_textures *text, double x_info, double y_info);
+void	draw_line_loops(t_cub3d *cub3d, t_textures *text, int x);
 
 /*Set Up*/
 void	init_settings(t_cub3d *cub3d);

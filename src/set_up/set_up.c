@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 13:54:59 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:54:09 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,19 @@ bool	load_wall_textures(t_cub3d *cub3d)
 	return (true);
 }
 
-void	draw_calculations(t_render *ray, t_cub3d *cub3d)
-{
-	if (ray->wall_dist == 0)
-		ray->line.height = S_HEIGTH;
-	else
-		ray->line.height = (int)(S_HEIGTH / ray->wall_dist);
-	ray->line.start = (S_HEIGTH / 2) - (ray->line.height / 2);
-	if (ray->line.start < 0)
-		ray->line.start = 0;
-	ray->line.end = (S_HEIGTH / 2) + (ray->line.height / 2);
-	if (ray->line.end >= S_HEIGTH)
-		ray->line.end = S_HEIGTH - 1;
-	cub3d->textures->pix_step = 1.0 * cub3d->textures->wall_img->height / ray->line.height;
-	cub3d->textures->tex_pos = (ray->line.start - S_HEIGTH / 2 + ray->line.height) \
-								* cub3d->textures->pix_step;
-}
+// void	draw_calculations(t_render *ray, t_cub3d *cub3d)
+// {
+// 	if (ray->wall_dist == 0)
+// 		ray->line.height = S_HEIGTH;
+// 	else
+// 		ray->line.height = (int)(S_HEIGTH / ray->wall_dist);
+// 	ray->line.start = (S_HEIGTH / 2) - (ray->line.height / 2);
+// 	if (ray->line.start < 0)
+// 		ray->line.start = 0;
+// 	ray->line.end = (S_HEIGTH / 2) + (ray->line.height / 2);
+// 	if (ray->line.end >= S_HEIGTH)
+// 		ray->line.end = S_HEIGTH - 1;
+// 	cub3d->textures->pix_step = (1.0 * cub3d->textures->wall_img->height / ray->line.height);
+// 	cub3d->textures->tex_pos = (ray->line.start - S_HEIGTH / 2 + ray->line.height) \
+// 								* cub3d->textures->pix_step;
+// }
