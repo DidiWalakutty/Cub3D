@@ -6,14 +6,13 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 18:17:25 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 21:59:49 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
 
-static void	set_n_and_s(t_player *player)
+static void	initiate_mlx_images(t_cub3d *cub3d)
 {
 	cub3d->scene = mlx_new_image(cub3d->mlx, S_WIDTH, S_HEIGTH);
 	cub3d->floor_and_ceiling = mlx_new_image(cub3d->mlx, \
@@ -30,11 +29,10 @@ static void	set_n_and_s(t_player *player)
 		end_game(cub3d, "Error: Couldn't load textures");
 }
 
-// Map's origin (0, 0) is top left corner.
-// Y is vertical, X is horizontal
-// the plane is the camera plane that represents the screen and it always runs
-// perpendicular to our direction
-static void	set_direction_and_plane(t_player *player)
+// mlx_new_image: Creates and allocates a new image buffer.
+// mlx_image_to_window: Draws a new instance of an image, 
+// it will then share the same pixel buffer as the image. Returns -1 if failed
+void	init_settings(t_cub3d *cub3d)
 {
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Error: Couldn't allocate structs");
@@ -44,12 +42,14 @@ static void	set_direction_and_plane(t_player *player)
 		end_game(cub3d, "Error: Couldn't alloc render struct");
 }
 
-// Need to check which variables we need in here.
-// Probably angle, FOV etc as well.
-// Need map info for direction.
-static void	set_variables(t_cub3d *cub3d)
+bool	load_wall_textures(t_cub3d *cub3d)
 {
-	set_direction_and_plane(cub3d->player); // map info: found letter for direction
-	cub3d->player->fov = (FOV * PI) / 180;	// FOV in radians for sin(), cos() and tan().
-	// cub3d->player.rotation = 
+	cub3d->textures->north = mlx_load_png("textures/Space_N.png");
+	cub3d->textures->south = mlx_load_png("textures/Space_S.png");
+	cub3d->textures->east = mlx_load_png("textures/Space_E.png");
+	cub3d->textures->west = mlx_load_png("textures/Space_W.png");
+	if (!cub3d->textures->north || !cub3d->textures->south || \
+		!cub3d->textures->east || !cub3d->textures->west)
+		return (false);
+	return (true);
 }

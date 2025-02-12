@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/12 18:29:24 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 22:01:48 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_error(char *errormsg)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-static void free_grid(char **grid)
+static void	free_grid(char **grid)
 {
 	int	i;
 
@@ -61,7 +61,6 @@ void	cleanup(t_cub3d *game)
 		}
 		free(game->input);
 	}
-
 	free_mlx_data(game);
 	if (game->render)
 		free(game->render);

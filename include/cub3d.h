@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 18:55:31 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 19:40:45 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -48,7 +49,20 @@ typedef struct s_dvectr
 {
 	double	x;
 	double	y;
-}	t_vectr;
+}	t_dvectr;
+
+typedef struct s_ivect
+{
+	int32_t	x;
+	int32_t	y;
+}	t_ivectr;
+
+typedef struct s_draw
+{
+	int32_t	height;
+	int32_t	start;
+	int32_t	end;
+}	t_draw;
 
 typedef struct s_player
 {
@@ -56,11 +70,6 @@ typedef struct s_player
 	int		y;
 	char	orientation;
 	int		player_count;
-	float	fov;
-	float	rotation;
-	t_vectr	position;
-	t_vectr	direction;
-	t_vectr	plane;
 }	t_player;
 
 typedef struct s_map
@@ -90,8 +99,17 @@ typedef struct s_textures
 	mlx_texture_t	*east;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
+	mlx_texture_t	*wall_img;
 	int32_t			floor_color;
 	int32_t			ceiling_color;
+	double			pix_step;
+	double			tex_pos;
+	int				x_tex;
+	int				y_tex;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+	uint8_t			a;
 }	t_textures;
 
 typedef struct s_render
@@ -113,11 +131,10 @@ typedef struct s_render
 
 typedef struct s_cub3d
 {
+	mlx_image_t	*scene;
+	mlx_image_t	*floor_and_ceiling;
 	t_input		*input;
-	t_map		*map_data;
-	t_player	*player;
-	// t_ray		*ray;
-	t_render	render;
+	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
 }	t_cub3d;
