@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 18:48:46 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:56:52 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	place_textures(t_render *ray, t_textures *texture)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
 	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
-	printf("x_tex: %i\n", texture->x_tex);
 }
 
 // Chooses the correct wall texture based on which side of the wall
