@@ -6,13 +6,15 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:51:05 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:48:46 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void place_textures(t_render *ray, t_textures *texture)
+// Determines the exact column (x_tex) of the texture to use based on
+// wall_x. Flips the texture horizontally for certain wall orientations.
+static void	place_textures(t_render *ray, t_textures *texture)
 {
 	texture->x_tex = (int)(ray->wall_x * \
 							(double)texture->wall_img->width);
@@ -20,10 +22,11 @@ static void place_textures(t_render *ray, t_textures *texture)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
 	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
+	printf("x_tex: %i\n", texture->x_tex);
 }
 
-// tex_col determines which column of the texture should be used
-// for this wall slice.
+// Chooses the correct wall texture based on which side of the wall
+// was hit (X or Y) and the ray's direction.
 void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 {
 	t_textures	*texture;
@@ -31,23 +34,23 @@ void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 	texture = cub3d->textures;
 	if (ray->side_hit == X_SIDE)
 	{
-		if (ray->ray_dir.y > 0)
-			texture->wall_img = texture->north;
+		if (ray->ray_dir.x > 0)
+			texture->wall_img = texture->east;
 		else
-			texture->wall_img = texture->south;
+			texture->wall_img = texture->west;
 	}
 	else if (ray->side_hit == Y_SIDE)
 	{
-		if (ray->ray_dir.x > 0)
-			texture->wall_img = texture->west;
+		if (ray->ray_dir.y > 0)
+			texture->wall_img = texture->south;
 		else
-			texture->wall_img = texture->east;
+			texture->wall_img = texture->north;
 	}
 	place_textures(ray, texture);
 }
 
-// Calcs the side distances from the player to the nearest gridline. 
-// Also updates the step values.
+// Determines whether the ray steps left/right or up/down.
+// Calcs the side_dist (distance to the first grid boundary)
 void	update_side_dist(t_render *ray)
 {
 	if (ray->ray_dir.x < 0)
@@ -76,17 +79,19 @@ void	update_side_dist(t_render *ray)
 	}
 }
 
+// Calcs the wall_dist from the player and wall_x (exact hit pos on the wall
+// for texture mapping).
 void	set_wall_height(t_render *ray)
 {
 	if (ray->side_hit == X_SIDE)
 	{
 		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
-		ray->wall_x = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
+		ray->wall_x = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
 	}
 	else
 	{
 		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
-		ray->wall_x = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
+		ray->wall_x = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
 	}
 	ray->wall_x -= floor(ray->wall_x);
 }

@@ -6,12 +6,14 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:59:58 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:43:46 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+// Performs DDA to trace the ray until it hits a wall.
+// Steps through the grid one square at a time.
 static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 {
 	while (1)
@@ -30,17 +32,17 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 		}
 		if (cub3d->input->map->grid[ray->map_pos.y][ray->map_pos.x] == '1')
 			break ;
-		// if (hit_wall(cub3d->input->map->grid, ray->map_pos.y, ray->map_pos.x))
 	}
 }
 
+// Calcs the ray direction for the current screen column.
+// Also does the delta_dist: step size between grid lines.
 static void	update_vars(t_cub3d *cub3d, t_render *ray)
 {
 	ray->map_pos.x = (int)ray->player_pos.x;
 	ray->map_pos.y = (int)ray->player_pos.y;
 	ray->ray_dir.x = ray->player_dir.x + ray->plane.x * ray->camera_column;
 	ray->ray_dir.y = ray->player_dir.y + ray->plane.y * ray->camera_column;
-
 	if (ray->ray_dir.x == 0)
 		ray->delta_dist.x = 1e30;
 	else
@@ -51,6 +53,8 @@ static void	update_vars(t_cub3d *cub3d, t_render *ray)
 		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
 }
 
+// Performs raycasting to render the 3D view by looping
+// through each vertical/y screen column.
 static void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
@@ -59,7 +63,7 @@ static void	raycaster(void *data)
 
 	cub3d = data;
 	render = cub3d->render;
-	ft_memset(cub3d->scene->pixels, 0xFF000000, S_WIDTH * S_HEIGTH * sizeof(uint32_t));
+	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_HEIGTH * 4);
 	y = 0;
 	while (y < S_WIDTH)
 	{
@@ -68,30 +72,24 @@ static void	raycaster(void *data)
 		update_side_dist(render);
 		dda_algorithm(render, cub3d);
 		set_wall_height(render);
+		// Stretched texture is probably in set_wall_textures,  
+		// place_textures (in set_text) or draw_wall_slices.
 		set_wall_textures(render, cub3d);
-		draw_line_loops(cub3d, cub3d->textures, y);
+		draw_wall_slices(cub3d, cub3d->textures, y);
 		y++;
 	}
 }
 
-void	test()
-{
-
-}
-
 // TODO:
 // if time: minimap
-// raycaster/render
-// MLX hooks and loop
 void	run_cub3d(t_cub3d *cub3d)
 {
-	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false); // creates window
+	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false);
 	if (!cub3d->mlx)
-		end_game(cub3d, "Couldn't init MLX window");
+		end_game(cub3d, "Error: Couldn't init MLX window");
 	init_settings(cub3d);
-	// if time left: mini_map
+	// mini_map
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
-	mlx_loop_hook(cub3d->mlx, &raycaster, (void*)cub3d);
-	// mlx_loop_hook(cub3d->mlx, test, cub3d); // As long as raycaster isn't functioning, use this to test background
+	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }

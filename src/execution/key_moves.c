@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 15:26:52 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:27:03 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 	render = cub3d->render;
 	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir;
 	update.y = render->player_pos.y + render->player_dir.y * SPEED * dir;
-	printf("updated x: %f - y: %f\n", update.x, update.y);
 	if (path_clear(cub3d->input->map->grid, cub3d->input->map, update))
 	{
 		render->player_pos.x = update.x;
 		render->player_pos.y = update.y;
-		printf("player_posx: %f - player_posy: %f\n", render->player_pos.x, render->player_pos.y);
 	}
 }
 
@@ -46,7 +44,9 @@ static void	move_left_right(const t_cub3d *cub3d, char dir)
 	}
 }
 
-static void turning(const t_cub3d *cub3d, char side)
+// Uses 2D rotation formulas using a standard rotation matrix 
+// to update the player_dir and plane (fov).
+static void	turning(const t_cub3d *cub3d, char side)
 {
 	t_dvectr	old_dir;
 	double		plane;
@@ -65,8 +65,6 @@ static void turning(const t_cub3d *cub3d, char side)
 						render->plane.x * cos(ROTATE_S * side);
 }
 
-// Calculate new player position based on
-// direction and speed.
 void	keys(void *param)
 {
 	t_cub3d	*cub3d;
@@ -74,7 +72,9 @@ void	keys(void *param)
 
 	cub3d = param;
 	mlx = cub3d->mlx;
-
+	// passed time for rotation?
+	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
+		end_game(cub3d, "Thanks for playing!");
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		move_up_down(cub3d, FORWARD);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))
@@ -87,10 +87,4 @@ void	keys(void *param)
 		turning(cub3d, TURN_LEFT);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 		turning(cub3d, TURN_RIGHT);
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-	{
-		cleanup(cub3d);
-		mlx_close_window(mlx);
-		mlx_terminate(mlx); // needed??
-	}
 }
