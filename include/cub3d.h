@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:13:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:55:31 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,12 @@
 # include "libft.h"
 
 // Define sizes
-# define S_WIDTH 1800		// screen width
-# define S_HEIGTH 1200		// screen heigth
-# define S_UPPER_HALF 900	// upper half of screen
-# define S_LOWER_HALF 600	// lower half of screen
+# define S_WIDTH 1800
+# define S_HEIGTH 1200
 
 // Define ray info
-# define FOV 60				// field of view
-# define PI 3.1415926		// PI
-# define SPEED 0.1			// move speed
-# define ROTATE_S 0.02			// rotate speed
-// # define WALL_MARGIN 0.05	// collision buffer for diaganol movement
+# define SPEED 0.1
+# define ROTATE_S 0.025
 # define X_SIDE 0
 # define Y_SIDE 1
 
@@ -48,7 +43,7 @@
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
 
-typedef struct	s_cub3d	t_cub3d;
+typedef struct s_cub3d	t_cub3d;
 
 typedef struct s_dvectr
 {
@@ -117,9 +112,6 @@ typedef struct s_textures
 	uint8_t			a;
 }	t_textures;
 
-// Renders the game world, incl walls, floors, ceiling onto the screen.
-// Info like players pos, direction, raycasting results. The engine
-// determines the appropriate colors to render the walls.
 typedef struct s_render
 {
 	t_dvectr	plane;
@@ -130,12 +122,11 @@ typedef struct s_render
 	t_dvectr	side_dist;
 	double		camera_column;
 	t_ivectr	map_pos;	// pos in the map
-	t_ivectr	map_step;		// dir of step
+	t_ivectr	map_step;	// dir of step
 	t_draw		line;
-	int			side_hit;	// x or y-side
-	int			wall_x;	
-	double		wall_dist;	// player_dist from wall
-	float		fov;
+	int			side_hit;
+	double		wall_x;	
+	double		wall_dist;
 }	t_render;
 
 typedef struct s_cub3d
@@ -148,54 +139,52 @@ typedef struct s_cub3d
 	t_textures	*textures;
 }	t_cub3d;
 
-
 /* File Parsing */
-int		handle_input(const char *filename, char ***lines);
-int		parse_file(char *argv[], t_input *file_data);
-bool	extract_elements(char **lines, t_input *content);
-bool	parse_texture(char *line, t_input *content);
-bool	parse_color(char *line, int *color);
-bool 	is_map_last_in_file(char **lines, t_map *map);
-bool	handle_map(t_input *file_data, char **lines);
+int			handle_input(const char *filename, char ***lines);
+int			parse_file(char *argv[], t_input *file_data);
+bool		extract_elements(char **lines, t_input *content);
+bool		parse_texture(char *line, t_input *content);
+bool		parse_color(char *line, int *color);
+bool		is_map_last_in_file(char **lines, t_map *map);
+bool		handle_map(t_input *file_data, char **lines);
 
 /* Map Validation */
-bool	is_valid_map_char(char c);
-bool	validate_map_characters(t_map *map);
-bool	is_map_surrounded_by_walls(t_map *map);
-bool 	validate_textures(t_input *content);
+bool		is_valid_map_char(char c);
+bool		validate_map_characters(t_map *map);
+bool		is_map_surrounded_by_walls(t_map *map);
+bool		validate_textures(t_input *content);
 
 /* Map Population */
-void	set_player_spawning_point(t_map *map, t_player *player);
-int		check_player_spawning_point(t_player *player);
+void		set_player_spawning_point(t_map *map, t_player *player);
+int			check_player_spawning_point(t_player *player);
 
 /*Execution*/
-void	run_cub3d(t_cub3d *cub3d);
-void	keys(void *param);
-bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
-bool	hit_wall(char **grid, int32_t x, int32_t y);
-void	create_ray(t_cub3d *cub3d, t_render *ray, int x);
-void	draw_calculations(t_render *ray, t_cub3d *cub3d);
-void	update_side_dist(t_render *ray);
-void	set_wall_height(t_render *ray);
-void	set_wall_textures(t_render *ray, t_cub3d *cub3d);
-uint32_t	color_texture(t_textures *text, double x_info, double y_info);
+void		run_cub3d(t_cub3d *cub3d);
+void		keys(void *param);
+bool		path_clear(char **grid, t_map *map, t_dvectr new);
+bool		hit_wall(char **grid, t_map *map, int32_t y, int32_t x);
+void		update_side_dist(t_render *ray);
+void		set_wall_height(t_render *ray);
+void		set_wall_textures(t_render *ray, t_cub3d *cub3d);
+void		draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x);
 
 /*Set Up*/
-void	init_settings(t_cub3d *cub3d);
-bool	alloc_execution_structs(t_cub3d *cub3d);
+void		init_settings(t_cub3d *cub3d);
+bool		alloc_execution_structs(t_cub3d *cub3d);
 t_render	*set_variables(t_cub3d *cub3d);
+uint32_t	color_texture(t_textures *text, double x_info, double y_info);
 
 /*Images and Textures*/
-bool	load_wall_textures(t_cub3d *cub3d);
-void	fill_background(t_cub3d *cub3d);
+bool		load_wall_textures(t_cub3d *cub3d);
+void		fill_background(t_cub3d *cub3d);
 
 /* Error Handling */
-void	print_error(char *errormsg);
-void	cleanup(t_cub3d *game);
-void	end_game(t_cub3d *cub3d, char *error_message);
+void		print_error(char *errormsg);
+void		cleanup(t_cub3d *game);
+void		end_game(t_cub3d *cub3d, char *error_message);
 
 /* Print for testing */
-void	print_parsed_content(t_input *content);
-void	print_map(char **map);
+void		print_parsed_content(t_input *content);
+void		print_map(char **map);
 
 #endif

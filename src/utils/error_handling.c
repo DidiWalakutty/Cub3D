@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/11 13:16:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:29:24 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,31 @@ void	print_error(char *errormsg)
 
 static void	free_grid(char **grid)
 {
-    int	i;
+	int	i;
 
 	i = 0;
-    while (grid[i])
-    {
-        free(grid[i]);
-        i++;
-    }
-    free(grid);
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
 }
 
-void	end_game(t_cub3d *game, char *error_message)
+static void	free_mlx_data(t_cub3d *cub3d)
 {
-	printf("Error: %s\n", error_message);
-	cleanup(game);
-	// end mlx
+	if (cub3d->textures->north)
+		mlx_delete_texture(cub3d->textures->north);
+	if (cub3d->textures->east)
+		mlx_delete_texture(cub3d->textures->east);
+	if (cub3d->textures->south)
+		mlx_delete_texture(cub3d->textures->south);
+	if (cub3d->textures->west)
+		mlx_delete_texture(cub3d->textures->west);
+	if (cub3d->floor_and_ceiling)
+		mlx_delete_image(cub3d->mlx, cub3d->floor_and_ceiling);
+	if (cub3d->scene)
+		mlx_delete_image(cub3d->mlx, cub3d->scene);
 }
 
 void	cleanup(t_cub3d *game)
@@ -45,12 +54,22 @@ void	cleanup(t_cub3d *game)
 	{
 		if (game->input->map)
 		{
+			free_grid(game->input->map->grid);
 			if (game->input->map->player)
 				free(game->input->map->player);
-			if (game->input->map->grid)
-                free_grid(game->input->map->grid);
 			free(game->input->map);
 		}
 		free(game->input);
 	}
+	free_mlx_data(game);
+	if (game->render)
+		free(game->render);
+}
+
+void	end_game(t_cub3d *game, char *message)
+{
+	printf("%s\n", message);
+	cleanup(game);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 }
