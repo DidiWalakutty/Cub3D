@@ -6,13 +6,13 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:39:40 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/02/12 19:05:57 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	bool has_xpm_extension(const char *filename)
+static	bool has_png_extension(const char *filename)
 {
 	const char	*ext;
 	size_t		len;
@@ -22,7 +22,7 @@ static	bool has_xpm_extension(const char *filename)
 	ext_len = ft_strlen(ext);
 	len = ft_strlen(filename);
 	if (len < ext_len)
-		return (print_error("Texture doesn't have xpm extension."), false);
+		return (print_error("Texture doesn't have png extension."), false);
 	return (ft_strncmp(filename + len - ext_len, ext, ext_len) == 0);
 }
 // static bool texture_exists(const char *filename)
@@ -53,7 +53,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix, t_input 
 		texture_path = ft_strdup(line + ft_strlen(prefix));
 		trimmed = ft_strtrim(texture_path, " \t\n\r");
 		free(texture_path);
-		if (!has_xpm_extension(trimmed))
+		if (!has_png_extension(trimmed))
 			return (free(trimmed), false);
 		// if (is_texture_duplicate(texture_path, content))
 		// {

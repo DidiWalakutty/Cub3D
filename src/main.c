@@ -6,7 +6,7 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:14 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 15:52:38 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:01:17 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int argc, char *argv[])
 	// adjust game struct pointers
 	print_map(game.input->map->grid);
 	run_cub3d(&game);
-	cleanup(&game); // temporary cleanup
+	end_game(&game, "Thanks for playing");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/11 14:22:59 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/12 18:53:44 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ static void	draw_background(t_cub3d *cub3d)
 	}
 }
 
-static int32_t	get_array_rgb(int colors[3], int32_t a)
+static int32_t	get_rgb(int colors[3], int32_t a)
 {
 	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | a);
 }
 
 void	fill_background(t_cub3d *cub3d)
 {
-	cub3d->textures->ceiling_color = get_array_rgb(cub3d->input->ceiling_colors, 255);
-	cub3d->textures->floor_color = get_array_rgb(cub3d->input->floor_colors, 255);
+	cub3d->textures->ceiling_color = get_rgb(cub3d->input->ceiling_colors, 255);
+	cub3d->textures->floor_color = get_rgb(cub3d->input->floor_colors, 255);
 	draw_background(cub3d);
 }
 
