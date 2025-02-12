@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/01/29 15:49:47 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/11 14:13:14 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <errno.h>
 # include <string.h>
 # include <stdbool.h>
+# include <stdint.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -29,14 +30,44 @@
 # define S_HEIGTH 1200		// screen heigth
 # define S_UPPER_HALF 900	// upper half of screen
 # define S_LOWER_HALF 600	// lower half of screen
+
+// Define ray info
 # define FOV 60				// field of view
 # define PI 3.1415926		// PI
+# define SPEED 0.1			// move speed
+# define ROTATE_S 0.02			// rotate speed
+// # define WALL_MARGIN 0.05	// collision buffer for diaganol movement
+# define X_SIDE 0
+# define Y_SIDE 1
 
-typedef struct s_vectr
+// Define movement
+# define FORWARD 1
+# define BACKWARDS -1
+# define RIGHT 1
+# define LEFT -1
+# define TURN_RIGHT 1
+# define TURN_LEFT -1
+
+typedef struct	s_cub3d	t_cub3d;
+
+typedef struct s_dvectr
 {
 	double	x;
 	double	y;
-}	t_vectr;
+}	t_dvectr;
+
+typedef struct s_ivect
+{
+	int32_t	x;
+	int32_t	y;
+}	t_ivectr;
+
+typedef struct s_draw
+{
+	int32_t	height;
+	int32_t	start;
+	int32_t	end;
+}	t_draw;
 
 typedef struct s_player
 {
@@ -44,11 +75,6 @@ typedef struct s_player
 	int		y;
 	char	orientation;
 	int		player_count;
-	float	fov;
-	float	rotation;
-	t_vectr	position;
-	t_vectr	direction;
-	t_vectr	plane;
 }	t_player;
 
 typedef struct s_map
@@ -78,34 +104,46 @@ typedef struct s_textures
 	mlx_texture_t	*east;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
+	mlx_texture_t	*wall_img;
 	int32_t			floor_color;
 	int32_t			ceiling_color;
+	double			pix_step;
+	double			tex_pos;
+	int				x_tex;
+	int				y_tex;
+	uint8_t			r;
+	uint8_t			g;
+	uint8_t			b;
+	uint8_t			a;
 }	t_textures;
-
-// Used to calculate the angles of rays from the player's viewpoint.
-// Determines the distance from the player to each wall.
-typedef struct s_ray
-{
-	
-}	t_ray;
 
 // Renders the game world, incl walls, floors, ceiling onto the screen.
 // Info like players pos, direction, raycasting results. The engine
 // determines the appropriate colors to render the walls.
 typedef struct s_render
 {
-	t_ray		ray;
-	mlx_image_t	*wall;
-	mlx_image_t	*floor_and_ceiling;
+	t_dvectr	plane;
+	t_dvectr	player_pos;
+	t_dvectr	player_dir;
+	t_dvectr	ray_dir;
+	t_dvectr	delta_dist;
+	t_dvectr	side_dist;
+	double		camera_column;
+	t_ivectr	map_pos;	// pos in the map
+	t_ivectr	map_step;		// dir of step
+	t_draw		line;
+	int			side_hit;	// x or y-side
+	int			wall_x;	
+	double		wall_dist;	// player_dist from wall
+	float		fov;
 }	t_render;
 
 typedef struct s_cub3d
 {
+	mlx_image_t	*scene;
+	mlx_image_t	*floor_and_ceiling;
 	t_input		*input;
-	t_map		*map_data;
-	t_player	*player;
-	// t_ray		*ray;
-	t_render	render;
+	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
 }	t_cub3d;
@@ -132,13 +170,24 @@ int		check_player_spawning_point(t_player *player);
 
 /*Execution*/
 void	run_cub3d(t_cub3d *cub3d);
+void	keys(void *param);
+bool	path_clear(char **grid, t_dvectr player_pos, t_dvectr new, t_dvectr dir);
+bool	hit_wall(char **grid, int32_t x, int32_t y);
+void	create_ray(t_cub3d *cub3d, t_render *ray, int x);
+void	draw_calculations(t_render *ray, t_cub3d *cub3d);
+void	update_side_dist(t_render *ray);
+void	set_wall_height(t_render *ray);
+void	set_wall_textures(t_render *ray, t_cub3d *cub3d);
+uint32_t	color_texture(t_textures *text, double x_info, double y_info);
 
 /*Set Up*/
-void	set_mlx_and_variables(t_cub3d *cub3d);
-int32_t	rgba_to_int(int colors[3], int32_t a);
+void	init_settings(t_cub3d *cub3d);
+bool	alloc_execution_structs(t_cub3d *cub3d);
+t_render	*set_variables(t_cub3d *cub3d);
 
 /*Images and Textures*/
 bool	load_wall_textures(t_cub3d *cub3d);
+void	fill_background(t_cub3d *cub3d);
 
 /* Error Handling */
 void	print_error(char *errormsg);

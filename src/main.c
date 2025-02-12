@@ -6,10 +6,11 @@
 /*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:14 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 15:52:38 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/09 13:51:29 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/cub3d.h"
 
 int	main(int argc, char *argv[])
 {
@@ -27,9 +28,8 @@ int	main(int argc, char *argv[])
 		cleanup(&game);
 		return (1);
 	}
-	// adjust game struct pointers
 	print_map(game.input->map->grid);
 	run_cub3d(&game);
-	cleanup(&game); // temporary cleanup
+	// cleanup(&game); // temporary cleanup
 	return (0);
 }
