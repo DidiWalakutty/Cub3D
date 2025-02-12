@@ -57,15 +57,14 @@ static void	update_vars(t_cub3d *cub3d, t_render *ray)
 // through each vertical/y screen column.
 static void	raycaster(void *data)
 {
-	t_cub3d		*cub3d;
-	t_render	*render;
-	int			y;
+	int	x;
+	int	y;
 
 	cub3d = data;
 	render = cub3d->render;
 	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_HEIGTH * 4);
 	y = 0;
-	while (y < S_WIDTH)
+	while (y < S_HEIGTH)
 	{
 		render->camera_column = 2 * (y / (double)S_WIDTH) - 1;
 		update_vars(cub3d, render);
@@ -81,6 +80,7 @@ static void	raycaster(void *data)
 }
 
 // TODO:
+// set colors and walls
 // if time: minimap
 void	run_cub3d(t_cub3d *cub3d)
 {
@@ -93,3 +93,4 @@ void	run_cub3d(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 }
+

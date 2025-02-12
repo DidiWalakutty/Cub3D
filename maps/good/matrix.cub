@@ -1,8 +1,7 @@
-NO ./textures/Space_N.png
-SO ./textures/Space_S.png
-WE ./textures/Space_W.png
-EA ./textures/Space_E.png
-
+NO textures/matrix.xpm
+SO textures/matrix.xpm
+WE textures/matrix.xpm
+EA textures/matrix.xpm
 
 F 0,0,0
 C 0,0,0

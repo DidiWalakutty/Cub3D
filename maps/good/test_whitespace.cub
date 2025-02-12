@@ -6,7 +6,7 @@
 
 
 
-NO ./textures/Space_N.png
+NO textures/test/north.xpm
 
 
 
@@ -15,9 +15,9 @@ NO ./textures/Space_N.png
 
 
 
-SO ./textures/Space_S.png
-                        WE              ./textures/Space_W.png
-        EA ./textures/Space_E.png            
+SO textures/test/south.xpm
+                        WE              textures/test/west.xpm
+        EA textures/test/east.xpm            
 
         F   20,           20,             20
 C      200,          200,200
@@ -37,6 +37,7 @@ C      200,          200,200
 11111           
 
         
+
 
 
 

@@ -19,7 +19,7 @@ void	print_error(char *errormsg)
 	ft_putstr_fd("\n", STDERR_FILENO);
 }
 
-static void	free_grid(char **grid)
+static void free_grid(char **grid)
 {
 	int	i;
 
@@ -61,6 +61,7 @@ void	cleanup(t_cub3d *game)
 		}
 		free(game->input);
 	}
+
 	free_mlx_data(game);
 	if (game->render)
 		free(game->render);

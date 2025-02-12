@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
 
 int	main(int argc, char *argv[])
 {
@@ -28,6 +27,7 @@ int	main(int argc, char *argv[])
 		cleanup(&game);
 		return (1);
 	}
+	// adjust game struct pointers
 	print_map(game.input->map->grid);
 	run_cub3d(&game);
 	end_game(&game, "Thanks for playing");

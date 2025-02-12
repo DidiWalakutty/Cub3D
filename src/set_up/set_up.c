@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
-static void	initiate_mlx_images(t_cub3d *cub3d)
+static void	set_n_and_s(t_player *player)
 {
 	cub3d->scene = mlx_new_image(cub3d->mlx, S_WIDTH, S_HEIGTH);
 	cub3d->floor_and_ceiling = mlx_new_image(cub3d->mlx, \
@@ -29,10 +30,11 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 		end_game(cub3d, "Error: Couldn't load textures");
 }
 
-// mlx_new_image: Creates and allocates a new image buffer.
-// mlx_image_to_window: Draws a new instance of an image, 
-// it will then share the same pixel buffer as the image. Returns -1 if failed
-void	init_settings(t_cub3d *cub3d)
+// Map's origin (0, 0) is top left corner.
+// Y is vertical, X is horizontal
+// the plane is the camera plane that represents the screen and it always runs
+// perpendicular to our direction
+static void	set_direction_and_plane(t_player *player)
 {
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Error: Couldn't allocate structs");
@@ -42,14 +44,12 @@ void	init_settings(t_cub3d *cub3d)
 		end_game(cub3d, "Error: Couldn't alloc render struct");
 }
 
-bool	load_wall_textures(t_cub3d *cub3d)
+// Need to check which variables we need in here.
+// Probably angle, FOV etc as well.
+// Need map info for direction.
+static void	set_variables(t_cub3d *cub3d)
 {
-	cub3d->textures->north = mlx_load_png("textures/Space_N.png");
-	cub3d->textures->south = mlx_load_png("textures/Space_S.png");
-	cub3d->textures->east = mlx_load_png("textures/Space_E.png");
-	cub3d->textures->west = mlx_load_png("textures/Space_W.png");
-	if (!cub3d->textures->north || !cub3d->textures->south || \
-		!cub3d->textures->east || !cub3d->textures->west)
-		return (false);
-	return (true);
+	set_direction_and_plane(cub3d->player); // map info: found letter for direction
+	cub3d->player->fov = (FOV * PI) / 180;	// FOV in radians for sin(), cos() and tan().
+	// cub3d->player.rotation = 
 }

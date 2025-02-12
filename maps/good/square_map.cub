@@ -1,13 +1,13 @@
-   WE                            ./textures/Space_W.png 
-NO      ./textures/Space_N.png
+   WE                            textures/wolfenstein/eagle.xpm 
+NO      textures/wolfenstein/grey_stone.xpm
 
 
 
-SO ./textures/Space_S.png
+SO textures/wolfenstein/red_brick.xpm
 
 F   69, 222, 199
 
-EA ./textures/Space_E.png
+EA textures/wolfenstein/mossy.xpm
 
 
 

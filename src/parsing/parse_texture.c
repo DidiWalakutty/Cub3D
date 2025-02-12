@@ -18,7 +18,7 @@ static	bool has_png_extension(const char *filename)
 	size_t		len;
 	size_t		ext_len;
 
-	ext = ".png";
+	ext = ".xpm";
 	ext_len = ft_strlen(ext);
 	len = ft_strlen(filename);
 	if (len < ext_len)
