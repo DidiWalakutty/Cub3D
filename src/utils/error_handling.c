@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   error_handling.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/12 22:01:48 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/13 14:46:22 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ static void	free_grid(char **grid)
 	free(grid);
 }
 
-static void	free_mlx_data(t_cub3d *cub3d)
-{
-	if (cub3d->textures->north)
-		mlx_delete_texture(cub3d->textures->north);
-	if (cub3d->textures->east)
-		mlx_delete_texture(cub3d->textures->east);
-	if (cub3d->textures->south)
-		mlx_delete_texture(cub3d->textures->south);
-	if (cub3d->textures->west)
-		mlx_delete_texture(cub3d->textures->west);
-	if (cub3d->floor_and_ceiling)
-		mlx_delete_image(cub3d->mlx, cub3d->floor_and_ceiling);
-	if (cub3d->scene)
-		mlx_delete_image(cub3d->mlx, cub3d->scene);
-}
+// static void	free_mlx_data(t_cub3d *cub3d)
+// {
+// 	if (cub3d->textures->north)
+// 		mlx_delete_texture(cub3d->textures->north);
+// 	if (cub3d->textures->east)
+// 		mlx_delete_texture(cub3d->textures->east);
+// 	if (cub3d->textures->south)
+// 		mlx_delete_texture(cub3d->textures->south);
+// 	if (cub3d->textures->west)
+// 		mlx_delete_texture(cub3d->textures->west);
+// 	if (cub3d->floor_and_ceiling)
+// 		mlx_delete_image(cub3d->mlx, cub3d->floor_and_ceiling);
+// 	if (cub3d->scene)
+// 		mlx_delete_image(cub3d->mlx, cub3d->scene);
+// }
 
 void	cleanup(t_cub3d *game)
 {
@@ -61,15 +61,15 @@ void	cleanup(t_cub3d *game)
 		}
 		free(game->input);
 	}
-	free_mlx_data(game);
-	if (game->render)
-		free(game->render);
+	//free_mlx_data(game);
+	//if (game->render)
+	//	free(game->render);
 }
 
 void	end_game(t_cub3d *game, char *message)
 {
 	printf("%s\n", message);
 	cleanup(game);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
+	// if (game->mlx)
+	// 	mlx_terminate(game->mlx);
 }

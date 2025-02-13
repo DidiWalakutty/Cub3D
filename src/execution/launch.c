@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   launch.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:00:28 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   launch.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/13 14:47:47 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 
 // Calcs the ray direction for the current screen column.
 // Also does the delta_dist: step size between grid lines.
-static void	update_vars(t_cub3d *cub3d, t_render *ray)
+static void	update_vars(t_render *ray)
 {
 	ray->map_pos.x = (int)ray->player_pos.x;
 	ray->map_pos.y = (int)ray->player_pos.y;
@@ -68,7 +68,7 @@ static void	raycaster(void *data)
 	while (y < S_WIDTH)
 	{
 		render->camera_column = 2 * (y / (double)S_WIDTH) - 1;
-		update_vars(cub3d, render);
+		update_vars(render);
 		update_side_dist(render);
 		dda_algorithm(render, cub3d);
 		set_wall_height(render);
