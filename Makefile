@@ -2,7 +2,7 @@ NAME := cub3d
 
 # Compilation
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 #MLX42FLAGS = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 LIBFT_INCLUDES := -I./lib/libft/include
 MLX_INCLUDES := -I./lib/MLX42/include/MLX42
@@ -19,7 +19,7 @@ MLX42 = lib/MLX42/build/libmlx42.a
 SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/**/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
-# OS Spe
+# OS Specific
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
     MLX42FLAGS = -lglfw -lm -ldl -lX11 -lpthread

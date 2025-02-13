@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 14:46:22 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/13 16:48:04 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	free_grid(char **grid)
 {
 	int	i;
 
+	if (!grid)
+		return ;
 	i = 0;
 	while (grid[i])
 	{
