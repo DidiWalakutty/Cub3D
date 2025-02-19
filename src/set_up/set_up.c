@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   set_up.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 21:59:49 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   set_up.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 13:49:41 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/18 16:36:59 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,24 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 		end_game(cub3d, "Error: Couldn't load textures");
 }
 
-// mlx_new_image: Creates and allocates a new image buffer.
-// mlx_image_to_window: Draws a new instance of an image, 
-// it will then share the same pixel buffer as the image. Returns -1 if failed
+/* mlx_new_image: Creates and allocates a new image buffer.
+mlx_image_to_window: Draws a new instance of an image, 
+it will then share the same pixel buffer as the image. Returns -1 if failed
+*/
 void	init_settings(t_cub3d *cub3d)
 {
+	t_render *temp_render = cub3d->render; //og pointer
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Error: Couldn't allocate structs");
 	initiate_mlx_images(cub3d);
 	cub3d->render = set_variables(cub3d);
+	free(temp_render);
 	if (!cub3d->render)
 		end_game(cub3d, "Error: Couldn't alloc render struct");
 }
+
+
+
 
 bool	load_wall_textures(t_cub3d *cub3d)
 {

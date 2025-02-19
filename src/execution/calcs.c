@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   calcs.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:00:11 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   calcs.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 20:40:53 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/19 19:15:35 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,18 @@ void	update_side_dist(t_render *ray)
 	}
 }
 
-// Calcs the wall_dist from the player and wall_x (exact hit pos on the wall
-// for texture mapping).
-void	set_wall_height(t_render *ray)
+
+void set_wall_height(t_render *ray)
 {
-	if (ray->side_hit == X_SIDE)
-	{
-		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
-		ray->wall_x = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
-	}
-	else
-	{
-		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
-		ray->wall_x = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
-	}
-	ray->wall_x -= floor(ray->wall_x);
+    if (ray->side_hit == X_SIDE)
+    {
+        ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
+        ray->wall_x = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
+    }
+    else
+    {
+        ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
+        ray->wall_x = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
+    }
+    ray->wall_x -= floor(ray->wall_x);
 }

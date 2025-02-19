@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 19:40:45 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/19 19:18:50 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**grid;
-	int			width;
-	int			height;
+	size_t			width;
+	size_t			height;
 	int			first_index;
 	int			last_index;
 	t_player	*player;
@@ -143,6 +143,7 @@ typedef struct s_cub3d
 int			handle_input(const char *filename, char ***lines);
 int			parse_file(char *argv[], t_input *file_data);
 bool		extract_elements(char **lines, t_input *content);
+//bool	extract_elements(char **lines, t_input *content, bool *has_floor_color, bool *has_ceiling_color);
 bool		parse_texture(char *line, t_input *content);
 bool		parse_color(char *line, int *color);
 bool		is_map_last_in_file(char **lines, t_map *map);
@@ -158,7 +159,7 @@ bool		validate_textures(t_input *content);
 void		set_player_spawning_point(t_map *map, t_player *player);
 int			check_player_spawning_point(t_player *player);
 
-/*Execution*/
+/* Execution */
 void		run_cub3d(t_cub3d *cub3d);
 void		keys(void *param);
 bool		path_clear(char **grid, t_map *map, t_dvectr new);
@@ -167,14 +168,15 @@ void		update_side_dist(t_render *ray);
 void		set_wall_height(t_render *ray);
 void		set_wall_textures(t_render *ray, t_cub3d *cub3d);
 void		draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x);
+void		raycaster(void *data);
 
-/*Set Up*/
+/* Set Up */
 void		init_settings(t_cub3d *cub3d);
 bool		alloc_execution_structs(t_cub3d *cub3d);
 t_render	*set_variables(t_cub3d *cub3d);
 uint32_t	color_texture(t_textures *text, double x_info, double y_info);
 
-/*Images and Textures*/
+/* Images and Textures */
 bool		load_wall_textures(t_cub3d *cub3d);
 void		fill_background(t_cub3d *cub3d);
 
@@ -186,5 +188,6 @@ void		end_game(t_cub3d *cub3d, char *error_message);
 /* Print for testing */
 void		print_parsed_content(t_input *content);
 void		print_map(char **map);
+
 
 #endif

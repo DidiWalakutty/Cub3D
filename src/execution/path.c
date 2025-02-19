@@ -14,7 +14,7 @@
 
 bool	hit_wall(char **grid, t_map *map, int32_t y, int32_t x)
 {
-	if (y < 0 || y >= map->height || x < 0 || x >= map->width)
+	if (y < 0 || y >= (int32_t)map->height || x < 0 || x >= (int32_t)map->width)
 		return (true);
 	return (grid[y][x] == '1');
 }

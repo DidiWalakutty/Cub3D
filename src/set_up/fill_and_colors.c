@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   fill_and_colors.c                                  :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:00:52 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   fill_and_colors.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 20:08:00 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/14 13:51:25 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ uint32_t	color_texture(t_textures *text, double x_info, double y_info)
 	int		x;
 	int		y;
 	int		index;
+	//printf("x_info: %f\n", x_info);
+	//printf("y_info: %f\n", y_info);
 
 	x = (int)x_info;
 	y = (int)y_info;

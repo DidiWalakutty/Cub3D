@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_texture.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/12 22:03:45 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:53 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/13 14:52:07 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static	bool has_png_extension(const char *filename)
 // 		(content->east_texture && ft_strncmp(texture, content->east_texture, len) == 0);
 // }
 
-static	bool set_texture(char *line, char **texture, const char *prefix, t_input *content)
+static	bool set_texture(char *line, char **texture, const char *prefix)
 {
 	char	*texture_path;
 	char	*trimmed;
@@ -102,10 +102,10 @@ bool	validate_textures(t_input *content)
 
 bool	parse_texture(char *line, t_input *content)
 {
-	if (set_texture(line, &content->north_texture, "NO ", content) ||
-		set_texture(line, &content->south_texture, "SO ", content) ||
-		set_texture(line, &content->west_texture, "WE ", content) ||
-		set_texture(line, &content->east_texture, "EA ", content))
+	if (set_texture(line, &content->north_texture, "NO ") ||
+		set_texture(line, &content->south_texture, "SO ") ||
+		set_texture(line, &content->west_texture, "WE ") ||
+		set_texture(line, &content->east_texture, "EA "))
 			return (true);
 	print_error("Failed to parse texture line");
 	return (false);

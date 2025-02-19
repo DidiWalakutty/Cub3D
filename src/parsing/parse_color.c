@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_color.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:35 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:37:35 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_color.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:35 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/13 15:26:37 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ static	bool	validate_rgb_values(char **rgb, int *color)
 	{
 		if (!rgb[i])
 		{
-			//printf("Missing RGB value at position %d\n", i);
+			printf("Missing RGB value at position %d\n", i);
 			return (false);
 		}
 		color[i] = ft_atoi(rgb[i]);
 		if (color[i] < 0 || color[i] > 255)
 		{
-			//printf("Invalid color value: %d\n", color[i]);
+			printf("Invalid color value: %d\n", color[i]);
 			return (false);
 		}
 		i++;
 	}
 	if (rgb[i] != NULL)
 	{
-		//printf("Too many RGB values\n");
+		printf("Too many RGB values\n");
 		return (false);
 	}
 	return (true);
@@ -82,6 +82,6 @@ bool	parse_color(char *line, int *color)
 		return (print_error("Failed parsing colors"), false);
 	}
 	free_rgb_values(rgb, 3);
-	//printf("Parsed Color: %d, %d, %d\n", color[0], color[1], color[2]);
+	printf("Parsed Color: %d, %d, %d\n", color[0], color[1], color[2]);
 	return (true);
 }

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   launch.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:00:28 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   launch.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/19 19:16:34 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 // Performs DDA to trace the ray until it hits a wall.
 // Steps through the grid one square at a time.
@@ -37,7 +38,7 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 
 // Calcs the ray direction for the current screen column.
 // Also does the delta_dist: step size between grid lines.
-static void	update_vars(t_cub3d *cub3d, t_render *ray)
+static void	update_vars(t_render *ray)
 {
 	ray->map_pos.x = (int)ray->player_pos.x;
 	ray->map_pos.y = (int)ray->player_pos.y;
@@ -53,9 +54,11 @@ static void	update_vars(t_cub3d *cub3d, t_render *ray)
 		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
 }
 
+
+
 // Performs raycasting to render the 3D view by looping
 // through each vertical/y screen column.
-static void	raycaster(void *data)
+void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
 	t_render	*render;
@@ -68,14 +71,14 @@ static void	raycaster(void *data)
 	while (y < S_WIDTH)
 	{
 		render->camera_column = 2 * (y / (double)S_WIDTH) - 1;
-		update_vars(cub3d, render);
+		update_vars(render);
 		update_side_dist(render);
 		dda_algorithm(render, cub3d);
 		set_wall_height(render);
-		// Stretched texture is probably in set_wall_textures,  
-		// place_textures (in set_text) or draw_wall_slices.
 		set_wall_textures(render, cub3d);
 		draw_wall_slices(cub3d, cub3d->textures, y);
+		//printf("Wall Distance: %f\n", render->wall_dist);
+		//place_textures (in set_text) or draw_wall_slices.
 		y++;
 	}
 }
