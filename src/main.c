@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:17:14 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 14:45:44 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/19 19:16:49 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	main(int argc, char *argv[])
 		cleanup(&game);
 		return (1);
 	}
-	print_map(game.input->map->grid);
-	//run_cub3d(&game);
+	//print_map(game.input->map->grid);
+	run_cub3d(&game);
 	end_game(&game, "Thanks for playing");
 	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/23 20:00:43 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:01:55 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 20:00:43 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/18 16:30:15 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,5 @@ bool	alloc_execution_structs(t_cub3d *cub3d)
 	ft_bzero(cub3d->render, sizeof (t_render));
 	return (true);
 }
+
+

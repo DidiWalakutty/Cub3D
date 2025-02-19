@@ -6,11 +6,12 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/13 14:47:47 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/19 19:16:34 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 // Performs DDA to trace the ray until it hits a wall.
 // Steps through the grid one square at a time.
@@ -53,9 +54,11 @@ static void	update_vars(t_render *ray)
 		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
 }
 
+
+
 // Performs raycasting to render the 3D view by looping
 // through each vertical/y screen column.
-static void	raycaster(void *data)
+void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
 	t_render	*render;
@@ -72,10 +75,10 @@ static void	raycaster(void *data)
 		update_side_dist(render);
 		dda_algorithm(render, cub3d);
 		set_wall_height(render);
-		// Stretched texture is probably in set_wall_textures,  
-		// place_textures (in set_text) or draw_wall_slices.
 		set_wall_textures(render, cub3d);
 		draw_wall_slices(cub3d, cub3d->textures, y);
+		//printf("Wall Distance: %f\n", render->wall_dist);
+		//place_textures (in set_text) or draw_wall_slices.
 		y++;
 	}
 }

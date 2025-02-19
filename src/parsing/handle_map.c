@@ -6,69 +6,11 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 16:54:39 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/19 19:17:43 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// static bool populate_grid(char **lines, t_map *map)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (i < map->height)
-// 	{
-// 		map->grid[i] = ft_strdup(lines[map->first_index + i]);
-// 		if (!map->grid[i])
-// 		{
-// 			while (--i >= 0)
-// 				free(map->grid[i]);
-// 			free(map->grid);
-// 			return (false);
-// 		}
-// 		i++;
-// 	}
-// 	map->grid[map->height] = NULL;
-// 	return (true);
-// }
-
-
-
-// bool populate_grid(char **lines, t_map *map)
-// {
-//     int i;
-//     int j;
-//     char *trimmed_line;
-
-//     i = map->first_index;
-//     j = 0;
-//     //printf("Populating grid from first_index: %d to last_index: %d\n", map->first_index, map->last_index);
-//     while (i <= map->last_index)
-//     {
-//         trimmed_line = ft_strtrim(lines[i], " \t\n\r");
-//         if (trimmed_line[0] != '\0') // Skip empty lines
-//         {
-//             printf("Copying line %d: %s\n", i, trimmed_line);
-//             map->grid[j] = ft_strdup(trimmed_line);
-//             free(trimmed_line);
-//             if (!map->grid[j])
-//             {
-//                 print_error("Memory allocation for map grid line failed.");
-//                 return false;
-//             }
-//             j++;
-//         }
-//         else
-//         {
-//             free(trimmed_line);
-//         }
-//         i++;
-//     }
-//     map->grid[j] = NULL;
-//     //printf("Finished populating grid.\n");
-//     return true;
-// }
 
 bool populate_grid(char **lines, t_map *map)
 {
@@ -77,10 +19,8 @@ bool populate_grid(char **lines, t_map *map)
 
     i = map->first_index;
     j = 0;
-    //printf("Populating grid from first_index: %d to last_index: %d\n", map->first_index, map->last_index);
     while (i <= map->last_index)
     {
-        //printf("Copying line %d: %s\n", i, lines[i]);
         map->grid[j] = ft_strdup(lines[i]);
         if (!map->grid[j])
         {
@@ -91,7 +31,6 @@ bool populate_grid(char **lines, t_map *map)
         j++;
     }
     map->grid[j] = NULL;
-    //printf("Finished populating grid.\n");
     return true;
 }
 
@@ -139,48 +78,7 @@ static void get_map_properties(char **lines, t_map *map)
     }
     map->height = height;
     map->width = width;
-    //printf("first index: %d, last index: %d\n", map->first_index, map->last_index);
-    //printf("first index line: %s\n", lines[map->first_index]);
-    //printf("last index line: %s\n", lines[map->last_index]);
-   //printf("map width: %d, and map height: %d\n", width, height);
 }
-
-
-// static void	get_map_properties(char **lines, t_map *map)
-// {
-// 	int height;
-// 	int width;
-// 	int i;
-// 	int line_len;
-
-// 	height = 0;
-// 	width = 0;
-// 	i = 0;
-// 	line_len = 0;
-// 	// trim empty spaces from end of lines
-// 	i = skip_non_map_lines(lines);
-// 	map->first_index = i;
-// 	while (lines[i])
-// 	{
-// 		if (is_valid_map_char(lines[i][0]))
-// 		{
-// 			//map->last_index = i;
-// 			//height++;
-// 			line_len = ft_strlen(lines[i]);
-// 			if (line_len > width)
-// 				width = line_len;
-// 			height++;
-// 			map->last_index = i;
-// 		}
-// 		i++;
-// 	}
-// 	map->height = height;
-// 	map->width = width;
-// 	printf("first index: %d, last index: %d\n", map->first_index, map->last_index);
-// 	printf("first index line: %s\n", lines[map->first_index]);
-// 	printf("last index line: %s\n", lines[map->last_index]);
-// 	printf("map width: %d, and map height: %d\n", width, height);
-// }
 
 
 static int	init_map(t_input *file_data)
@@ -210,7 +108,7 @@ bool	handle_map(t_input *file_data, char **lines)
 		print_error("Memory allocation for map grid failed.");
 		return (false);
 	}
-	if (!populate_grid(lines, file_data->map))
+    ft_bzero(file_data->map->grid, sizeof(char *) * (file_data->map->height + 1));	if (!populate_grid(lines, file_data->map))
 		return (false);
 	//print_map(file_data->map->grid);
 	if (!validate_map_characters(file_data->map))
