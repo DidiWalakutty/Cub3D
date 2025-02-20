@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:53 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 14:52:07 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_texture.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/02/20 17:00:54 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix)
 		//     return false;
 		// }
 		*texture = trimmed;
-		free(trimmed);
+		// free(trimmed);
 		return (true);
 	}
 	return (false);

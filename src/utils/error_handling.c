@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/20 16:54:07 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/20 17:05:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	cleanup(t_cub3d *game)
 				free(game->input->map->player);
 			free(game->input->map);
 		}
+		free(game->input->north_texture);
+		free(game->input->south_texture);
+		free(game->input->east_texture);
+		free(game->input->west_texture);
 		free(game->input);
 	}
 	free_mlx_data(game);

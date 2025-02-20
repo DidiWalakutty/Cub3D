@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 16:53:24 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/20 16:58:37 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	init_settings(t_cub3d *cub3d)
 
 bool	load_wall_textures(t_cub3d *cub3d)
 {
-	cub3d->textures->north = mlx_load_png("textures/Space_N.png");
-	cub3d->textures->south = mlx_load_png("textures/Space_S.png");
-	cub3d->textures->east = mlx_load_png("textures/Space_E.png");
-	cub3d->textures->west = mlx_load_png("textures/Space_W.png");
+	cub3d->textures->north = mlx_load_png(cub3d->input->north_texture);
+	cub3d->textures->south = mlx_load_png(cub3d->input->south_texture);
+	cub3d->textures->east = mlx_load_png(cub3d->input->east_texture);
+	cub3d->textures->west = mlx_load_png(cub3d->input->west_texture);
 	if (!cub3d->textures->north || !cub3d->textures->south || \
 		!cub3d->textures->east || !cub3d->textures->west)
 		return (false);
