@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:22:22 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/19 19:16:11 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   render.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/02/20 16:19:09 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x)
 	t_render	*r;
 
 	r = cub3d->render;
-	lineheigth = (int)S_HEIGTH / r->wall_dist;
+	lineheigth = (int)(S_HEIGTH / r->wall_dist);
 	draw_start = -lineheigth / 2 + (S_HEIGTH / 2);
 	draw_end = lineheigth / 2 + (S_HEIGTH / 2);
 	if (draw_start < 0)

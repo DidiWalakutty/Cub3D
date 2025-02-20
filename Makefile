@@ -1,4 +1,4 @@
-NAME := cub3d
+NAME := cub3D
 
 # Compilation
 CC := cc
@@ -13,10 +13,26 @@ INCLUDES = $(LIBFT_INCLUDES) $(MLX_INCLUDES) $(cub3d_INCLUDES)
 # Directories
 BUILD_DIR := bin
 SRC_DIR := src
+EXEC_DIR := $(SRC_DIR)/execution
+PARS_DIR := $(SRC_DIR)/parsing
+SET_DIR := $(SRC_DIR)/set_up
+UTL_DIR := $(SRC_DIR)/utils
+
+MAIN_SRC := main.c
+EXEC_SRC := calcs.c key_moves.c launch.c path.c render.c
+PARS_SRC := handle_map.c input.c map_validation.c parse_color.c parse_file.c parse_texture.c player.c
+SET_SRC := fill_and_colors.c set_position.c set_up.c
+UTL_SRC := error_handling.c init.c test_print.c
+
 INC_DIR := include
 LIBFT := lib/libft/libft.a
 MLX42 = lib/MLX42/build/libmlx42.a
-SRCS = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/**/*.c)
+SRCS := $(addprefix $(SRC_DIR)/, $(MAIN_SRC)) \
+		$(addprefix $(EXEC_DIR)/, $(EXEC_SRC)) \
+		$(addprefix $(PARS_DIR)/, $(PARS_SRC)) \
+		$(addprefix $(SET_DIR)/, $(SET_SRC)) \
+		$(addprefix $(UTL_DIR)/, $(UTL_SRC))
+
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
 
 # OS Specific

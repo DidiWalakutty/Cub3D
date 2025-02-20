@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_map.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/19 19:17:43 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   handle_map.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/02/20 16:55:03 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static void get_map_properties(char **lines, t_map *map)
     map->width = width;
 }
 
-
 static int	init_map(t_input *file_data)
 {
 	file_data->map = malloc(sizeof(t_map));
@@ -108,7 +107,8 @@ bool	handle_map(t_input *file_data, char **lines)
 		print_error("Memory allocation for map grid failed.");
 		return (false);
 	}
-    ft_bzero(file_data->map->grid, sizeof(char *) * (file_data->map->height + 1));	if (!populate_grid(lines, file_data->map))
+    ft_bzero(file_data->map->grid, sizeof(char *) * (file_data->map->height + 1));	
+	if (!populate_grid(lines, file_data->map))
 		return (false);
 	//print_map(file_data->map->grid);
 	if (!validate_map_characters(file_data->map))

@@ -6,7 +6,7 @@
 /*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:00:22 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/02/20 16:33:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 	}
 }
 
-static void	move_left_right(const t_cub3d *cub3d, char dir)
+static void	move_left_right(const t_cub3d *cub3d, int32_t dir)
 {
 	t_render	*render;
 	t_dvectr	update;
 
 	render = cub3d->render;
-	update.x = render->player_pos.x + render->player_dir.x * SPEED * dir;
-	update.y = render->player_pos.y - render->player_dir.y * SPEED * dir;
+	update.x = render->player_pos.x + render->player_dir.y * SPEED * dir;
+	update.y = render->player_pos.y - render->player_dir.x * SPEED * dir;
 	if (path_clear(cub3d->input->map->grid, cub3d->input->map, update))
 	{
 		render->player_pos.x = update.x;
@@ -72,9 +72,8 @@ void	keys(void *param)
 
 	cub3d = param;
 	mlx = cub3d->mlx;
-	// passed time for rotation?
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		end_game(cub3d, "Thanks for playing!");
+		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
 		move_up_down(cub3d, FORWARD);
 	if (mlx_is_key_down(mlx, MLX_KEY_S))

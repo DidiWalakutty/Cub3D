@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/18 16:24:04 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   error_handling.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/02/20 16:54:07 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	free_mlx_data(t_cub3d *cub3d)
 		mlx_delete_texture(cub3d->textures->south);
 	if (cub3d->textures->west)
 		mlx_delete_texture(cub3d->textures->west);
-
+	if (cub3d->textures)
+		free(cub3d->textures);
 }
 
 void	cleanup(t_cub3d *game)
@@ -66,20 +67,16 @@ void	cleanup(t_cub3d *game)
 		free(game->input);
 	}
 	free_mlx_data(game);
-	
 	if (game->render)
 		free(game->render);
-	if (game->textures)
-	{
-		free(game->textures);
-	}
 }
 
 void	end_game(t_cub3d *game, char *message)
 {
 	printf("%s\n", message);
-	
+	if (game == NULL)
+		return ;
+	cleanup(game);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
-	cleanup(game);
 }

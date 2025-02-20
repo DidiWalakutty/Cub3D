@@ -55,6 +55,6 @@ a.out*
 .vscode
 *.bmp
 cubed
-cub3d
+cub3D
 *.o
 *.a

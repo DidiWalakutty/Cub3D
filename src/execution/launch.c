@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   launch.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/19 19:16:34 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   launch.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/02/20 16:51:40 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 // Performs DDA to trace the ray until it hits a wall.
 // Steps through the grid one square at a time.
@@ -54,8 +53,6 @@ static void	update_vars(t_render *ray)
 		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
 }
 
-
-
 // Performs raycasting to render the 3D view by looping
 // through each vertical/y screen column.
 void	raycaster(void *data)
@@ -77,8 +74,6 @@ void	raycaster(void *data)
 		set_wall_height(render);
 		set_wall_textures(render, cub3d);
 		draw_wall_slices(cub3d, cub3d->textures, y);
-		//printf("Wall Distance: %f\n", render->wall_dist);
-		//place_textures (in set_text) or draw_wall_slices.
 		y++;
 	}
 }
@@ -95,4 +90,5 @@ void	run_cub3d(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
+	end_game(cub3d, "Thanks for playing!");
 }

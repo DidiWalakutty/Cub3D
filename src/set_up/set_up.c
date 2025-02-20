@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_up.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 13:49:41 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/18 16:36:59 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   set_up.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/02/20 16:53:24 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ it will then share the same pixel buffer as the image. Returns -1 if failed
 */
 void	init_settings(t_cub3d *cub3d)
 {
-	t_render *temp_render = cub3d->render; //og pointer
+	t_render	*temp_render;
+
+	temp_render = cub3d->render;
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Error: Couldn't allocate structs");
 	initiate_mlx_images(cub3d);
@@ -44,9 +46,6 @@ void	init_settings(t_cub3d *cub3d)
 	if (!cub3d->render)
 		end_game(cub3d, "Error: Couldn't alloc render struct");
 }
-
-
-
 
 bool	load_wall_textures(t_cub3d *cub3d)
 {
