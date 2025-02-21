@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/21 10:35:26 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:38:05 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	cleanup(t_cub3d *game)
 		free(game->input->west_texture);
 		free(game->input);
 	}
-	//free_mlx_data(game);
 	if (game->render)
 		free(game->render);
 }

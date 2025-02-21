@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   render.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 16:19:09 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 17:22:22 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/21 12:41:35 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Draws each vertical line (wall slice)
-// pix_step: how much to move through the texture for each vertical pixel
-// tex_pos: starts at the correct position within the texture for the first
-// pixel of the wall.
-// y_tex: calcs the correct texture coordinate for the vertical pixel.
+/*
+	Draws each vertical line (wall slice)
+	pix_step: how much to move through the texture for each vertical pixel
+	tex_pos: starts at the correct position within the texture for the first
+	pixel of the wall.
+	y_tex: calcs the correct texture coordinate for the vertical pixel.
+*/
 void	draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x)
 {
 	long		draw_start;

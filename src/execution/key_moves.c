@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   key_moves.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 16:33:53 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   key_moves.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 16:27:45 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/21 12:40:09 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Calculates the player's new position based on movement direction and speed. 
-// If the path is clear, updates the player's position.
+/*
+	Calculates the player's new position based on movement direction and speed. 
+	If the path is clear, updates the player's position.
+*/
 static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 {
 	t_render	*render;
@@ -44,8 +46,10 @@ static void	move_left_right(const t_cub3d *cub3d, int32_t dir)
 	}
 }
 
-// Uses 2D rotation formulas using a standard rotation matrix 
-// to update the player_dir and plane (fov).
+/*
+	Uses 2D rotation formulas using a standard rotation matrix 
+	to update the player_dir and plane (fov).
+*/
 static void	turning(const t_cub3d *cub3d, char side)
 {
 	t_dvectr	old_dir;

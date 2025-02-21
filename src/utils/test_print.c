@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   test_print.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:17:09 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/28 13:58:56 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   test_print.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:17:09 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/21 12:38:32 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ void	print_parsed_content(t_input *content)
 	printf("East Texture: %s\n", content->east_texture);
 
 	// Print colors
-	printf("Floor Color: %d, %d, %d\n", content->floor_colors[0], content->floor_colors[1], content->floor_colors[2]);
-	printf("Ceiling Color: %d, %d, %d\n", content->ceiling_colors[0], content->ceiling_colors[1], content->ceiling_colors[2]);
+	printf("Floor Color: %d, %d, %d\n", content->floor_colors[0], \
+			content->floor_colors[1], content->floor_colors[2]);
+	printf("Ceiling Color: %d, %d, %d\n", content->ceiling_colors[0], \
+			content->ceiling_colors[1], content->ceiling_colors[2]);
 
 	// Print map
 	printf("Map:\n");

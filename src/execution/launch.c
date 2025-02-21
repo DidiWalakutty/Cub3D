@@ -6,15 +6,16 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 10:09:21 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:40:56 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
-// Performs DDA to trace the ray until it hits a wall.
-// Steps through the grid one square at a time.
+/*
+	Performs DDA to trace the ray until it hits a wall.
+	Steps through the grid one square at a time.
+*/
 static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 {
 	while (1)
@@ -36,8 +37,10 @@ static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 	}
 }
 
-// Calcs the ray direction for the current screen column.
-// Also does the delta_dist: step size between grid lines.
+/*
+	Calcs the ray direction for the current screen column.
+	Also does the delta_dist: step size between grid lines.
+*/
 static void	update_vars(t_render *ray)
 {
 	ray->map_pos.x = (int)ray->player_pos.x;
@@ -54,8 +57,10 @@ static void	update_vars(t_render *ray)
 		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
 }
 
-// Performs raycasting to render the 3D view by looping
-// through each vertical/y screen column.
+/*
+	Performs raycasting to render the 3D view by looping
+	through each vertical/y screen column.
+*/
 void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
@@ -79,8 +84,6 @@ void	raycaster(void *data)
 	}
 }
 
-// TODO:
-// if time: minimap
 void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false);

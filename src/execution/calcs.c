@@ -6,14 +6,16 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 20:40:53 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/19 19:15:35 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:39:30 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Determines the exact column (x_tex) of the texture to use based on
-// wall_x. Flips the texture horizontally for certain wall orientations.
+/*
+	Determines the exact column (x_tex) of the texture to use based on
+	wall_x. Flips the texture horizontally for certain wall orientations.
+*/
 static void	place_textures(t_render *ray, t_textures *texture)
 {
 	texture->x_tex = (int)(ray->wall_x * \
@@ -23,9 +25,10 @@ static void	place_textures(t_render *ray, t_textures *texture)
 	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
 }
-
-// Chooses the correct wall texture based on which side of the wall
-// was hit (X or Y) and the ray's direction.
+/*
+	Chooses the correct wall texture based on which side of the wall
+	was hit (X or Y) and the ray's direction.
+*/
 void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 {
 	t_textures	*texture;
@@ -48,8 +51,10 @@ void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 	place_textures(ray, texture);
 }
 
-// Determines whether the ray steps left/right or up/down.
-// Calcs the side_dist (distance to the first grid boundary)
+/*
+	Determines whether the ray steps left/right or up/down.
+	Calcs the side_dist (distance to the first grid boundary)
+*/
 void	update_side_dist(t_render *ray)
 {
 	if (ray->ray_dir.x < 0)

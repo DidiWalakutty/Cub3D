@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   set_position.c                                     :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: diwalaku <diwalaku@codam.student.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/12 22:01:03 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   set_position.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 15:06:03 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/21 12:36:59 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ static void	set_n_and_s(t_render *render, t_player *player)
 	}
 }
 
-// Map's origin (0, 0) is top left corner.
-// Y is vertical, X is horizontal
-// the plane is the camera plane that represents the screen and it always runs
-// perpendicular to our direction
+/* 
+	Map's origin (0, 0) is top left corner.
+	Y is vertical, X is horizontal
+	the plane is the camera plane that represents the screen and it always runs
+	perpendicular to our direction
+*/
 static void	set_direction_and_plane(t_render *render, t_player *player)
 {
 	if (player->orientation == 'N' || player->orientation == 'S')
@@ -53,9 +55,10 @@ static void	set_direction_and_plane(t_render *render, t_player *player)
 		render->plane.y = 0.66;
 	}
 }
-
-// Need to check which variables we need in here.
-// Probably angle, FOV etc as well.
+/*
+	Need to check which variables we need in here.
+	Probably angle, FOV etc as well.
+*/
 t_render	*set_variables(t_cub3d *cub3d)
 {
 	t_render	*render;
