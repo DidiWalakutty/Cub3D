@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:36:43 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/02/21 11:51:32 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:35:11 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	**create_visited_array(int height, int width)
 	return (visited);
 }
 
-
 static void	free_visited_array(int **visited, int height)
 {
 	int	i;
@@ -74,7 +73,6 @@ static void	flood_fill(t_map *map, int **visited, size_t x, size_t y)
 		}
 }
 
-
 bool	is_player_entrapped(t_map *map)
 {
 	int		player_x;
@@ -92,14 +90,6 @@ bool	is_player_entrapped(t_map *map)
 	if (!visited)
 		return (false);
 	flood_fill(map, visited, player_x, player_y);
-
-	// Print the visited array (for debugging)
-	// for (int y = 0; y < map->height; y++) {
-	// 	for (int x = 0; x < map->width; x++) {
-	// 		printf("%d ", visited[y][x]);
-	// 	}
-	// 	printf("\n");
-	// }
 	entrapped = false;
 	while(y < map->height - 1 && !entrapped)
 	{

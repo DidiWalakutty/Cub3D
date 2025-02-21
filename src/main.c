@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:17:14 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/20 18:17:29 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:30:05 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 	ft_bzero(&game, sizeof(t_cub3d));
 	game.input = malloc(sizeof(t_input));
 	if (!game.input)
-		return (print_error("memory allocation for input failed."), 1);
+		return (print_error("Memory allocation for input failed."), 1);
 	ft_bzero(game.input, sizeof(t_input));
 	if (parse_file(argv, game.input) == 1)
 	{

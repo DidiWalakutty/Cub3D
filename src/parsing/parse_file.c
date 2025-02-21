@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:16:42 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 15:35:37 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:30:45 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,45 +20,35 @@ static bool	is_texture_prefix(const char *line)
 			ft_strncmp(line, "EA ", 3) == 0);
 }
 
-bool	extract_elements(char **lines, t_input *content)
+bool	extract_elements(char **lines, t_input *content, bool *has_floor_color, bool *has_ceiling_color)
 {
 	int		i;
 	char	*trimmed_line;
-	//bool	has_floor_color;
-	//bool	has_ceiling_color;
 
-	//has_floor_color = false;
-	//has_ceiling_color = false;
 	i = 0;
 	while (lines[i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
-		//printf("trimmed line in extract func: %s\n", trimmed_line);
 		if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 		{
-			//printf("trimmed line in extract func - F: %s\n", trimmed_line);
 			if (!parse_color(trimmed_line, content->floor_colors))
 				return (free(trimmed_line), false);
-			//has_floor_color = true;
+			*has_floor_color = true;
 		}
 		else if (ft_strncmp(trimmed_line, "C ", 2) == 0)
 		{
-			//printf("trimmed line in extract func - C: %s\n", trimmed_line);
 			if (!parse_color(trimmed_line, content->ceiling_colors))
 				return (free(trimmed_line), false);
-			//has_floor_color = true;
+			*has_ceiling_color = true;
 		}
 		else if (is_texture_prefix(trimmed_line))
 		{
-			//printf("trimmed line in extract func before pars text: %s\n", trimmed_line);
 			if (!parse_texture(trimmed_line, content))
 				return (free(trimmed_line), false);
 		}
 		free(trimmed_line);
 		i++;
 	}
-	// if (!has_floor_color || !has_ceiling_color)
-    //     return (print_error("Both floor and ceiling colors must be specified"), false);
 	return (true);
 }
 
@@ -82,8 +72,8 @@ int	parse_file(char *argv[], t_input *file_data)
 {
 	char	**lines;
 	int		result;
-	//bool has_floor_color;
-	//bool has_ceiling_color;
+	bool has_floor_color;
+	bool has_ceiling_color;
 
 	lines = NULL;
 	result = 0;
@@ -94,15 +84,10 @@ int	parse_file(char *argv[], t_input *file_data)
 			free_lines(lines);
 		return (result);
 	}
-	if (!extract_elements(lines, file_data))
-		result = 1;
+	if (!extract_elements(lines, file_data, &has_floor_color, &has_ceiling_color))
+        result = 1;
 	else
 	{
-		// if (!file_data->floor_colors[0] || !file_data->ceiling_colors[0])
-    	// {
-        // 	printf("Both floor and ceiling colors must be specified\n");
-        // 	result = 1;
-    	// }
 		if(!handle_map(file_data, lines))
 			result = 1;
 	}
@@ -110,11 +95,10 @@ int	parse_file(char *argv[], t_input *file_data)
 		result = 1;	
 	if (lines)
 		free_lines(lines);
-	if (!file_data->floor_colors[0] || !file_data->ceiling_colors[0])
+	if (!has_ceiling_color || !has_floor_color)
     {
-        printf("Both floor and ceiling colors must be specified\n");
+        print_error("Both floor and ceiling colors must be specified.");
         result = 1;
     }
-	printf("status of parsing_file function: %d\n", result);
 	return (result);
 }

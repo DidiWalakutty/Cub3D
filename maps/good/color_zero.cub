@@ -1,0 +1,13 @@
+NO ./textures/red_border_rectangle.png
+SO ./textures/red_border_rectangle.png
+WE ./textures/red_border_rectangle.png
+EA ./textures/red_border_rectangle.png
+
+F 0,0,0
+C 0,0,0
+
+111111
+100001
+10N001
+100001
+111111
