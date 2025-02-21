@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:16:28 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/13 16:28:55 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/20 18:19:24 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ bool	is_valid_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
-
-
-
 
 
 bool	is_map_surrounded_by_walls(t_map *map)
@@ -93,8 +90,6 @@ bool validate_map_characters(t_map *map)
     int j;
 
     i = 0;
-    //printf("maps first: %d\n", map->first_index);
-    //printf("Line before loop: %s\n", map->grid[i]);
     while (map->grid[i])
     {
         j = 0;

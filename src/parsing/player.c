@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   player.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/29 12:42:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 14:20:36 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/29 12:42:53 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/20 18:16:50 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	set_player_spawning_point(t_map *map, t_player *player)
 				player->x = col_index;
 				player->y = row_index;
 				player->orientation = map->grid[row_index][col_index];
-				//map->grid[row_index][col_index] = '0'; // Replace player position with empty space
-				//printf("p count: %d\n", player_count);
 				player_count++;
 			}
 			col_index++;
@@ -39,14 +37,10 @@ void	set_player_spawning_point(t_map *map, t_player *player)
 		row_index++;
 	}
 	player->player_count = player_count;
-	//printf("player orientation: %c\n", player->orientation);
-	//printf("player count from inside first spawn func: %d\n", player_count);
-	//printf("player x pos: %d, player y: %d\n", player->x, player->y);
 }
 
 int	check_player_spawning_point(t_player *player)
 {
-	//printf("player count: %d\n", player->player_count);
 	if (player->player_count != 1)
 	{
 		if (player->player_count  == 0)

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   launch.c                                           :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 16:51:40 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   launch.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/21 10:09:21 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 // Performs DDA to trace the ray until it hits a wall.
 // Steps through the grid one square at a time.
@@ -84,11 +85,11 @@ void	run_cub3d(t_cub3d *cub3d)
 {
 	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false);
 	if (!cub3d->mlx)
-		end_game(cub3d, "Error: Couldn't init MLX window");
+		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
 	// mini_map
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
-	end_game(cub3d, "Thanks for playing!");
+	end_game(cub3d, NULL);
 }

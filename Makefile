@@ -22,7 +22,7 @@ MAIN_SRC := main.c
 EXEC_SRC := calcs.c key_moves.c launch.c path.c render.c
 PARS_SRC := handle_map.c input.c map_validation.c parse_color.c parse_file.c parse_texture.c player.c
 SET_SRC := fill_and_colors.c set_position.c set_up.c
-UTL_SRC := error_handling.c init.c test_print.c
+UTL_SRC := error_handling.c init.c test_print.c 
 
 INC_DIR := include
 LIBFT := lib/libft/libft.a

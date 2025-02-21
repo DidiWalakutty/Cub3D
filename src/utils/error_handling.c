@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   error_handling.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/20 17:05:21 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/21 10:08:26 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	free_mlx_data(t_cub3d *cub3d)
 		mlx_delete_image(cub3d->mlx, cub3d->floor_and_ceiling);
 	if (cub3d->scene)
 		mlx_delete_image(cub3d->mlx, cub3d->scene);
+	if (cub3d->mmap)
+		mlx_delete_image(cub3d->mlx, cub3d->mmap);
 	if (cub3d->textures->north)
 		mlx_delete_texture(cub3d->textures->north);
 	if (cub3d->textures->east)
@@ -77,10 +79,12 @@ void	cleanup(t_cub3d *game)
 
 void	end_game(t_cub3d *game, char *message)
 {
-	printf("%s\n", message);
+	if (message)
+		print_error(message);
 	if (game == NULL)
 		return ;
 	cleanup(game);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
+	exit(EXIT_FAILURE);
 }

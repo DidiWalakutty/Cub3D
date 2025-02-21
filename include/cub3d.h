@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/02/20 16:33:58 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/02/21 10:07:25 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@
 # define LEFT -1
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
+
+// Minimap
+# define MINIMAP_W 600
+# define MINIMAP_H 400
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -129,14 +133,29 @@ typedef struct s_render
 	double		wall_dist;
 }	t_render;
 
+typedef struct s_minimap {
+	int x;
+    int y;
+    int width;
+    int height;
+    char **map_grid;
+    int tile_size;
+    int player_x;
+    int player_y;
+    double player_orientation;
+	
+} t_minimap;
+
 typedef struct s_cub3d
 {
 	mlx_image_t	*scene;
 	mlx_image_t	*floor_and_ceiling;
+	mlx_image_t *mmap;
 	t_input		*input;
 	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
+	t_minimap	*minimap;
 }	t_cub3d;
 
 /* File Parsing */
