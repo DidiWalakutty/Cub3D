@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   handle_map.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/20 16:55:03 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   handle_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/02/21 11:54:41 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,27 @@ static int	init_map(t_input *file_data)
 	return (0);
 }
 
+
+static bool validate_map(t_map *map)
+{
+    if (!validate_map_characters(map))
+    {
+        printf("Invalid map characters.");
+        return (false);
+    }
+    if (!is_map_surrounded_by_walls(map))
+    {
+        print_error("Map is not surrounded by walls.");
+        return (false);
+    }
+    if (is_player_entrapped(map))
+    {
+        print_error("Player is entrapped within walls.");
+        return (false);
+    }
+    return (true);
+}
+
 bool	handle_map(t_input *file_data, char **lines)
 {
 	t_player	*player;
@@ -103,26 +124,19 @@ bool	handle_map(t_input *file_data, char **lines)
 		return (false);
 	file_data->map->grid = malloc(sizeof(char *) * (file_data->map->height + 1));
 	if (!file_data->map->grid)
-	{
-		print_error("Memory allocation for map grid failed.");
-		return (false);
-	}
+		return (print_error("Memory allocation for map grid failed."), false);
     ft_bzero(file_data->map->grid, sizeof(char *) * (file_data->map->height + 1));	
 	if (!populate_grid(lines, file_data->map))
-		return (false);
-	//print_map(file_data->map->grid);
-	if (!validate_map_characters(file_data->map))
-		return (false);
-	// print_map(file_data->map->grid);
-	if (!is_map_surrounded_by_walls(file_data->map))
 		return (false);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (false);
 	file_data->map->player = player;
 	ft_bzero(player, sizeof(t_player));
-	set_player_spawning_point(file_data->map, player); //position and orientation
+	set_player_spawning_point(file_data->map, player);
 	if (check_player_spawning_point(player) == 1)
+		return (false);
+	if (validate_map(file_data->map) == false)
 		return (false);
 	return (true);
 }

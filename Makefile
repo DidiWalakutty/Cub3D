@@ -2,8 +2,7 @@ NAME := cub3D
 
 # Compilation
 CC := cc
-CFLAGS := -Wall -g -fsanitize=address -fno-omit-frame-pointer
-#MLX42FLAGS = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address -fno-omit-frame-pointer
 LIBFT_INCLUDES := -I./lib/libft/include
 MLX_INCLUDES := -I./lib/MLX42/include/MLX42
 cub3d_INCLUDES := -I./include
@@ -20,7 +19,8 @@ UTL_DIR := $(SRC_DIR)/utils
 
 MAIN_SRC := main.c
 EXEC_SRC := calcs.c key_moves.c launch.c path.c render.c
-PARS_SRC := handle_map.c input.c map_validation.c parse_color.c parse_file.c parse_texture.c player.c
+PARS_SRC := handle_map.c input.c map_validation.c parse_color.c parse_file.c \
+			parse_texture.c player.c path_checker.c
 SET_SRC := fill_and_colors.c set_position.c set_up.c
 UTL_SRC := error_handling.c init.c test_print.c 
 
@@ -57,13 +57,13 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME): $(LIBFT) $(MLX42) $(OBJS)
+$(NAME): $(OBJS) $(LIBFT) $(MLX42)
 	$(CC) $(CFLAGS) $(INCLUDES) $(MLX42FLAGS) $(OBJS) $(LIBFT) $(MLX42) -o $(NAME)
-	
+
 $(LIBFT):
 	$(MAKE) -C lib/libft
 
-$(MLX42):
+$(MLX42): lib/MLX42/CMakeLists.txt lib/MLX42/src/*.c
 	cd lib/MLX42 && cmake -B build && cmake --build build -j4
 
 clean:
