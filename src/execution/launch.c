@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:40:56 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/21 12:44:11 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	run_cub3d(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
+	printf("Thank you for playing!");
 	end_game(cub3d, NULL);
 }
