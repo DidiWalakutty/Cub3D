@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:44:11 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/24 18:12:16 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	raycaster(void *data)
 		draw_wall_slices(cub3d, cub3d->textures, y);
 		y++;
 	}
+	render_minimap(cub3d);
 }
 
 void	run_cub3d(t_cub3d *cub3d)
@@ -90,7 +91,6 @@ void	run_cub3d(t_cub3d *cub3d)
 	if (!cub3d->mlx)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
-	// mini_map
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);

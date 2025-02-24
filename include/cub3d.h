@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:46:49 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/24 18:11:52 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@
 # define LEFT -1
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
+
+// Minimap dimension
+# define MINIMAP_WIDTH 200 
+# define MINIMAP_HEIGHT 200
+
+// Minimap colors
+# define PLAYER_COLOR 0xFF0000FF // Red
+# define WALL_COLOR 0x00008BFF   // Dark Blue
+# define FLOOR_COLOR 0xF8F8FFFF  // Off White
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -130,6 +139,19 @@ typedef struct s_render
 }	t_render;
 
 
+typedef struct s_minimap
+{
+	int			w;
+	int			h;
+	double		scale;
+	uint32_t	player_color;
+	uint32_t	wall_color;
+	uint32_t	floor_color;
+	t_ivectr	player_pos;
+	mlx_image_t	*minimap_img;
+	// t_map		*map;
+}		t_minimap;
+
 typedef struct s_cub3d
 {
 	mlx_image_t	*scene;
@@ -138,6 +160,7 @@ typedef struct s_cub3d
 	t_render	*render;
 	mlx_t		*mlx;
 	t_textures	*textures;
+	t_minimap	*minimap;
 }	t_cub3d;
 
 /* File Parsing */
@@ -190,5 +213,9 @@ void		end_game(t_cub3d *cub3d, char *error_message);
 /* Print for testing */
 void		print_parsed_content(t_input *content);
 void		print_map(char **map);
+
+/* Minimap */
+void		render_minimap(t_cub3d *game);
+void		initialize_minimap(t_minimap *minimap, t_cub3d *game);
 
 #endif

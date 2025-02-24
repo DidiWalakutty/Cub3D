@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/21 12:38:05 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/24 14:24:31 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ static void	free_mlx_data(t_cub3d *cub3d)
 		mlx_delete_image(cub3d->mlx, cub3d->floor_and_ceiling);
 	if (cub3d->scene)
 		mlx_delete_image(cub3d->mlx, cub3d->scene);
-	if (cub3d->mmap)
-		mlx_delete_image(cub3d->mlx, cub3d->mmap);
 	if (cub3d->textures->north)
 		mlx_delete_texture(cub3d->textures->north);
 	if (cub3d->textures->east)
@@ -52,6 +50,10 @@ static void	free_mlx_data(t_cub3d *cub3d)
 		mlx_delete_texture(cub3d->textures->west);
 	if (cub3d->textures)
 		free(cub3d->textures);
+	if (cub3d->minimap && cub3d->minimap->minimap_img)
+		mlx_delete_image(cub3d->mlx, cub3d->minimap->minimap_img);
+	if (cub3d->minimap)
+		free(cub3d->minimap);
 }
 
 void	cleanup(t_cub3d *game)

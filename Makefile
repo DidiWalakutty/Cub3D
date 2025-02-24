@@ -18,7 +18,7 @@ SET_DIR := $(SRC_DIR)/set_up
 UTL_DIR := $(SRC_DIR)/utils
 
 MAIN_SRC := main.c
-EXEC_SRC := calcs.c key_moves.c launch.c path.c render.c
+EXEC_SRC := calcs.c key_moves.c launch.c path.c render.c minimap.c
 PARS_SRC := handle_map.c input.c map_validation.c parse_color.c parse_file.c \
 			parse_texture.c player.c path_checker.c
 SET_SRC := fill_and_colors.c set_position.c set_up.c

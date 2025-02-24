@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 13:49:41 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:37:40 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/02/24 18:12:25 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 	cub3d->scene = mlx_new_image(cub3d->mlx, S_WIDTH, S_HEIGTH);
 	cub3d->floor_and_ceiling = mlx_new_image(cub3d->mlx, \
 										S_WIDTH, S_HEIGTH);
-	if (!cub3d->scene || !cub3d->floor_and_ceiling)
+	cub3d->minimap->minimap_img = mlx_new_image(cub3d->mlx, MINIMAP_WIDTH, \
+															MINIMAP_HEIGHT);
+	if (!cub3d->scene || !cub3d->floor_and_ceiling ||\
+		!cub3d->minimap->minimap_img)
 		end_game(cub3d, "Allocation error for image space.");
 	if (mlx_image_to_window(cub3d->mlx, cub3d->floor_and_ceiling, \
 															0, 0) == -1)
 		end_game(cub3d, "Couldn't output image to window.");
 	if (mlx_image_to_window(cub3d->mlx, cub3d->scene, 0, 0) == -1)
 		end_game(cub3d, "Couldn't output image to window");
+	if (mlx_image_to_window(cub3d->mlx, cub3d->minimap->minimap_img, \
+			0, 0) == -1)
+		end_game(cub3d, "Couldn't output minimap image to window.");
 	fill_background(cub3d);
 	if (load_wall_textures(cub3d) == false)
 		end_game(cub3d, "Couldn't load textures.");
@@ -41,6 +47,7 @@ void	init_settings(t_cub3d *cub3d)
 	temp_render = cub3d->render;
 	if (!alloc_execution_structs(cub3d))
 		end_game(cub3d, "Couldn't allocate structs.");
+	initialize_minimap(cub3d->minimap, cub3d);
 	initiate_mlx_images(cub3d);
 	cub3d->render = set_variables(cub3d);
 	free(temp_render);
