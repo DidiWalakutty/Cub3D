@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   key_moves.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 16:27:45 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:40:09 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   key_moves.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/12 21:32:10 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,32 @@ static void	move_left_right(const t_cub3d *cub3d, int32_t dir)
 	Uses 2D rotation formulas using a standard rotation matrix 
 	to update the player_dir and plane (fov).
 */
-static void	turning(const t_cub3d *cub3d, char side)
+static void	turning(const t_cub3d *cub3d, double rotspeed)
 {
-	t_dvectr	old_dir;
-	double		plane;
-	t_render	*render;
+	t_dvectr	*dir;
+	double		old_dir_x;
+	double		old_plane_x;
+	t_dvectr	*plane;
 
-	render = cub3d->render;
-	old_dir.y = render->player_dir.y;
-	render->player_dir.y = render->player_dir.y * cos(ROTATE_S * side) - \
-									render->player_dir.x * sin(ROTATE_S * side);
-	render->player_dir.x = old_dir.y * sin(ROTATE_S * side) + \
-									render->player_dir.x * cos(ROTATE_S * side);
-	plane = render->plane.y;
-	render->plane.y = render->plane.y * cos(ROTATE_S * side) - \
-						render->plane.x * sin(ROTATE_S * side);
-	render->plane.x = plane * sin(ROTATE_S * side) + \
-						render->plane.x * cos(ROTATE_S * side);
+	dir = &cub3d->render->player_dir;
+	plane = &cub3d->render->plane;
+	old_dir_x = dir->x;
+	old_plane_x = plane->x;
+	dir->x = dir->x * cos(rotspeed) - dir->y * sin(rotspeed);
+	dir->y = old_dir_x * sin(rotspeed) + dir->y * cos(rotspeed);
+	plane->x = plane->x * cos(rotspeed) - plane->y * sin(rotspeed);
+	plane->y = old_plane_x * sin(rotspeed) + plane->y * cos(rotspeed);
 }
 
 void	keys(void *param)
 {
 	t_cub3d	*cub3d;
 	mlx_t	*mlx;
+	double	rotspeed;
 
 	cub3d = param;
 	mlx = cub3d->mlx;
+	rotspeed = 0.02 * 1.5;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))
@@ -87,7 +87,7 @@ void	keys(void *param)
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		move_left_right(cub3d, RIGHT);
 	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
-		turning(cub3d, TURN_LEFT);
+		turning(cub3d, -rotspeed);
 	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-		turning(cub3d, TURN_RIGHT);
+		turning(cub3d, rotspeed);
 }

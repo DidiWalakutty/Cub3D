@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   launch.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/24 18:12:16 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   launch.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/12 21:47:39 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static void	update_vars(t_render *ray)
 	if (ray->ray_dir.x == 0)
 		ray->delta_dist.x = 1e30;
 	else
-		ray->delta_dist.x = fabs((float)1 / ray->ray_dir.x);
+		ray->delta_dist.x = fabs(1.0 / ray->ray_dir.x);
 	if (ray->ray_dir.y == 0)
 		ray->delta_dist.y = 1e30;
 	else
-		ray->delta_dist.y = fabs((float)1 / ray->ray_dir.y);
+		ray->delta_dist.y = fabs(1.0 / ray->ray_dir.y);
 }
 
 /*
@@ -94,6 +94,6 @@ void	run_cub3d(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
-	printf("Thank you for playing!");
+	printf("Thank you for playing\n!");
 	end_game(cub3d, NULL);
 }

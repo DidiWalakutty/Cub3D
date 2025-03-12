@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/24 18:11:52 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   cub3d.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/12 21:04:15 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 // Define movement
 # define FORWARD 1
 # define BACKWARDS -1
-# define RIGHT 1
-# define LEFT -1
+# define RIGHT -1
+# define LEFT 1
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
 
@@ -134,7 +134,7 @@ typedef struct s_render
 	t_ivectr	map_step;
 	t_draw		line;
 	int			side_hit;
-	double		wall_x;	
+	double		wall_heigth;	
 	double		wall_dist;
 }	t_render;
 

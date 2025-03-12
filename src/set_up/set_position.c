@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_position.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 15:06:03 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/21 12:36:59 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   set_position.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/12 19:06:32 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	set_n_and_s(t_render *render, t_player *player)
 	{
 		render->player_dir.x = 0;
 		render->player_dir.y = -1;
-		render->plane.x = -0.66;
+		render->plane.x = 0.66;
 		render->plane.y = 0;
 	}
 	else
 	{
 		render->player_dir.x = 0;
 		render->player_dir.y = 1;
-		render->plane.x = 0.66;
+		render->plane.x = -0.66;
 		render->plane.y = 0;
 	}
 }
@@ -45,14 +45,14 @@ static void	set_direction_and_plane(t_render *render, t_player *player)
 		render->player_dir.x = 1;
 		render->player_dir.y = 0;
 		render->plane.x = 0;
-		render->plane.y = -0.66;
+		render->plane.y = 0.66;
 	}
 	else if (player->orientation == 'W')
 	{
 		render->player_dir.x = -1;
 		render->player_dir.y = 0;
 		render->plane.x = 0;
-		render->plane.y = 0.66;
+		render->plane.y = -0.66;
 	}
 }
 /*

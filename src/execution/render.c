@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:22:22 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/24 14:06:53 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   render.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/12 21:06:30 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x)
 	text->pix_step = (1.0 * text->wall_img->height / lineheigth);
 	text->tex_pos = (draw_start - (S_HEIGTH / 2) + (lineheigth / 2)) * \
 					text->pix_step;
-	while (draw_start < draw_end && draw_start < S_HEIGTH)
+	while (draw_start <= draw_end && draw_start < S_HEIGTH)
 	{
 		text->y_tex = (int)text->tex_pos & (text->wall_img->height - 1);
 		text->tex_pos += text->pix_step;
