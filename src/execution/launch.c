@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 21:47:39 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 16:41:00 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,22 @@ void	raycaster(void *data)
 {
 	t_cub3d		*cub3d;
 	t_render	*render;
-	int			y;
+	int			x;
 
 	cub3d = data;
 	render = cub3d->render;
 	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_HEIGTH * 4);
-	y = 0;
-	while (y < S_WIDTH)
+	x = 0;
+	while (x < S_WIDTH)
 	{
-		render->camera_column = 2 * (y / (double)S_WIDTH) - 1;
+		render->camera_column = 2 * (x / (double)S_WIDTH) - 1;
 		update_vars(render);
 		update_side_dist(render);
 		dda_algorithm(render, cub3d);
 		set_wall_height(render);
 		set_wall_textures(render, cub3d);
-		draw_wall_slices(cub3d, cub3d->textures, y);
-		y++;
+		draw_wall_slices(cub3d, cub3d->textures, x);
+		x++;
 	}
 	render_minimap(cub3d);
 }

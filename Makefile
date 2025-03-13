@@ -79,4 +79,4 @@ re: fclean all
 memcheck:
 	valgrind --leak-check=full ./$(NAME)
 
-.PHONY: all clean fclean re $(LIBFT) $(MLX42)
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/13 16:03:15 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 16:45:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include "libft.h"
 
 // Define sizes
-# define S_WIDTH 1800
-# define S_HEIGTH 1200
+# define S_WIDTH 1600
+# define S_HEIGTH 1000
 
 // Define ray info
 # define SPEED 0.1
@@ -131,7 +131,6 @@ typedef struct s_render
 	double		camera_column;
 	t_ivectr	map_pos;
 	t_ivectr	map_step;
-	t_draw		line;
 	int			side_hit;
 	double		wall_heigth;	
 	double		wall_dist;
@@ -148,7 +147,7 @@ typedef struct s_minimap
 	t_ivectr	player_pos;
 	mlx_image_t	*minimap_img;
 	// t_map		*map;
-}		t_minimap;
+}	t_minimap;
 
 typedef struct s_cub3d
 {

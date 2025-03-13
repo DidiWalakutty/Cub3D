@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/13 16:00:41 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 16:11:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 	if (!cub3d->scene || !cub3d->floor_and_ceiling || \
 		!cub3d->minimap->minimap_img)
 		end_game(cub3d, "Allocation error for image space.");
-	if (mlx_image_to_window(cub3d->mlx, cub3d->floor_and_ceiling, \
-															0, 0) == -1)
+	if (mlx_image_to_window(cub3d->mlx, cub3d->floor_and_ceiling, 0, 0) == -1)
 		end_game(cub3d, "Couldn't output image to window.");
 	if (mlx_image_to_window(cub3d->mlx, cub3d->scene, 0, 0) == -1)
 		end_game(cub3d, "Couldn't output image to window");
 	if (mlx_image_to_window(cub3d->mlx, cub3d->minimap->minimap_img, \
-			0, 0) == -1)
+							0, 0) == -1)
 		end_game(cub3d, "Couldn't output minimap image to window.");
 	fill_background(cub3d);
 	if (load_wall_textures(cub3d) == false)
