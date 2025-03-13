@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 21:32:10 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 15:56:33 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	move_left_right(const t_cub3d *cub3d, int32_t dir)
 /*
 	Uses 2D rotation formulas using a standard rotation matrix 
 	to update the player_dir and plane (fov).
+	If wall_dist is less than 0.5, we increase the speed.
 */
 static void	turning(const t_cub3d *cub3d, double rotspeed)
 {
@@ -56,15 +57,23 @@ static void	turning(const t_cub3d *cub3d, double rotspeed)
 	double		old_dir_x;
 	double		old_plane_x;
 	t_dvectr	*plane;
+	double		adjusted_rotspeed;
 
 	dir = &cub3d->render->player_dir;
 	plane = &cub3d->render->plane;
 	old_dir_x = dir->x;
 	old_plane_x = plane->x;
-	dir->x = dir->x * cos(rotspeed) - dir->y * sin(rotspeed);
-	dir->y = old_dir_x * sin(rotspeed) + dir->y * cos(rotspeed);
-	plane->x = plane->x * cos(rotspeed) - plane->y * sin(rotspeed);
-	plane->y = old_plane_x * sin(rotspeed) + plane->y * cos(rotspeed);
+	if (cub3d->render->wall_dist < 0.5)
+		adjusted_rotspeed = rotspeed * 1.6;
+	else
+		adjusted_rotspeed = rotspeed;
+	dir->x = dir->x * cos(adjusted_rotspeed) - dir->y * sin(adjusted_rotspeed);
+	dir->y = old_dir_x * sin(adjusted_rotspeed) + dir->y * \
+							cos(adjusted_rotspeed);
+	plane->x = plane->x * cos(adjusted_rotspeed) - plane->y * \
+							sin(adjusted_rotspeed);
+	plane->y = old_plane_x * sin(adjusted_rotspeed) + plane->y * \
+							cos(adjusted_rotspeed);
 }
 
 void	keys(void *param)
@@ -75,7 +84,7 @@ void	keys(void *param)
 
 	cub3d = param;
 	mlx = cub3d->mlx;
-	rotspeed = 0.02 * 1.5;
+	rotspeed = 0.023 * 1.4;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
 	if (mlx_is_key_down(mlx, MLX_KEY_W))

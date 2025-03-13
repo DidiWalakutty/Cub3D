@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 21:34:52 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 15:55:51 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ static void	place_textures(t_render *ray, t_textures *texture)
 {
 	texture->x_tex = (int)(ray->wall_heigth * \
 							(double)texture->wall_img->width);
-	if (ray->side_hit == X_SIDE && ray->ray_dir.x > 0)
+	if (ray->side_hit == X_SIDE && ray->ray_dir.x < 0)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
 	if (ray->side_hit == Y_SIDE && ray->ray_dir.y < 0)
 		texture->x_tex = texture->wall_img->width - texture->x_tex - 1;
 }
+
 /*
 	Chooses the correct wall texture based on which side of the wall
 	was hit (X or Y) and the ray's direction.
@@ -83,18 +84,17 @@ void	update_side_dist(t_render *ray)
 	}
 }
 
-
-void set_wall_height(t_render *ray)
+void	set_wall_height(t_render *ray)
 {
-    if (ray->side_hit == X_SIDE)
-    {
-        ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
-        ray->wall_heigth = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
-    }
-    else
-    {
-        ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
-        ray->wall_heigth = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
-    }
-    ray->wall_heigth -= floor((ray->wall_heigth));
+	if (ray->side_hit == X_SIDE)
+	{
+		ray->wall_dist = (ray->side_dist.x - ray->delta_dist.x);
+		ray->wall_heigth = ray->player_pos.y + ray->wall_dist * ray->ray_dir.y;
+	}
+	else
+	{
+		ray->wall_dist = (ray->side_dist.y - ray->delta_dist.y);
+		ray->wall_heigth = ray->player_pos.x + ray->wall_dist * ray->ray_dir.x;
+	}
+	ray->wall_heigth -= floor((ray->wall_heigth));
 }

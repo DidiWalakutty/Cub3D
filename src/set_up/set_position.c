@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 15:06:03 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 19:06:32 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 16:01:04 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	set_direction_and_plane(t_render *render, t_player *player)
 		render->plane.y = -0.66;
 	}
 }
+
 /*
 	Need to check which variables we need in here.
 	Probably angle, FOV etc as well.

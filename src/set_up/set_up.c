@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   set_up.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 13:49:41 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/02/24 18:12:25 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   set_up.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/13 16:00:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 										S_WIDTH, S_HEIGTH);
 	cub3d->minimap->minimap_img = mlx_new_image(cub3d->mlx, MINIMAP_WIDTH, \
 															MINIMAP_HEIGHT);
-	if (!cub3d->scene || !cub3d->floor_and_ceiling ||\
+	if (!cub3d->scene || !cub3d->floor_and_ceiling || \
 		!cub3d->minimap->minimap_img)
 		end_game(cub3d, "Allocation error for image space.");
 	if (mlx_image_to_window(cub3d->mlx, cub3d->floor_and_ceiling, \

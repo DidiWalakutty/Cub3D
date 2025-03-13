@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/12 21:04:15 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/13 16:03:15 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 
 // Define ray info
 # define SPEED 0.1
-# define ROTATE_S 0.03
 # define X_SIDE 0
 # define Y_SIDE 1
 
@@ -84,8 +83,8 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**grid;
-	size_t			width;
-	size_t			height;
+	size_t		width;
+	size_t		height;
 	int			first_index;
 	int			last_index;
 	t_player	*player;
@@ -138,7 +137,6 @@ typedef struct s_render
 	double		wall_dist;
 }	t_render;
 
-
 typedef struct s_minimap
 {
 	int			w;
@@ -166,8 +164,8 @@ typedef struct s_cub3d
 /* File Parsing */
 int			handle_input(const char *filename, char ***lines);
 int			parse_file(char *argv[], t_input *file_data);
-bool		extract_elements(char **lines, t_input *content, bool *has_floor_color,\
-							bool *has_ceiling_color);
+bool		extract_elements(char **lines, t_input *content, \
+							bool *has_floor_color, bool *has_ceiling_color);
 bool		parse_texture(char *line, t_input *content);
 bool		parse_color(char *line, int *color);
 bool		is_map_last_in_file(char **lines, t_map *map);
