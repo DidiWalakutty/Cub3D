@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path_checker.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 11:36:43 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/02/21 12:35:11 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path_checker.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/02/21 11:36:43 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/19 19:33:32 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,3 +104,5 @@ bool	is_player_entrapped(t_map *map)
 	free_visited_array(visited, map->height);
 	return (entrapped);
 }
+
+

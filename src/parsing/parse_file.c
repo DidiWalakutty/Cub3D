@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:42 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/21 12:30:45 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_file.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/19 14:25:17 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	parse_file(char *argv[], t_input *file_data)
 		return (result);
 	}
 	if (!extract_elements(lines, file_data, &has_floor_color, &has_ceiling_color))
-        result = 1;
+		result = 1;
 	else
 	{
 		if(!handle_map(file_data, lines))
@@ -96,9 +96,9 @@ int	parse_file(char *argv[], t_input *file_data)
 	if (lines)
 		free_lines(lines);
 	if (!has_ceiling_color || !has_floor_color)
-    {
-        print_error("Both floor and ceiling colors must be specified.");
-        result = 1;
-    }
+	{
+		print_error("Both floor and ceiling colors must be specified.");
+		result = 1;
+	}
 	return (result);
 }

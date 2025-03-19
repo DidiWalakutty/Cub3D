@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/13 16:45:38 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/19 19:35:03 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@
 # include "MLX42.h"
 # include "libft.h"
 
-// Define sizes
+/* Define sizes */
 # define S_WIDTH 1600
 # define S_HEIGTH 1000
 
-// Define ray info
+/* Define ray info */
 # define SPEED 0.1
 # define X_SIDE 0
 # define Y_SIDE 1
 
-// Define movement
+/* Define movement */
 # define FORWARD 1
 # define BACKWARDS -1
 # define RIGHT -1
@@ -42,14 +42,14 @@
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
 
-// Minimap dimension
-# define MINIMAP_WIDTH 200 
+/* Minimap dimension */
+# define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
 
-// Minimap colors
-# define PLAYER_COLOR 0xFF0000FF // Red
-# define WALL_COLOR 0x00008BFF   // Dark Blue
-# define FLOOR_COLOR 0xF8F8FFFF  // Off White
+/* Minimap colors */
+# define PLAYER_COLOR 0xFF0000FF
+# define WALL_COLOR 0x00008BFF
+# define FLOOR_COLOR 0xF8F8FFFF
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -146,7 +146,6 @@ typedef struct s_minimap
 	uint32_t	floor_color;
 	t_ivectr	player_pos;
 	mlx_image_t	*minimap_img;
-	// t_map		*map;
 }	t_minimap;
 
 typedef struct s_cub3d
@@ -214,5 +213,7 @@ void		print_map(char **map);
 /* Minimap */
 void		render_minimap(t_cub3d *game);
 void		initialize_minimap(t_minimap *minimap, t_cub3d *game);
+void		clear_minimap_image(t_cub3d *game);
+void		draw_minimap_grid(t_cub3d *game);
 
 #endif

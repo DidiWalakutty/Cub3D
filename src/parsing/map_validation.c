@@ -1,45 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:28 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/21 12:33:15 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_validation.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/19 18:04:43 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	is_valid_map_char(char c)
+#include "cub3d.h"
+
+bool is_valid_map_char(char c)
 {
-	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
+    return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
 }
+
+
+static int	check_top_or_bottom(char **map_tab, int i, int j)
+{
+	if (!map_tab || !map_tab[i] || !map_tab[i][j])
+		return (1);
+	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
+	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
+	|| map_tab[i][j] == '\f')
+		j++;
+	while (map_tab[i][j])
+	{
+		if (map_tab[i][j] != '1')
+			return (1);
+		j++;
+	}
+	return (0);
+}
+
+static int	check_map_sides(t_map *map, char **map_tab)
+{
+	size_t	i;
+	size_t	j;
+
+	if (check_top_or_bottom(map_tab, 0, 0) == 1)
+		return (1);
+	i = 1;
+	while (i < (map->height - 1))
+	{
+		j = ft_strlen(map_tab[i]) - 1;
+		if (map_tab[i][j] != '1')
+			return (1);
+		i++;
+	}
+	if (check_top_or_bottom(map_tab, i, 0) == 1)
+		return (1);
+	return (0);
+}
+
 
 bool	is_map_surrounded_by_walls(t_map *map)
 {
-	size_t	row_index;
-	size_t	col_index;
-
-	row_index = 0;
-	col_index = 0;
-	while (col_index < map->width)
-	{
-		if (map->grid[0][col_index] != '1')
-			return (print_error("Map is not surrounded by walls."), false);
-		if (map->grid[map->height - 1][col_index] != '1')
-			return (print_error("Map is not surrounded by walls."), false);
-		col_index++;
-	}
-	while (row_index < map->height)
-	{
-		if (map->grid[row_index][0] != '1')
-			return (print_error("Map is not surrounded by walls."), false);
-		if (map->grid[row_index][map->width - 1] != '1')
-			return (print_error("Map is not surrounded by walls."), false);
-		row_index++;
-	}
+	if (check_map_sides(map, map->grid) == 1)
+		return (print_error("Map is not surrounded by walls."), false);
+	
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/14 15:52:42 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/19 14:17:28 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ static void	update_vars(t_render *ray)
 		ray->delta_dist.y = 1e30;
 	else
 		ray->delta_dist.y = fabs(1.0 / ray->ray_dir.y);
+}
+
+void	render_minimap(t_cub3d *game)
+{
+	clear_minimap_image(game);
+	draw_minimap_grid(game);
+	mlx_image_to_window(game->mlx, game->minimap->minimap_img, 10, 10);
 }
 
 /*
