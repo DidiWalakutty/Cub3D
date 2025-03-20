@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/19 15:35:06 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/20 21:10:36 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 // Define sizes
 # define S_WIDTH 1600
-# define S_HEIGTH 1000
+# define S_height 1000
 
 // Define ray info
 # define SPEED 0.1
@@ -52,6 +52,14 @@
 # define FLOOR_COLOR 0xF8F8FFFF  // Off White
 
 typedef struct s_cub3d	t_cub3d;
+
+typedef struct s_timer
+{
+	double	start;
+	double	end;
+	double	delta;
+	double	(*time_func)(void);
+}	t_timer;
 
 typedef struct s_dvectr
 {
@@ -132,7 +140,7 @@ typedef struct s_render
 	t_ivectr	map_pos;
 	t_ivectr	map_step;
 	int			side_hit;
-	double		wall_heigth;	
+	double		wall_height;	
 	double		wall_dist;
 }	t_render;
 
@@ -158,6 +166,8 @@ typedef struct s_cub3d
 	mlx_t		*mlx;
 	t_textures	*textures;
 	t_minimap	*minimap;
+	t_timer		fps_timer;
+	uint32_t	fps;
 }	t_cub3d;
 
 /* File Parsing */
@@ -210,6 +220,7 @@ void		end_game(t_cub3d *cub3d, char *error_message);
 /* Print for testing */
 void		print_parsed_content(t_input *content);
 void		print_map(char **map);
+void		fps_hook(void *param);
 
 /* Minimap */
 void		render_minimap(t_cub3d *game);

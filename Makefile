@@ -2,7 +2,8 @@ NAME := cub3D
 
 # Compilation
 CC := cc
-CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address -fno-omit-frame-pointer
+CFLAGS := -Wall -Werror -Wextra -fno-omit-frame-pointer
+CFLAGS += -g -fsanitize=address
 LIBFT_INCLUDES := -I./lib/libft/include
 MLX_INCLUDES := -I./lib/MLX42/include/MLX42
 cub3d_INCLUDES := -I./include

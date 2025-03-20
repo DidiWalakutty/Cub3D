@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/19 15:41:13 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/20 18:56:57 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ static void	turning(const t_cub3d *cub3d, double rotspeed)
 	plane = &cub3d->render->plane;
 	old_dir_x = dir->x;
 	old_plane_x = plane->x;
-	if (cub3d->render->wall_dist < 0.5)
-		adjusted_rotspeed = rotspeed * 1.6;
-	else
-		adjusted_rotspeed = rotspeed;
+	// if (cub3d->render->wall_dist < 0.5)
+	// 	adjusted_rotspeed = rotspeed * 1.6;
+	// else
+	adjusted_rotspeed = rotspeed;
 	dir->x = dir->x * cos(adjusted_rotspeed) - dir->y * sin(adjusted_rotspeed);
 	dir->y = old_dir_x * sin(adjusted_rotspeed) + dir->y * \
 							cos(adjusted_rotspeed);

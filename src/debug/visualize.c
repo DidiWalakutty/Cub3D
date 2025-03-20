@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   visualize.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 12:22:00 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/02/18 12:23:52 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   visualize.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/02/18 12:22:00 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/20 21:10:21 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@
 //         //... (wall height calculations for column x)...
 
 //         // Calculate wall slice boundaries
-//         int lineheigth = (int)S_HEIGTH / ray->wall_dist;
-//         int wall_top = S_HEIGTH / 2 - lineheigth / 2;
-//         int wall_bottom = S_HEIGTH / 2 + lineheigth / 2;
+//         int lineheight = (int)S_height / ray->wall_dist;
+//         int wall_top = S_height / 2 - lineheight / 2;
+//         int wall_bottom = S_height / 2 + lineheight / 2;
 
 //         // Draw wall slice rectangle (using appropriate MLX42 function)
 //         draw_rect_on_image(cub3d->scene, x, wall_top, 1, wall_bottom - wall_top, 0x00FF00); // Green color for wall slices
@@ -90,13 +90,13 @@
 
 
         // Visualize the wall slice
-        // int line_height = (int)(S_HEIGTH / render->wall_dist);
-        // int wall_top = S_HEIGTH / 2 - line_height / 2;
-        // int wall_bottom = S_HEIGTH / 2 + line_height / 2;
+        // int line_height = (int)(S_height / render->wall_dist);
+        // int wall_top = S_height / 2 - line_height / 2;
+        // int wall_bottom = S_height / 2 + line_height / 2;
 
         // // Ensure wall_top and wall_bottom are within screen bounds
         // if (wall_top < 0) wall_top = 0;
-        // if (wall_bottom >= S_HEIGTH) wall_bottom = S_HEIGTH - 1;
+        // if (wall_bottom >= S_height) wall_bottom = S_height - 1;
 
         // Draw rectangle outline for wall slice
         //draw_rect_on_image(cub3d->scene, y, wall_top, 1, wall_bottom - wall_top, 0x00FF00); // Green color for wall slices
@@ -108,3 +108,26 @@
         // int ray_end_x = render->map_pos.x * 64;
         // int ray_end_y = render->map_pos.y * 64;
         // draw_line_on_image(cub3d->scene, render->player_pos.x * 64 , render->player_pos.y * 64 , ray_end_x, ray_end_y, 0xFF0000); // Red color for rays
+
+void	fps_hook(void *param)
+{
+	static uint32_t	fps;
+	t_cub3d			*meta;
+
+	meta = param;
+	if (!(meta->fps_timer.time_func))
+	{
+		fps = 0;
+		timer_init(&meta->fps_timer, mlx_get_time);
+	}
+	if (timer_delta(&meta->fps_timer) >= 1)
+	{
+		meta->fps = fps;
+		printf("FPS: [%u]\n", meta->fps);
+		timer_start(&meta->fps_timer);
+		fps = 0;
+	}
+	else
+		fps++;
+}
+
