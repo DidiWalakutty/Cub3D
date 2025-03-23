@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-<<<<<<< HEAD
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/20 21:10:36 by diwalaku      ########   odam.nl         */
-=======
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/03/23 11:36:34 by yasamankari      ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2025/03/23 12:26:37 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +25,8 @@
 # include "MLX42.h"
 # include "libft.h"
 
-<<<<<<< HEAD
-// Define sizes
-# define S_WIDTH 1600
-# define S_height 1000
-=======
-/* Define sizes */
-# define S_WIDTH 800
-# define S_HEIGTH 800 // gave segfault with 1000 and 1200
->>>>>>> main
+# define S_WIDTH 800 // segfault with 1200 and 1000!
+# define S_height 800
 
 /* Define ray info */
 # define SPEED 0.1
@@ -244,5 +227,11 @@ void		render_minimap(t_cub3d *game);
 void		initialize_minimap(t_minimap *minimap, t_cub3d *game);
 void		clear_minimap_image(t_cub3d *game);
 void		draw_minimap_grid(t_cub3d *game);
+
+/* Timer */
+double		timer_delta(t_timer *t);
+double		timer_stop(t_timer *t);
+double		timer_start(t_timer *t);
+t_timer		*timer_init(t_timer *t, double (*time_func)(void));
 
 #endif
