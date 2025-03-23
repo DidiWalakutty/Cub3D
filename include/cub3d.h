@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/03/23 10:44:08 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/03/23 11:36:34 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ bool		validate_textures(t_input *content);
 /* Map Population */
 void		set_player_spawning_point(t_map *map, t_player *player);
 int			check_player_spawning_point(t_player *player);
+void		get_map_properties(char **lines, t_map *map);
+bool		populate_grid(char **lines, t_map *map);
 
 /* Execution */
 void		run_cub3d(t_cub3d *cub3d);

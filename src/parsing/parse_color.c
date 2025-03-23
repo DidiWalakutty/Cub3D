@@ -6,12 +6,11 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:16:35 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/21 12:34:10 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/03/23 12:02:24 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
 
 static bool	free_rgb_values(char **rgb, int count)
 {
@@ -39,7 +38,6 @@ static	bool	split_rgb_values(char *line, char ***rgb)
 	}
 	return (true);
 }
-
 static	bool	validate_rgb_values(char **rgb, int *color)
 {
 	int	i;
@@ -58,7 +56,6 @@ static	bool	validate_rgb_values(char **rgb, int *color)
 		return (false);
 	return (true);
 }
-
 
 bool	parse_color(char *line, int *color)
 {

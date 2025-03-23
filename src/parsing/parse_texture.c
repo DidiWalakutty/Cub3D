@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_texture.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/02/20 17:00:54 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:53 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/03/23 12:01:29 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,6 @@ static	bool has_png_extension(const char *filename)
 		return (print_error("Texture doesn't have png extension."), false);
 	return (ft_strncmp(filename + len - ext_len, ext, ext_len) == 0);
 }
-// static bool texture_exists(const char *filename)
-// {
-//     struct stat buffer;
-//     return (stat(filename, &buffer) == 0);
-// }
-
-
-// static	bool is_texture_duplicate(const char *texture, t_input *content)
-// {
-// 	size_t	len;
-
-// 	len = ft_strlen(texture);
-// 	return (content->north_texture && ft_strncmp(texture, content->north_texture, len) == 0) ||
-// 		(content->south_texture && ft_strncmp(texture, content->south_texture, len) == 0) ||
-// 		(content->west_texture && ft_strncmp(texture, content->west_texture, len) == 0) ||
-// 		(content->east_texture && ft_strncmp(texture, content->east_texture, len) == 0);
-// }
 
 static	bool set_texture(char *line, char **texture, const char *prefix)
 {
@@ -55,20 +38,7 @@ static	bool set_texture(char *line, char **texture, const char *prefix)
 		free(texture_path);
 		if (!has_png_extension(trimmed))
 			return (free(trimmed), false);
-		// if (is_texture_duplicate(texture_path, content))
-		// {
-		// 	printf("Duplicate texture: %s\n", texture_path);
-		// 	free(texture_path);
-		// 	return false;
-		// }
-		// if (!texture_exists(texture_path))
-		// {
-		//     printf("Texture file does not exist: %s\n", texture_path);
-		//     free(texture_path);
-		//     return false;
-		// }
 		*texture = trimmed;
-		// free(trimmed);
 		return (true);
 	}
 	return (false);
@@ -98,7 +68,6 @@ bool	validate_textures(t_input *content)
 	}
 	return (true);
 }
-
 
 bool	parse_texture(char *line, t_input *content)
 {
