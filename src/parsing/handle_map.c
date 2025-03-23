@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   handle_map.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/19 19:43:06 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   handle_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/03/23 11:01:30 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ static bool	validate_map(t_map *map)
 	if (is_player_entrapped(map))
 	{
 		print_error("Player is entrapped within walls.");
-		//return (false);
+		return (false);
 	}
 	return (true);
 }

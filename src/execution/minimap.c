@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minimap.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/02/24 13:23:05 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/19 18:51:24 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/24 13:23:05 by yasamankari       #+#    #+#             */
+/*   Updated: 2025/03/23 10:35:15 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,13 @@ static void draw_minimap_cell(t_cub3d *game, int x, int y, uint32_t color)
 static void draw_minimap(t_cub3d *game, int row, int col)
 {
     t_minimap *minimap;
-    t_map *map;
+    //t_map *map;
     uint32_t color;
     int x;
     int y;
 
     minimap = game->minimap;
-    map = game->input->map;
+    //map = game->input->map;
     x = col * minimap->scale;
     y = row * minimap->scale;
     color = get_cell_color(game, row, col);
@@ -94,11 +94,11 @@ void draw_minimap_grid(t_cub3d *game)
 {
     int row;
     int col;
-    t_minimap *minimap;
+    //t_minimap *minimap;
     t_map *map;
 
     row = 0;
-    minimap = game->minimap;
+    //minimap = game->minimap;
     map = game->input->map;
     while (row < (int)map->height)
     {
