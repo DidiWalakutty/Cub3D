@@ -1,5 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
+<<<<<<< HEAD
 /*                                                        ::::::::            */
 /*   cub3d.h                                            :+:    :+:            */
 /*                                                     +:+                    */
@@ -7,6 +8,15 @@
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
 /*   Updated: 2025/03/20 21:10:36 by diwalaku      ########   odam.nl         */
+=======
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/03/23 11:36:34 by yasamankari      ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +35,22 @@
 # include "MLX42.h"
 # include "libft.h"
 
+<<<<<<< HEAD
 // Define sizes
 # define S_WIDTH 1600
 # define S_height 1000
+=======
+/* Define sizes */
+# define S_WIDTH 800
+# define S_HEIGTH 800 // gave segfault with 1000 and 1200
+>>>>>>> main
 
-// Define ray info
+/* Define ray info */
 # define SPEED 0.1
 # define X_SIDE 0
 # define Y_SIDE 1
 
-// Define movement
+/* Define movement */
 # define FORWARD 1
 # define BACKWARDS -1
 # define RIGHT -1
@@ -42,14 +58,14 @@
 # define TURN_RIGHT 1
 # define TURN_LEFT -1
 
-// Minimap dimension
-# define MINIMAP_WIDTH 200 
+/* Minimap dimension */
+# define MINIMAP_WIDTH 200
 # define MINIMAP_HEIGHT 200
 
-// Minimap colors
-# define PLAYER_COLOR 0xFF0000FF // Red
-# define WALL_COLOR 0x00008BFF   // Dark Blue
-# define FLOOR_COLOR 0xF8F8FFFF  // Off White
+/* Minimap colors */
+# define PLAYER_COLOR 0xFF0000FF
+# define WALL_COLOR 0x00008BFF
+# define FLOOR_COLOR 0xF8F8FFFF
 
 typedef struct s_cub3d	t_cub3d;
 
@@ -154,7 +170,6 @@ typedef struct s_minimap
 	uint32_t	floor_color;
 	t_ivectr	player_pos;
 	mlx_image_t	*minimap_img;
-	// t_map		*map;
 }	t_minimap;
 
 typedef struct s_cub3d
@@ -190,6 +205,8 @@ bool		validate_textures(t_input *content);
 /* Map Population */
 void		set_player_spawning_point(t_map *map, t_player *player);
 int			check_player_spawning_point(t_player *player);
+void		get_map_properties(char **lines, t_map *map);
+bool		populate_grid(char **lines, t_map *map);
 
 /* Execution */
 void		run_cub3d(t_cub3d *cub3d);
@@ -225,5 +242,7 @@ void		fps_hook(void *param);
 /* Minimap */
 void		render_minimap(t_cub3d *game);
 void		initialize_minimap(t_minimap *minimap, t_cub3d *game);
+void		clear_minimap_image(t_cub3d *game);
+void		draw_minimap_grid(t_cub3d *game);
 
 #endif
