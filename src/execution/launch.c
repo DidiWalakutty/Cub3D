@@ -6,11 +6,40 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
+<<<<<<< HEAD
+/*   Updated: 2025/03/20 21:10:56 by diwalaku      ########   odam.nl         */
+=======
 /*   Updated: 2025/03/19 14:17:28 by ykarimi       ########   odam.nl         */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+t_timer	*timer_init(t_timer *t, double (*time_func)(void))
+{
+	t->time_func = time_func;
+	return (t);
+}
+
+double	timer_start(t_timer *t)
+{
+	t->start = (*t->time_func)();
+	return (t->start);
+}
+
+double	timer_stop(t_timer *t)
+{
+	t->end = (*t->time_func)();
+	return (t->end);
+}
+
+double	timer_delta(t_timer *t)
+{
+	timer_stop(t);
+	t->delta = t->end - t->start;
+	return (t->delta);
+}
 
 /*
 	Performs DDA to trace the ray until it hits a wall.
@@ -76,7 +105,7 @@ void	raycaster(void *data)
 
 	cub3d = data;
 	render = cub3d->render;
-	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_HEIGTH * 4);
+	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_height * 4);
 	x = 0;
 	while (x < S_WIDTH)
 	{
@@ -94,11 +123,12 @@ void	raycaster(void *data)
 
 void	run_cub3d(t_cub3d *cub3d)
 {
-	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGTH, "Cub3D", false);
+	cub3d->mlx = mlx_init(S_WIDTH, S_height, "Cub3D", false);
 	if (!cub3d->mlx)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
+	mlx_loop_hook(cub3d->mlx, &fps_hook, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 	printf("Thank you for playing!\n");

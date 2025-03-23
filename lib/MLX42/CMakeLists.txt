@@ -39,8 +39,6 @@ if(UNIX AND NOT EMSCRIPTEN)
 		-Wextra
 		-Wall
 		-Werror
-		-g
-		-fsanitize=address
 		-Wunreachable-code
 
 		# Some low priority warnings that are annoying.

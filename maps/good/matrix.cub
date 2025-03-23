@@ -1,7 +1,7 @@
-NO ./textures/Space_N.png
-SO ./textures/Space_S.png
+NO ./textures/Dystopian_Concrete.png
+SO ./textures/Dystopian_Cans.png
 WE ./textures/Space_W.png
-EA ./textures/Space_E.png
+EA ./textures/Dystopian_Hardware.png
 
 
 F 0,0,0
