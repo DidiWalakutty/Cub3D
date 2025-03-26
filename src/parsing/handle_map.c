@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_map.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 11:42:03 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   handle_map.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:57:52 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,25 @@ static int	init_map(t_input *file_data)
 	return (0);
 }
 
-static void replace_spaces_with_one(char **grid)
+static void	replace_spaces_with_one(char **grid)
 {
-    int i, j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (grid[i])
-    {
-        j = 0;
-        while (grid[i][j])
-        {
-            if (grid[i][j] == ' ')
-            {
-                grid[i][j] = '1';
-            }
-            j++;
-        }
-        i++;
-    }
+	i = 0;
+	while (grid[i])
+	{
+		j = 0;
+		while (grid[i][j])
+		{
+			if (grid[i][j] == ' ')
+			{
+				grid[i][j] = '1';
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 static bool	validate_map(t_map *map)
@@ -74,12 +75,15 @@ bool	handle_map(t_input *file_data, char **lines)
 	get_map_properties(lines, file_data->map);
 	if (!is_map_last_in_file(lines, file_data->map))
 		return (false);
-	file_data->map->grid = malloc(sizeof(char *) * (file_data->map->height + 1));
+	file_data->map->grid = malloc(sizeof(char *) * \
+						(file_data->map->height + 1));
 	if (!file_data->map->grid)
 		return (print_error("Memory allocation for map grid failed."), false);
-	ft_bzero(file_data->map->grid, sizeof(char *) * (file_data->map->height + 1));	
+	ft_bzero(file_data->map->grid, sizeof(char *) * \
+	(file_data->map->height + 1));
 	if (!populate_grid(lines, file_data->map))
-		return (print_error("Memory allocation for map grid line failed."), false);
+		return (print_error("Memory allocation for map grid line failed."), \
+				 false);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (false);

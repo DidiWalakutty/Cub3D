@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 12:42:53 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 11:18:34 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   player.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/29 12:42:53 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:45:31 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_player_spawning_point(t_player *player)
 {
 	if (player->player_count != 1)
 	{
-		if (player->player_count  == 0)
+		if (player->player_count == 0)
 			print_error("No player.");
 		else
 			print_error("Multiple players.");

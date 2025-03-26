@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:42 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 12:02:00 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_file.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:50:59 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	free_lines(char **lines)
 static int	handle_input_and_extract_elements(char *file, char ***lines, \
 	t_input *file_data, bool *has_floor_color, bool *has_ceiling_color)
 {
-	int result;
+	int	result;
 
 	result = handle_input(file, lines);
 	if (result != 0)
@@ -37,7 +37,8 @@ static int	handle_input_and_extract_elements(char *file, char ***lines, \
 			free_lines(*lines);
 		return (result);
 	}
-	if (!extract_elements(*lines, file_data, has_floor_color, has_ceiling_color))
+	if (!extract_elements(*lines, file_data, has_floor_color, \
+		has_ceiling_color))
 		return (1);
 	return (0);
 }
@@ -59,8 +60,8 @@ int	parse_file(char *argv[], t_input *file_data)
 	bool	has_ceiling_color;
 
 	lines = NULL;
-	result = handle_input_and_extract_elements(argv[1], &lines, file_data,\
-		 &has_floor_color, &has_ceiling_color);
+	result = handle_input_and_extract_elements(argv[1], &lines, file_data, \
+		&has_floor_color, &has_ceiling_color);
 	if (result == 0)
 		result = handle_map_and_validate(file_data, lines);
 	if (lines)

@@ -1,50 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:28 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 11:51:32 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_validation.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:54:12 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool is_valid_map_char(char c)
+bool	is_valid_map_char(char c)
 {
-    return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == ' ');
+	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' \
+			|| c == 'W' || c == ' ');
 }
 
 bool	validate_map_characters(t_map *map)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (map->grid[i])
-    {
-        j = 0;
-        while (map->grid[i][j])
-        {
-            if (!is_valid_map_char(map->grid[i][j]))
-            {
-                print_error("Invalid map character.");
-                return (false);
-            }
-            j++;
-        }
-        i++;
-    }
-    return (true);
+	i = 0;
+	while (map->grid[i])
+	{
+		j = 0;
+		while (map->grid[i][j])
+		{
+			if (!is_valid_map_char(map->grid[i][j]))
+			{
+				print_error("Invalid map character.");
+				return (false);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }
 
 bool	is_map_last_in_file(char **lines, t_map *map)
 {
 	int		i;
 	char	*trimmed_line;
-	
+
 	i = map->last_index + 1;
 	while (lines[i])
 	{

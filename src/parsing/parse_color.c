@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_color.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:35 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 12:02:24 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_color.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:35 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:51:35 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static bool	free_rgb_values(char **rgb, int count)
 	free(rgb);
 	return (false);
 }
-static	bool	split_rgb_values(char *line, char ***rgb)
+
+static bool	split_rgb_values(char *line, char ***rgb)
 {
 	int	i;
 
@@ -38,6 +39,7 @@ static	bool	split_rgb_values(char *line, char ***rgb)
 	}
 	return (true);
 }
+
 static	bool	validate_rgb_values(char **rgb, int *color)
 {
 	int	i;

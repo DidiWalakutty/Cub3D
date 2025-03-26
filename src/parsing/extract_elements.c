@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   extract_elements.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 11:14:41 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/23 12:05:33 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   extract_elements.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/03/23 11:14:41 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/26 13:58:37 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static bool	is_texture_prefix(const char *line)
 {
-	return (ft_strncmp(line, "NO ", 3) == 0 ||
-			ft_strncmp(line, "SO ", 3) == 0 ||
-			ft_strncmp(line, "WE ", 3) == 0 ||
+	return (ft_strncmp(line, "NO ", 3) == 0 || \
+			ft_strncmp(line, "SO ", 3) == 0 || \
+			ft_strncmp(line, "WE ", 3) == 0 || \
 			ft_strncmp(line, "EA ", 3) == 0);
 }
 
@@ -40,7 +40,7 @@ static bool	handle_ceiling_color(char *line, t_input *content, \
 
 static bool	handle_texture(char *line, t_input *content)
 {
-	return parse_texture(line, content);
+	return (parse_texture(line, content));
 }
 
 bool	extract_elements(char **lines, t_input *content, \

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_properties.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 11:31:51 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/23 12:03:05 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_properties.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/03/23 11:31:51 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/26 13:55:32 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 static bool	is_texture_or_color_line(const char *line)
 {
-	return (ft_strncmp(line, "NO ", 3) == 0 || 
-			ft_strncmp(line, "SO ", 3) == 0 || 
-			ft_strncmp(line, "WE ", 3) == 0 || 
-			ft_strncmp(line, "EA ", 3) == 0 || 
-			ft_strncmp(line, "F ", 2) == 0 || 
+	return (ft_strncmp(line, "NO ", 3) == 0 || \
+			ft_strncmp(line, "SO ", 3) == 0 || \
+			ft_strncmp(line, "WE ", 3) == 0 || \
+			ft_strncmp(line, "EA ", 3) == 0 || \
+			ft_strncmp(line, "F ", 2) == 0 || \
 			ft_strncmp(line, "C ", 2) == 0);
 }
 
 static bool	is_empty_or_texture_line(const char *line, bool *map_started)
 {
 	char	*trimmed_line;
+
 	trimmed_line = ft_strtrim(line, " \t\n\r");
 	if (trimmed_line[0] == '\0')
 	{
@@ -53,9 +54,9 @@ static int	skip_non_map_lines(char **lines)
 		if (is_empty_or_texture_line(lines[i], &map_started))
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		break;
+		break ;
 	}
 	return (i);
 }
@@ -90,10 +91,11 @@ void	get_map_properties(char **lines, t_map *map)
 		{
 			free(trimmed_line);
 			i++;
-			continue;
+			continue ;
 		}
 		if (is_valid_map_char(trimmed_line[0]))
-			update_map_dimensions(trimmed_line, &width, &height, &map->last_index, i);
+			update_map_dimensions(trimmed_line, &width, \
+							&height, &map->last_index, i);
 		free(trimmed_line);
 		i++;
 	}

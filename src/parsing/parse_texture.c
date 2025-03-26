@@ -6,13 +6,13 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 13:41:40 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 13:49:10 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static	bool has_png_extension(const char *filename)
+static bool	has_png_extension(const char *filename)
 {
 	const char	*ext;
 	size_t		len;
@@ -39,16 +39,16 @@ static bool	set_texture(char *line, char **texture, const char *prefix)
 		if (!has_png_extension(trimmed))
 		{
 			free(trimmed);
-			return false;
+			return (false);
 		}
 		if (*texture)
 		{
 			free(*texture);
 		}
 		*texture = trimmed;
-		return true;
+		return (true);
 	}
-	return false;
+	return (false);
 }
 
 bool	validate_textures(t_input *content)
@@ -78,11 +78,11 @@ bool	validate_textures(t_input *content)
 
 bool	parse_texture(char *line, t_input *content)
 {
-	if (set_texture(line, &content->north_texture, "NO ") ||
-		set_texture(line, &content->south_texture, "SO ") ||
-		set_texture(line, &content->west_texture, "WE ") ||
+	if (set_texture(line, &content->north_texture, "NO ") || \
+		set_texture(line, &content->south_texture, "SO ") || \
+		set_texture(line, &content->west_texture, "WE ") || \
 		set_texture(line, &content->east_texture, "EA "))
-			return (true);
+		return (true);
 	print_error("Failed to parse texture line");
 	return (false);
 }

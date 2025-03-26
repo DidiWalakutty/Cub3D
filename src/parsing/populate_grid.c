@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/23 11:20:05 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 12:59:07 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 13:45:46 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static char	*trim_and_allocate(const char *line, size_t width)
 	return (no_spaces);
 }
 
-static void	fill_no_spaces(char *no_spaces, const char *line, const char *trimmed)
+static void	fill_no_spaces(char *no_spaces, const char *line, \
+							const char *trimmed)
 {
 	int	k;
 	int	l;
