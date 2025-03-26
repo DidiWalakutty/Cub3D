@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 20:17:02 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/26 20:33:38 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@
 # define BACKWARDS -1
 # define RIGHT -1
 # define LEFT 1
-# define TURN_RIGHT 1
-# define TURN_LEFT -1
 
 /* Minimap dimension */
 # define MINIMAP_WIDTH 200
