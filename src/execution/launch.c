@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 15:15:24 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 20:12:50 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	run_cub3d(t_cub3d *cub3d)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
-	mlx_loop_hook(cub3d->mlx, &fps_hook, cub3d);
 	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 	printf("Thank you for playing!\n");

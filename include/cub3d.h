@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 20:05:39 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/26 20:17:02 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,6 @@
 # define FLOOR_COLOR 0xF8F8FFFF
 
 typedef struct s_cub3d	t_cub3d;
-
-typedef struct s_timer
-{
-	double	start;
-	double	end;
-	double	delta;
-	double	(*time_func)(void);
-}	t_timer;
 
 typedef struct s_dvectr
 {
@@ -166,8 +158,6 @@ typedef struct s_cub3d
 	mlx_t		*mlx;
 	t_textures	*textures;
 	t_minimap	*minimap;
-	t_timer		fps_timer;
-	uint32_t	fps;
 }	t_cub3d;
 
 /* File Parsing */
@@ -223,18 +213,11 @@ void		end_game(t_cub3d *cub3d, char *error_message);
 /* Print for testing */
 void		print_parsed_content(t_input *content);
 void		print_map(char **map);
-void		fps_hook(void *param);
 
 /* Minimap */
 void		render_minimap(t_cub3d *game);
 void		initialize_minimap(t_minimap *minimap, t_cub3d *game);
 void		clear_minimap_image(t_cub3d *game);
 void		draw_minimap_grid(t_cub3d *game);
-
-/* Timer */
-double		timer_delta(t_timer *t);
-double		timer_stop(t_timer *t);
-double		timer_start(t_timer *t);
-t_timer		*timer_init(t_timer *t, double (*time_func)(void));
 
 #endif
