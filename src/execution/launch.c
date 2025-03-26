@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   launch.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 19:29:54 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/03/23 12:24:07 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   launch.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
+/*   Updated: 2025/03/26 15:15:24 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	raycaster(void *data)
 
 	cub3d = data;
 	render = cub3d->render;
-	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_height * 4);
+	ft_bzero(cub3d->scene->pixels, S_WIDTH * S_HEIGHT * 4);
 	x = 0;
 	while (x < S_WIDTH)
 	{
@@ -94,7 +94,7 @@ void	raycaster(void *data)
 
 void	run_cub3d(t_cub3d *cub3d)
 {
-	cub3d->mlx = mlx_init(S_WIDTH, S_height, "Cub3D", false);
+	cub3d->mlx = mlx_init(S_WIDTH, S_HEIGHT, "Cub3D", false);
 	if (!cub3d->mlx)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);

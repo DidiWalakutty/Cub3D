@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/20 21:09:28 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/26 15:15:18 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	draw_wall_slices(t_cub3d *cub3d, t_textures *text, int x)
 	t_render	*r;
 
 	r = cub3d->render;
-	lineheight = (int)(S_height / r->wall_dist);
-	draw_start = -lineheight / 2 + (S_height / 2);
-	draw_end = lineheight / 2 + (S_height / 2);
+	lineheight = (int)(S_HEIGHT / r->wall_dist);
+	draw_start = -lineheight / 2 + (S_HEIGHT / 2);
+	draw_end = lineheight / 2 + (S_HEIGHT / 2);
 	if (draw_start < 0)
 		draw_start = 0;
-	if (draw_end >= S_height)
-		draw_end = S_height - 1;
+	if (draw_end >= S_HEIGHT)
+		draw_end = S_HEIGHT - 1;
 	text->pix_step = (1.0 * text->wall_img->height / lineheight);
-	text->tex_pos = (draw_start - (S_height / 2) + (lineheight / 2)) * \
+	text->tex_pos = (draw_start - (S_HEIGHT / 2) + (lineheight / 2)) * \
 					text->pix_step;
-	while (draw_start <= draw_end && draw_start < S_height)
+	while (draw_start <= draw_end && draw_start < S_HEIGHT)
 	{
 		text->y_tex = (int)text->tex_pos & (text->wall_img->height - 1);
 		text->tex_pos += text->pix_step;

@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/20 19:21:53 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/26 15:14:55 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	initiate_mlx_images(t_cub3d *cub3d)
 {
-	cub3d->scene = mlx_new_image(cub3d->mlx, S_WIDTH, S_height);
+	cub3d->scene = mlx_new_image(cub3d->mlx, S_WIDTH, S_HEIGHT);
 	cub3d->floor_and_ceiling = mlx_new_image(cub3d->mlx, \
-										S_WIDTH, S_height);
+										S_WIDTH, S_HEIGHT);
 	cub3d->minimap->minimap_img = mlx_new_image(cub3d->mlx, MINIMAP_WIDTH, \
 															MINIMAP_HEIGHT);
 	if (!cub3d->scene || !cub3d->floor_and_ceiling || \
