@@ -6,11 +6,21 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 15:10:30 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 16:31:24 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	is_texture_or_color_line(const char *line)
+{
+	return (ft_strncmp(line, "NO ", 3) == 0 || \
+			ft_strncmp(line, "SO ", 3) == 0 || \
+			ft_strncmp(line, "WE ", 3) == 0 || \
+			ft_strncmp(line, "EA ", 3) == 0 || \
+			ft_strncmp(line, "F ", 2) == 0 || \
+			ft_strncmp(line, "C ", 2) == 0);
+}
 
 static int	init_map(t_input *file_data)
 {
@@ -66,33 +76,31 @@ static bool	validate_map(t_map *map)
 	return (true);
 }
 
-bool	handle_map(t_input *file_data, char **lines)
+bool	handle_map(t_input *data, char **lines)
 {
 	t_player	*player;
 
-	if (init_map(file_data) == 1)
+	if (init_map(data) == 1)
 		return (false);
-	get_map_properties(lines, file_data->map);
-	if (!is_map_last_in_file(lines, file_data->map))
+	get_map_properties(lines, data->map);
+	if (!is_map_last_in_file(lines, data->map))
 		return (false);
-	file_data->map->grid = malloc(sizeof(char *) * \
-						(file_data->map->height + 1));
-	if (!file_data->map->grid)
-		return (print_error("Memory allocation for map grid failed."), false);
-	ft_bzero(file_data->map->grid, sizeof(char *) * \
-	(file_data->map->height + 1));
-	if (!populate_grid(lines, file_data->map))
-		return (print_error("Memory allocation for map grid line failed."), \
-				false);
+	data->map->grid = malloc(sizeof(char *) * (data->map->height + 1));
+	if (!data->map->grid)
+		return (print_error("Memory allocation failed."), false);
+	ft_bzero(data->map->grid, sizeof(char *) * \
+	(data->map->height + 1));
+	if (!populate_grid(lines, data->map))
+		return (print_error("Memory allocation failed."), false);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (false);
-	file_data->map->player = player;
+	data->map->player = player;
 	ft_bzero(player, sizeof(t_player));
-	set_player_spawning_point(file_data->map, player);
+	set_player_spawning_point(data->map, player);
 	if (check_player_spawning_point(player) == 1)
 		return (false);
-	if (validate_map(file_data->map) == false)
+	if (validate_map(data->map) == false)
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/23 11:14:41 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 13:58:37 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 16:01:15 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ bool	extract_elements(char **lines, t_input *content, \
 	int		i;
 	char	*trimmed_line;
 
-	i = 0;
-	while (lines[i])
+	i = -1;
+	while (lines[++i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
 		if (ft_strncmp(trimmed_line, "F ", 2) == 0)
@@ -69,7 +69,6 @@ bool	extract_elements(char **lines, t_input *content, \
 				return (free(trimmed_line), false);
 		}
 		free(trimmed_line);
-		i++;
 	}
 	return (true);
 }

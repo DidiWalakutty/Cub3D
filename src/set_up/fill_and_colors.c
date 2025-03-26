@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 20:08:00 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 15:15:07 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 17:15:00 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	draw_background(t_cub3d *cub3d)
 	while (x < S_WIDTH)
 	{
 		y = 0;
-		while (y <S_HEIGHT)
+		while (y < S_HEIGHT)
 		{
 			if (y < (S_HEIGHT / 2))
 				mlx_put_pixel(mlx_img, x, y, cub3d->textures->ceiling_color);

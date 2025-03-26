@@ -6,21 +6,11 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/23 11:31:51 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 13:55:32 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 16:31:05 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static bool	is_texture_or_color_line(const char *line)
-{
-	return (ft_strncmp(line, "NO ", 3) == 0 || \
-			ft_strncmp(line, "SO ", 3) == 0 || \
-			ft_strncmp(line, "WE ", 3) == 0 || \
-			ft_strncmp(line, "EA ", 3) == 0 || \
-			ft_strncmp(line, "F ", 2) == 0 || \
-			ft_strncmp(line, "C ", 2) == 0);
-}
 
 static bool	is_empty_or_texture_line(const char *line, bool *map_started)
 {
@@ -61,29 +51,23 @@ static int	skip_non_map_lines(char **lines)
 	return (i);
 }
 
-static void	update_map_dimensions(const char *line, int *width, \
-							int *height, int *last_index, int i)
+static void	update_map_dimensions(const char *line, t_map *map, int i)
 {
 	int	line_len;
 
 	line_len = ft_strlen(line);
-	if (line_len > *width)
-		*width = line_len;
-	(*height)++;
-	*last_index = i;
+	if (line_len > (int)map->width)
+		map->width = line_len;
+	map->height++;
+	map->last_index = i;
 }
 
-void	get_map_properties(char **lines, t_map *map)
+static void	process_map_lines(char **lines, t_map *map)
 {
-	int		height;
-	int		width;
 	int		i;
 	char	*trimmed_line;
 
-	height = 0;
-	width = 0;
-	i = skip_non_map_lines(lines);
-	map->first_index = i;
+	i = map->first_index;
 	while (lines[i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
@@ -94,11 +78,16 @@ void	get_map_properties(char **lines, t_map *map)
 			continue ;
 		}
 		if (is_valid_map_char(trimmed_line[0]))
-			update_map_dimensions(trimmed_line, &width, \
-							&height, &map->last_index, i);
+			update_map_dimensions(trimmed_line, map, i);
 		free(trimmed_line);
 		i++;
 	}
-	map->height = height;
-	map->width = width;
+}
+
+void	get_map_properties(char **lines, t_map *map)
+{
+	map->height = 0;
+	map->width = 0;
+	map->first_index = skip_non_map_lines(lines);
+	process_map_lines(lines, map);
 }

@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 15:14:37 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 16:40:12 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ typedef struct s_input
 	int		floor_colors[3];
 	int		ceiling_colors[3];
 	t_map	*map;
+	bool	has_floor_color;
+	bool	has_ceiling_color;
 }	t_input;
 
 typedef struct s_textures
@@ -190,6 +192,7 @@ void		set_player_spawning_point(t_map *map, t_player *player);
 int			check_player_spawning_point(t_player *player);
 void		get_map_properties(char **lines, t_map *map);
 bool		populate_grid(char **lines, t_map *map);
+bool		is_texture_or_color_line(const char *line);
 
 /* Execution */
 void		run_cub3d(t_cub3d *cub3d);
