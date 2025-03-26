@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 16:40:12 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 20:05:39 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@
 # include "MLX42.h"
 # include "libft.h"
 
-# define S_WIDTH 800 // segfault with 1200 and 1000!
-# define S_HEIGHT 800
+# define S_WIDTH 1200
+# define S_HEIGHT 1000
 
 /* Define ray info */
-# define SPEED 0.1
+# define SPEED 0.08
 # define X_SIDE 0
 # define Y_SIDE 1
 
