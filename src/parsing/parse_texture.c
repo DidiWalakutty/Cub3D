@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:53 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 12:01:29 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_texture.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 13:41:40 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static	bool has_png_extension(const char *filename)
 	return (ft_strncmp(filename + len - ext_len, ext, ext_len) == 0);
 }
 
-static	bool set_texture(char *line, char **texture, const char *prefix)
+static bool	set_texture(char *line, char **texture, const char *prefix)
 {
 	char	*texture_path;
 	char	*trimmed;
@@ -37,11 +37,18 @@ static	bool set_texture(char *line, char **texture, const char *prefix)
 		trimmed = ft_strtrim(texture_path, " \t\n\r");
 		free(texture_path);
 		if (!has_png_extension(trimmed))
-			return (free(trimmed), false);
+		{
+			free(trimmed);
+			return false;
+		}
+		if (*texture)
+		{
+			free(*texture);
+		}
 		*texture = trimmed;
-		return (true);
+		return true;
 	}
-	return (false);
+	return false;
 }
 
 bool	validate_textures(t_input *content)

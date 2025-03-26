@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_validation_II.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 11:48:13 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/23 11:58:21 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_validation_II.c                                :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/03/23 11:48:13 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/26 13:43:41 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ bool	is_map_surrounded_by_walls(t_map *map)
 {
     if (!check_top_and_bottom_walls(map->grid, 0) || \
 	!check_top_and_bottom_walls(map->grid, map->height - 1))
-        return (print_error("Map is not surrounded by walls."), false);
+        return (false);
     if (!check_side_walls(map, map->grid))
-        return (print_error("Map is not surrounded by walls."), false);
+        return (false);
     return (true);
 }

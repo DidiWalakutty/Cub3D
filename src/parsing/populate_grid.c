@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   populate_grid.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 11:20:05 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/23 11:41:57 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   populate_grid.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/03/23 11:20:05 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/26 12:59:07 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	*trim_and_allocate(const char *line, size_t width)
 		free(trimmed);
 		return (NULL);
 	}
+	free(trimmed);
 	return (no_spaces);
 }
 
