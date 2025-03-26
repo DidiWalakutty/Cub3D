@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 13:23:05 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/23 12:20:46 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minimap.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/02/24 13:23:05 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/03/26 15:13:34 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	clear_minimap_image(t_cub3d *game)
 	minimap = game->minimap;
 	if (game->minimap->minimap_img)
 		mlx_delete_image(game->mlx, minimap->minimap_img);
-	minimap->minimap_img = mlx_new_image(game->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	minimap->minimap_img = mlx_new_image(game->mlx, MINIMAP_WIDTH, \
+										MINIMAP_HEIGHT);
 	if (!minimap->minimap_img)
 		end_game(game, "Couldn't render minimap.");
 }
 
-static uint32_t get_cell_color(t_cub3d *game, int row, int col)
+static uint32_t	get_cell_color(t_cub3d *game, int row, int col)
 {
 	t_minimap	*minimap;
 	t_map		*map;
@@ -36,18 +37,18 @@ static uint32_t get_cell_color(t_cub3d *game, int row, int col)
 		return (minimap->floor_color);
 	if (map->grid[row][col] == '1')
 		return (minimap->wall_color);
-	else if (row == (int)game->render->player_pos.y &&\
+	else if (row == (int)game->render->player_pos.y && \
 			col == (int)game->render->player_pos.x)
 		return (minimap->player_color);
 	else
 		return (minimap->floor_color);
 }
 
-static void draw_minimap_cell(t_cub3d *game, int x, int y, uint32_t color)
+static void	draw_minimap_cell(t_cub3d *game, int x, int y, uint32_t color)
 {
-	t_minimap *minimap;
-	int i;
-	int j;
+	t_minimap	*minimap;
+	int			i;
+	int			j;
 
 	i = 0;
 	minimap = game->minimap;

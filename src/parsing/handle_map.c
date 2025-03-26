@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 13:57:52 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/26 15:10:30 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	handle_map(t_input *file_data, char **lines)
 	(file_data->map->height + 1));
 	if (!populate_grid(lines, file_data->map))
 		return (print_error("Memory allocation for map grid line failed."), \
-				 false);
+				false);
 	player = malloc(sizeof(t_player));
 	if (!player)
 		return (false);

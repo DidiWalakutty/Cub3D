@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   test_print.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:17:09 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/23 12:06:41 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   test_print.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:17:09 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/03/26 15:11:26 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	print_parsed_content(t_input *content)
 
 void	print_map(char **map)
 {
-	int row_index = 0;
+	int	row_index;
 
+	row_index = 0;
 	printf("Map:\n");
 	while (map[row_index])
 	{
