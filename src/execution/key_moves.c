@@ -6,14 +6,14 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 16:27:45 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 20:18:14 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/27 16:00:43 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-	Calculates the player's new position based on movement direction and speed. 
+	Calculates the player's new position based on movement direction and speed.
 	If the path is clear, updates the player's position.
 */
 static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
@@ -31,6 +31,9 @@ static void	move_up_down(const t_cub3d *cub3d, int32_t dir)
 	}
 }
 
+/*
+	Moves player sideways by shifting movement 90 degrees.
+*/
 static void	move_left_right(const t_cub3d *cub3d, int32_t dir)
 {
 	t_render	*render;

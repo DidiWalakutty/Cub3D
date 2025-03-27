@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/10 20:40:53 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/20 19:23:09 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/27 16:58:51 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	set_wall_textures(t_render *ray, t_cub3d *cub3d)
 
 /*
 	Determines whether the ray steps left/right or up/down.
-	Calcs the side_dist (distance to the first grid boundary)
+	Calcs the side_dist (distance to the first grid boundary) for DDA
 */
 void	update_side_dist(t_render *ray)
 {
@@ -83,6 +83,12 @@ void	update_side_dist(t_render *ray)
 	}
 }
 
+/*
+	Calcs how far away the wall is and where exactly on the wall 
+	the ray has hit (X is vertical: l/r).
+	Side_dist incl one step inside the wall (DDA), so we subtract last step.
+	Floor keeps only the decimal part, used for texture mapping.
+*/
 void	set_wall_height(t_render *ray)
 {
 	if (ray->side_hit == X_SIDE)

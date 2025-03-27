@@ -6,15 +6,16 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 20:12:50 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/27 16:52:53 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-	Performs DDA to trace the ray until it hits a wall.
+	Performs DDA to trace the ray through the grid until it hits a wall.
 	Steps through the grid one square at a time.
+	Decides whether to move horiz/vertic based on which side is closer.
 */
 static void	dda_algorithm(t_render *ray, t_cub3d *cub3d)
 {
@@ -67,6 +68,7 @@ void	render_minimap(t_cub3d *game)
 /*
 	Performs raycasting to render the 3D view by looping
 	through each vertical/y screen column.
+	Camera_col is used to calc the view of the camera.
 */
 void	raycaster(void *data)
 {
@@ -99,7 +101,7 @@ void	run_cub3d(t_cub3d *cub3d)
 		end_game(cub3d, "Couldn't init MLX window");
 	init_settings(cub3d);
 	mlx_loop_hook(cub3d->mlx, keys, cub3d);
-	mlx_loop_hook(cub3d->mlx, &raycaster, (void *)cub3d);
+	mlx_loop_hook(cub3d->mlx, raycaster, (void *)cub3d);
 	mlx_loop(cub3d->mlx);
 	printf("Thank you for playing!\n");
 	end_game(cub3d, NULL);

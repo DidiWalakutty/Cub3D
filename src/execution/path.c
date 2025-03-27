@@ -19,7 +19,7 @@ bool	hit_wall(char **grid, t_map *map, int32_t y, int32_t x)
 	return (grid[y][x] == '1');
 }
 
-/* Checks if the new position is free by testing both a forward and backward */
+/* Checks if the new position is free by checking a small margin around it */
 bool	path_clear(char **grid, t_map *map, t_dvectr new)
 {
 	double	margin;

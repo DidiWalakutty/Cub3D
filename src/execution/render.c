@@ -6,15 +6,16 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/31 17:22:22 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 15:15:18 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/27 16:51:06 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-	Draws each vertical line (wall slice)
-	pix_step: how much to move through the texture for each vertical pixel
+	Draws each vertical line (wall slice) by calculating the height + pos of
+	the walls. It samples the texture and draws it pixel by pixel.
+	pix_step: how much to move through the texture for each vertical pixel.
 	tex_pos: starts at the correct position within the texture for the first
 	pixel of the wall.
 	y_tex: calcs the correct texture coordinate for the vertical pixel.
