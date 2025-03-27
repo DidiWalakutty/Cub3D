@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/23 19:29:54 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/27 16:52:53 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/03/27 17:22:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	render_minimap(t_cub3d *game)
 /*
 	Performs raycasting to render the 3D view by looping
 	through each vertical/y screen column.
-	Camera_col is used to calc the view of the camera.
+	Camera_col is used to calc the view of the camera from player's perspective.
 */
 void	raycaster(void *data)
 {
