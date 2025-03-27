@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/23 11:14:41 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 16:01:15 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/03/27 21:09:37 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ bool	extract_elements(char **lines, t_input *content, \
 	int		i;
 	char	*trimmed_line;
 
+	// check if trimmed_line is NULL
 	i = -1;
 	while (lines[++i])
 	{
@@ -65,6 +66,8 @@ bool	extract_elements(char **lines, t_input *content, \
 		}
 		else if (is_texture_prefix(trimmed_line))
 		{
+			// if is_texture_prefixed returns false, we don't handle it.
+			// we only handle !handle_texture
 			if (!handle_texture(trimmed_line, content))
 				return (free(trimmed_line), false);
 		}
