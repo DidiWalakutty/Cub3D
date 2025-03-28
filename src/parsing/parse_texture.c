@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   parse_texture.c                                    :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:53 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 13:49:10 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:53 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/03/28 11:17:13 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ static bool	set_texture(char *line, char **texture, const char *prefix)
 	if (ft_strncmp(line, prefix, ft_strlen(prefix)) == 0)
 	{
 		texture_path = ft_strdup(line + ft_strlen(prefix));
+		if (!texture_path)
+			return (false);
 		trimmed = ft_strtrim(texture_path, " \t\n\r");
 		free(texture_path);
+		if (!trimmed)
+			return (false);
 		if (!has_png_extension(trimmed))
 		{
 			free(trimmed);

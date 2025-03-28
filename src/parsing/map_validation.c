@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   map_validation.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 13:54:12 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:28 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/03/28 11:18:12 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ bool	is_map_last_in_file(char **lines, t_map *map)
 	while (lines[i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
+		if (!trimmed_line)
+			return (false);
 		if (trimmed_line[0] != '\0' && !is_valid_map_char(trimmed_line[0]))
 		{
 			print_error("Map is not last in file.");

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 20:33:38 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/03/28 11:30:32 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ bool		validate_textures(t_input *content);
 /* Map Population */
 void		set_player_spawning_point(t_map *map, t_player *player);
 int			check_player_spawning_point(t_player *player);
-void		get_map_properties(char **lines, t_map *map);
+bool		get_map_properties(char **lines, t_map *map);
 bool		populate_grid(char **lines, t_map *map);
 bool		is_texture_or_color_line(const char *line);
 

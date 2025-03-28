@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   extract_elements.c                                 :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/03/23 11:14:41 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/27 21:09:37 by diwalaku      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   extract_elements.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 11:14:41 by yasamankari       #+#    #+#             */
+/*   Updated: 2025/03/28 11:39:44 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ bool	extract_elements(char **lines, t_input *content, \
 	while (lines[++i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
+		if (!trimmed_line)
+			return (false);
 		if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 		{
 			if (!handle_floor_color(trimmed_line, content, f_color))
@@ -70,6 +72,19 @@ bool	extract_elements(char **lines, t_input *content, \
 			// we only handle !handle_texture
 			if (!handle_texture(trimmed_line, content))
 				return (free(trimmed_line), false);
+		}
+		else if (trimmed_line[0] == '\0')
+		{
+			//print_error("Texture corrupt.");
+			free(trimmed_line);
+			continue ;
+			//return (false);
+		}
+		else
+		{
+			print_error("invalid line.");
+			free(trimmed_line);
+			return (false);
 		}
 		free(trimmed_line);
 	}

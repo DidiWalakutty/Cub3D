@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   map_properties.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/03/23 11:31:51 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 16:31:05 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   map_properties.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 11:31:51 by yasamankari       #+#    #+#             */
+/*   Updated: 2025/03/28 11:29:53 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	is_empty_or_texture_line(const char *line, bool *map_started)
 	char	*trimmed_line;
 
 	trimmed_line = ft_strtrim(line, " \t\n\r");
+	if (!trimmed_line)
+		return (false);
 	if (trimmed_line[0] == '\0')
 	{
 		free(trimmed_line);
@@ -32,6 +34,25 @@ static bool	is_empty_or_texture_line(const char *line, bool *map_started)
 	return (false);
 }
 
+// static int	skip_non_map_lines(char **lines)
+// {
+// 	int		i;
+// 	bool	map_started;
+
+// 	i = 0;
+// 	map_started = false;
+// 	while (lines[i])
+// 	{
+// 		if (is_empty_or_texture_line(lines[i], &map_started))
+// 		{
+// 			i++;
+// 			continue ;
+// 		}
+// 		break ;
+// 	}
+// 	return (i);
+// }
+
 static int	skip_non_map_lines(char **lines)
 {
 	int		i;
@@ -41,17 +62,19 @@ static int	skip_non_map_lines(char **lines)
 	map_started = false;
 	while (lines[i])
 	{
-		if (is_empty_or_texture_line(lines[i], &map_started))
+		if (!is_empty_or_texture_line(lines[i], &map_started))
 		{
-			i++;
-			continue ;
+			if (map_started)
+				break;
+			print_error("Error processing non-map lines.");
+			return (-1);
 		}
-		break ;
+		i++;
 	}
 	return (i);
 }
 
-static void	update_map_dimensions(const char *line, t_map *map, int i)
+static bool	update_map_dimensions(const char *line, t_map *map, int i)
 {
 	int	line_len;
 
@@ -60,9 +83,10 @@ static void	update_map_dimensions(const char *line, t_map *map, int i)
 		map->width = line_len;
 	map->height++;
 	map->last_index = i;
+	return (true);
 }
 
-static void	process_map_lines(char **lines, t_map *map)
+static bool	process_map_lines(char **lines, t_map *map)
 {
 	int		i;
 	char	*trimmed_line;
@@ -71,6 +95,8 @@ static void	process_map_lines(char **lines, t_map *map)
 	while (lines[i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
+		if (!trimmed_line)
+			return (false);
 		if (trimmed_line[0] == '\0')
 		{
 			free(trimmed_line);
@@ -78,16 +104,30 @@ static void	process_map_lines(char **lines, t_map *map)
 			continue ;
 		}
 		if (is_valid_map_char(trimmed_line[0]))
-			update_map_dimensions(trimmed_line, map, i);
+		{
+			if (!update_map_dimensions(trimmed_line, map, i))
+				return (free(trimmed_line), false);
+		}
+		else
+		{
+			print_error("Invalid map character encountered.");
+			free(trimmed_line);
+			return (false);
+		}
 		free(trimmed_line);
 		i++;
 	}
+	return (true);
 }
 
-void	get_map_properties(char **lines, t_map *map)
+bool	get_map_properties(char **lines, t_map *map)
 {
 	map->height = 0;
 	map->width = 0;
 	map->first_index = skip_non_map_lines(lines);
-	process_map_lines(lines, map);
+	if (map->first_index == -1)
+		return (false);
+	if (!process_map_lines(lines, map))
+		return (false);
+	return (true);
 }

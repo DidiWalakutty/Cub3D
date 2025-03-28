@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   input.c                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: ykarimi <ykarimi@student.codam.nl>           +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 12:16:23 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/01/29 12:31:42 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 12:16:23 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/03/28 11:32:01 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char	*read_file(const char *pathname)
 	if (fd == -1)
 		return (print_error("Could not open file"), NULL);
 	line_joined = ft_strdup("");
+	if (!line_joined)
+		return (NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
