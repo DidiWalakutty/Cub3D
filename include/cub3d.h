@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/02 14:52:07 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/02 18:42:08 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void		fill_background(t_cub3d *cub3d);
 /* Error Handling */
 void		print_error(char *errormsg);
 void		cleanup(t_cub3d *game);
-void		end_game(t_cub3d *cub3d, char *error_message);
+void		end_game(t_cub3d *cub3d, char *error_message, bool failure);
 
 /* Print for testing */
 void		print_parsed_content(t_input *content);

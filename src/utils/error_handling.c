@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:17:03 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/02/24 14:24:31 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   error_handling.c                                   :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:17:03 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/04/02 18:48:55 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	cleanup(t_cub3d *game)
 		free(game->render);
 }
 
-void	end_game(t_cub3d *game, char *message)
+// add third arg if end_game isnt failure
+void	end_game(t_cub3d *game, char *message, bool failure)
 {
 	if (message)
 		print_error(message);
@@ -90,5 +91,7 @@ void	end_game(t_cub3d *game, char *message)
 		free_mlx_data(game);
 		mlx_terminate(game->mlx);
 	}
-	exit(EXIT_FAILURE);
+	if (failure)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }

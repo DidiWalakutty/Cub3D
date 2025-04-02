@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/24 13:49:41 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/03/26 15:14:55 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/02 18:48:23 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ static void	initiate_mlx_images(t_cub3d *cub3d)
 															MINIMAP_HEIGHT);
 	if (!cub3d->scene || !cub3d->floor_and_ceiling || \
 		!cub3d->minimap->minimap_img)
-		end_game(cub3d, "Allocation error for image space.");
+		end_game(cub3d, "Allocation error for image space.", true);
 	if (mlx_image_to_window(cub3d->mlx, cub3d->floor_and_ceiling, 0, 0) == -1)
-		end_game(cub3d, "Couldn't output image to window.");
+		end_game(cub3d, "Couldn't output image to window.", true);
 	if (mlx_image_to_window(cub3d->mlx, cub3d->scene, 0, 0) == -1)
-		end_game(cub3d, "Couldn't output image to window");
+		end_game(cub3d, "Couldn't output image to window", true);
 	if (mlx_image_to_window(cub3d->mlx, cub3d->minimap->minimap_img, \
 							0, 0) == -1)
-		end_game(cub3d, "Couldn't output minimap image to window.");
+		end_game(cub3d, "Couldn't output minimap image to window.", true);
 	fill_background(cub3d);
 	if (load_wall_textures(cub3d) == false)
-		end_game(cub3d, "Couldn't load textures.");
+		end_game(cub3d, "Couldn't load textures.", true);
 }
 
 /* 
@@ -45,13 +45,13 @@ void	init_settings(t_cub3d *cub3d)
 
 	temp_render = cub3d->render;
 	if (!alloc_execution_structs(cub3d))
-		end_game(cub3d, "Couldn't allocate structs.");
+		end_game(cub3d, "Couldn't allocate structs.", true);
 	initialize_minimap(cub3d->minimap, cub3d);
 	initiate_mlx_images(cub3d);
 	cub3d->render = set_variables(cub3d);
 	free(temp_render);
 	if (!cub3d->render)
-		end_game(cub3d, "Couldn't allocate render struct.");
+		end_game(cub3d, "Couldn't allocate render struct.", true);
 }
 
 bool	load_wall_textures(t_cub3d *cub3d)

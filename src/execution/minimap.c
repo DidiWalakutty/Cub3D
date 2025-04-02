@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/02/24 13:23:05 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 15:13:34 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/02 18:47:47 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	clear_minimap_image(t_cub3d *game)
 	minimap->minimap_img = mlx_new_image(game->mlx, MINIMAP_WIDTH, \
 										MINIMAP_HEIGHT);
 	if (!minimap->minimap_img)
-		end_game(game, "Couldn't render minimap.");
+		end_game(game, "Couldn't render minimap.", true);
 }
 
 static uint32_t	get_cell_color(t_cub3d *game, int row, int col)
