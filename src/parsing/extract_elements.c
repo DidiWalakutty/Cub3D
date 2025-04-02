@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   extract_elements.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/23 11:14:41 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/28 11:39:44 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   extract_elements.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/03/23 11:14:41 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/04/02 12:23:42 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,26 @@ static bool	handle_ceiling_color(char *line, t_input *content, \
 
 static bool	handle_texture(char *line, t_input *content)
 {
+	printf("Processing texture line: '%s'\n", line);
 	return (parse_texture(line, content));
 }
+
+// static bool f_c(char *trimmed_line, t_input *content, bool *f_color, bool *c_color)
+// {
+// 	if (ft_strncmp(trimmed_line, "F ", 2) == 0)
+// 		{
+// 			if (!handle_floor_color(trimmed_line, content, f_color))
+// 				return (free(trimmed_line), false);
+// 		}
+// 		else if (ft_strncmp(trimmed_line, "C ", 2) == 0)
+// 		{
+// 			if (!handle_ceiling_color(trimmed_line, content, c_color))
+// 				return (free(trimmed_line), false);
+// 		}
+// 		return true;
+	
+// }
+
 
 bool	extract_elements(char **lines, t_input *content, \
 						bool *f_color, bool *c_color)
@@ -49,13 +67,16 @@ bool	extract_elements(char **lines, t_input *content, \
 	int		i;
 	char	*trimmed_line;
 
-	// check if trimmed_line is NULL
 	i = -1;
 	while (lines[++i])
 	{
 		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
 		if (!trimmed_line)
 			return (false);
+		// if (!f_c(trimmed_line, content, f_color, c_color))
+		// {
+		// 	return (free(trimmed_line), false);
+		// }
 		if (ft_strncmp(trimmed_line, "F ", 2) == 0)
 		{
 			if (!handle_floor_color(trimmed_line, content, f_color))
@@ -68,25 +89,24 @@ bool	extract_elements(char **lines, t_input *content, \
 		}
 		else if (is_texture_prefix(trimmed_line))
 		{
-			// if is_texture_prefixed returns false, we don't handle it.
-			// we only handle !handle_texture
 			if (!handle_texture(trimmed_line, content))
 				return (free(trimmed_line), false);
 		}
 		else if (trimmed_line[0] == '\0')
 		{
-			//print_error("Texture corrupt.");
 			free(trimmed_line);
 			continue ;
-			//return (false);
 		}
+		else if (is_valid_map_char(trimmed_line[0]))
+        {
+            free(trimmed_line);
+            break;
+        }
 		else
-		{
-			print_error("invalid line.");
-			free(trimmed_line);
-			return (false);
-		}
+			return (free(trimmed_line), false);
 		free(trimmed_line);
 	}
 	return (true);
 }
+
+
