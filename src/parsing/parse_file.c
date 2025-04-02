@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:42 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/28 11:33:07 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parse_file.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:42 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/04/02 12:47:41 by diwalaku      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	parse_file(char *argv[], t_input *file_data)
 		result = handle_map_and_validate(file_data, lines);
 	if (lines)
 		free_lines(lines);
-	// if (result != 0)
-	// 	return (result);
+	if (result != 0)
+		print_error("Problem with extracting elements.");
 	if (!file_data->has_ceiling_color || !file_data->has_floor_color)
 	{
 		print_error("Both floor and ceiling colors must be specified.");
