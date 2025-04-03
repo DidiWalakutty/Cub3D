@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:35 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/03/26 13:51:35 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/03 16:12:07 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ static bool	split_rgb_values(char *line, char ***rgb)
 	return (true);
 }
 
+static bool	is_valid_number(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 static	bool	validate_rgb_values(char **rgb, int *color)
 {
 	int	i;
@@ -47,7 +65,7 @@ static	bool	validate_rgb_values(char **rgb, int *color)
 	i = 0;
 	while (i < 3)
 	{
-		if (!rgb[i])
+		if (!rgb[i] || !is_valid_number(rgb[i]))
 			return (false);
 		color[i] = ft_atoi(rgb[i]);
 		if (color[i] < 0 || color[i] > 255)

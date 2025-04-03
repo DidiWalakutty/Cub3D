@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:16:23 by ykarimi           #+#    #+#             */
-/*   Updated: 2025/03/28 11:32:01 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   input.c                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/01/28 12:16:23 by ykarimi       #+#    #+#                 */
+/*   Updated: 2025/04/03 16:14:40 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ int	handle_input(const char *filename, char ***lines)
 		return (1);
 	if (is_file_empty(file_content))
 		return (free(file_content), 1);
-	*lines = ft_split(file_content, '\n');
+	*lines = split_file_content(file_content);
+	if (!*lines)
+	{
+		free(file_content);
+		return (print_error("Memory allocation failed"), 1);
+	}
 	free(file_content);
 	if (!*lines)
 		return (1);

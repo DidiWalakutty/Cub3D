@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path_checker.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/21 11:36:43 by yasamankari       #+#    #+#             */
-/*   Updated: 2025/03/28 11:04:50 by yasamankari      ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path_checker.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/02/21 11:36:43 by yasamankari   #+#    #+#                 */
+/*   Updated: 2025/04/03 16:10:49 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ static bool	can_move_direction(t_map *map, int dx, int dy)
 
 bool	is_player_entrapped(t_map *map)
 {
-	//int	player_x;
-	//int	player_y;
-
-	//player_x = map->player->x;
-	//player_y = map->player->y;
 	if (!can_move_direction(map, 0, 1) && \
 		!can_move_direction(map, 0, -1) && \
 		!can_move_direction(map, 1, 0) && \

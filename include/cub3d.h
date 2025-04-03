@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/02 18:42:08 by diwalaku      ########   odam.nl         */
+/*   Updated: 2025/04/03 16:28:54 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,24 @@ bool		parse_color(char *line, int *color);
 bool		is_map_last_in_file(char **lines, t_map *map);
 bool		handle_map(t_input *file_data, char **lines);
 bool		is_player_entrapped(t_map *map);
+bool		update_map_dimensions(const char *line, t_map *map, int i);
+char		**split_file_content(const char *file_content);
+size_t		count_lines(const char *file_content);
+bool	is_texture_prefix(const char *line);
+bool	handle_texture(char *line, t_input *content);
+bool	process_ceiling_line(char *line, t_input *content, bool *c_color);
+
+bool	process_floor_line(char *line, t_input *content, bool *f_color);
+bool	process_ceiling_line(char *line, t_input *content, bool *c_color);
+bool	handle_floor_color(char *line, t_input *content, \
+							bool *f_color);
+bool	handle_ceiling_color(char *line, t_input *content, \
+			bool *c_color);
+bool	process_floor_line(char *line, t_input *content, bool *f_color);
+int	process_line(char *line, t_input *content, bool *f_color, bool *c_color);
+int	process_map_or_empty_line(char *line);
+int	process_element_line(char *line, t_input *content, bool *f_color, bool *c_color);
+bool	process_texture_line(char *line, t_input *content);
 
 /* Map Validation */
 bool		is_valid_map_char(char c);
@@ -213,6 +231,7 @@ void		end_game(t_cub3d *cub3d, char *error_message, bool failure);
 /* Print for testing */
 void		print_parsed_content(t_input *content);
 void		print_map(char **map);
+void		print_lines(char **lines);
 
 /* Minimap */
 void		render_minimap(t_cub3d *game);
