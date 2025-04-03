@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:17:09 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/04/03 16:09:45 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/03 16:47:38 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,19 @@ void	print_map(char **map)
 		row_index++;
 	}
 }
-void print_lines(char **lines)
+
+void	print_lines(char **lines)
 {
-    int i = 0;
-    printf("Printing lines:\n");
-    while (lines[i])
-    {
-        printf("Line %d: '%s'\n", i, lines[i]);
-        i++;
-    }
-    printf("End of lines.\n");
+	int	i;
+
+	i = 0;
+	printf("Printing lines:\n");
+	while (lines[i])
+	{
+		printf("Line %d: '%s'\n", i, lines[i]);
+		i++;
+	}
+	printf("End of lines.\n");
 }
 
 size_t	count_lines(const char *file_content)
