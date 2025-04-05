@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/04/03 16:49:59 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/05 13:23:21 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,51 +33,6 @@ static int	init_map(t_input *file_data)
 	ft_bzero(file_data->map, sizeof(t_map));
 	return (0);
 }
-// malloc check
-static void	replace_spaces_with_one(char **grid)
-{
-    int	i;
-    int	j;
-    int	max_length;
-
-    max_length = 0;
-    i = 0;
-    while (grid[i])
-    {
-        int line_length = ft_strlen(grid[i]);
-        if (line_length > max_length)
-            max_length = line_length;
-        i++;
-    }
-    i = 0;
-    while (grid[i])
-    {
-        j = 0;
-        while (grid[i][j])
-        {
-            if (grid[i][j] == ' ')
-                grid[i][j] = '1';
-            j++;
-        }
-        if (j < max_length)
-        {
-            char *padded_line = malloc(max_length + 1);
-            if (!padded_line)
-            {
-                print_error("Memory allocation failed while padding lines.");
-                return ;
-            }
-            ft_strlcpy(padded_line, grid[i], max_length + 1);
-            while (j < max_length)
-                padded_line[j++] = '1';
-            padded_line[j] = '\0';
-            free(grid[i]);
-            grid[i] = padded_line;
-        }
-        i++;
-    }
-}
-
 
 static bool	validate_map(t_map *map)
 {

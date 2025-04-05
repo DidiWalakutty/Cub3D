@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/03 16:28:54 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/05 13:25:29 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,21 +173,25 @@ bool		is_player_entrapped(t_map *map);
 bool		update_map_dimensions(const char *line, t_map *map, int i);
 char		**split_file_content(const char *file_content);
 size_t		count_lines(const char *file_content);
-bool	is_texture_prefix(const char *line);
-bool	handle_texture(char *line, t_input *content);
-bool	process_ceiling_line(char *line, t_input *content, bool *c_color);
+bool		is_texture_prefix(const char *line);
+bool		handle_texture(char *line, t_input *content);
+bool		process_ceiling_line(char *line, t_input *content, bool *c_color);
 
-bool	process_floor_line(char *line, t_input *content, bool *f_color);
-bool	process_ceiling_line(char *line, t_input *content, bool *c_color);
-bool	handle_floor_color(char *line, t_input *content, \
+bool		process_floor_line(char *line, t_input *content, bool *f_color);
+bool		process_ceiling_line(char *line, t_input *content, bool *c_color);
+bool		handle_floor_color(char *line, t_input *content, \
 							bool *f_color);
-bool	handle_ceiling_color(char *line, t_input *content, \
+bool		handle_ceiling_color(char *line, t_input *content, \
 			bool *c_color);
-bool	process_floor_line(char *line, t_input *content, bool *f_color);
-int	process_line(char *line, t_input *content, bool *f_color, bool *c_color);
-int	process_map_or_empty_line(char *line);
-int	process_element_line(char *line, t_input *content, bool *f_color, bool *c_color);
-bool	process_texture_line(char *line, t_input *content);
+bool		process_floor_line(char *line, t_input *content, bool *f_color);
+int			process_line(char *line, t_input *content, \
+							bool *f_color, bool *c_color);
+int			process_map_or_empty_line(char *line);
+int			process_element_line(char *line, t_input *content, \
+									bool *f_color, bool *c_color);
+bool		process_texture_line(char *line, t_input *content);
+void		replace_spaces_with_one(char **grid);
+bool		process_map_lines(char **lines, t_map *map);
 
 /* Map Validation */
 bool		is_valid_map_char(char c);

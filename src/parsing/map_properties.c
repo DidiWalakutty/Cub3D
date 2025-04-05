@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/03/23 11:31:51 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/04/03 16:13:55 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/05 13:24:16 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,26 @@ bool	update_map_dimensions(const char *line, t_map *map, int i)
 	return (true);
 }
 
-static bool	process_map_lines(char **lines, t_map *map)
+static bool	process_single_map_line(const char *line, t_map *map, int i)
 {
-	int		i;
 	char	*trimmed_line;
 
-	i = map->first_index;
-	while (lines[i])
+	trimmed_line = ft_strtrim(line, " \t\n\r");
+	if (!trimmed_line)
+		return (false);
+	if (trimmed_line[0] == '\0')
 	{
-		trimmed_line = ft_strtrim(lines[i], " \t\n\r");
-		if (!trimmed_line)
-			return (false);
-		if (trimmed_line[0] == '\0')
-		{
-			free(trimmed_line);
-			i++;
-			continue ;
-		}
-		if (is_valid_map_char(trimmed_line[0]))
-		{
-			if (!update_map_dimensions(trimmed_line, map, i))
-				return (free(trimmed_line), false);
-		}
-		else
-			return (free(trimmed_line), false);
 		free(trimmed_line);
-		i++;
+		return (true);
 	}
+	if (is_valid_map_char(trimmed_line[0]))
+	{
+		if (!update_map_dimensions(trimmed_line, map, i))
+			return (free(trimmed_line), false);
+	}
+	else
+		return (free(trimmed_line), false);
+	free(trimmed_line);
 	return (true);
 }
 

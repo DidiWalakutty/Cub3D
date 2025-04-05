@@ -6,11 +6,25 @@
 /*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/01/28 12:16:28 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/04/03 16:12:51 by ykarimi       ########   odam.nl         */
+/*   Updated: 2025/04/05 13:21:50 by ykarimi       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	process_map_lines(char **lines, t_map *map)
+{
+	int	i;
+
+	i = map->first_index;
+	while (lines[i])
+	{
+		if (!process_single_map_line(lines[i], map, i))
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 bool	is_valid_map_char(char c)
 {
