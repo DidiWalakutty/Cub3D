@@ -6,7 +6,7 @@
 /*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
-/*   Updated: 2025/04/06 13:21:30 by yasamankari      ###   ########.fr       */
+/*   Updated: 2025/04/06 13:52:28 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,9 @@ bool		process_texture_line(char *line, t_input *content);
 void		replace_spaces_with_one(char **grid);
 bool		process_map_lines(char **lines, t_map *map);
 bool		process_single_map_line(const char *line, t_map *map, int i);
-bool	check_line_for_walls(const char *line);
+bool		check_line_for_walls(const char *line);
+bool		is_map_surrounded_by_walls_unpadded(char **grid, int height);
+bool		check_first_and_last_rows(char **grid, int height);
 
 /* Map Validation */
 bool		is_valid_map_char(char c);
