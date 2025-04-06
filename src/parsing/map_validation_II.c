@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   map_validation_II.c                                :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/03/23 11:48:13 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/03/26 13:53:00 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   map_validation_II.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 11:48:13 by yasamankari       #+#    #+#             */
+/*   Updated: 2025/04/06 13:25:57 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	check_line_for_walls(const char *line)
+bool	check_line_for_walls(const char *line)
 {
 	int	j;
 
@@ -22,7 +22,7 @@ static bool	check_line_for_walls(const char *line)
 		j++;
 	while (line[j])
 	{
-		if (line[j] != '1')
+		if (line[j] != '1' && line[j] != ' ')
 			return (false);
 		j++;
 	}

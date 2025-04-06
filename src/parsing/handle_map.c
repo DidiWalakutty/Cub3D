@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   handle_map.c                                       :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/28 17:01:12 by ykarimi       #+#    #+#                 */
-/*   Updated: 2025/04/05 13:23:21 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   handle_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/28 17:01:12 by ykarimi           #+#    #+#             */
+/*   Updated: 2025/04/06 13:31:46 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,46 @@ static int	init_map(t_input *file_data)
 	return (0);
 }
 
+static bool	is_map_surrounded_by_walls_unpadded(char **grid, int height)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*trimmed_row;
+
+	trimmed_row = ft_strtrim(grid[0], " ");
+	if (!trimmed_row || !check_line_for_walls(trimmed_row))
+		return (free(trimmed_row), false);
+	free(trimmed_row);
+	trimmed_row = ft_strtrim(grid[height - 1], " ");
+	if (!trimmed_row || !check_line_for_walls(trimmed_row))
+		return (free(trimmed_row), false);
+	free(trimmed_row);
+	i = 1;
+	while (i < height - 1)
+	{
+		len = ft_strlen(grid[i]);
+		j = 0;
+		while (grid[i][j] == ' ')
+			j++;
+		if (grid[i][j] != '1')
+			return (false);
+		while (len > 0 && grid[i][len - 1] == ' ')
+			len--;
+		if (grid[i][len - 1] != '1')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 static bool	validate_map(t_map *map)
 {
+	if (!is_map_surrounded_by_walls_unpadded(map->grid, map->height))
+	{
+		print_error("Map is not surrounded by walls in its original state.");
+		return (false);
+	}
 	replace_spaces_with_one(map->grid);
 	if (!validate_map_characters(map))
 		return (false);

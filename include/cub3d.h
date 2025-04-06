@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   cub3d.h                                            :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/01/20 14:25:31 by diwalaku      #+#    #+#                 */
-/*   Updated: 2025/04/05 13:25:29 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/20 14:25:31 by diwalaku          #+#    #+#             */
+/*   Updated: 2025/04/06 13:21:30 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ int			process_element_line(char *line, t_input *content, \
 bool		process_texture_line(char *line, t_input *content);
 void		replace_spaces_with_one(char **grid);
 bool		process_map_lines(char **lines, t_map *map);
+bool		process_single_map_line(const char *line, t_map *map, int i);
+bool	check_line_for_walls(const char *line);
 
 /* Map Validation */
 bool		is_valid_map_char(char c);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   map_properties.c                                   :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: yasamankarimi <yasamankarimi@student.42      +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2025/03/23 11:31:51 by yasamankari   #+#    #+#                 */
-/*   Updated: 2025/04/05 13:24:16 by ykarimi       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   map_properties.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yasamankarimi <yasamankarimi@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/23 11:31:51 by yasamankari       #+#    #+#             */
+/*   Updated: 2025/04/06 10:15:28 by yasamankari      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	update_map_dimensions(const char *line, t_map *map, int i)
 	return (true);
 }
 
-static bool	process_single_map_line(const char *line, t_map *map, int i)
+bool	process_single_map_line(const char *line, t_map *map, int i)
 {
 	char	*trimmed_line;
 
