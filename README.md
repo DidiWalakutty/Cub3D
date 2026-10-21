@@ -54,9 +54,9 @@ Replace the map path with another valid .cub file from the repository.
 
 | Key | Action |
 |---|---|
-| W / A / S / D | Move through the maze |
-| Left / Right arrows | Rotate the camera |
-| ESC | Exit the game |
+| `W` / `A` / `S` / `D` | Move through the maze |
+| `←` / `→` | Rotate the camera |
+| `ESC` | Exit the game |
 
 ## 🛠️ Technologies
 - C
