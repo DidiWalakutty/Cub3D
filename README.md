@@ -18,11 +18,11 @@ This project was created with [Yaz](https://github.com/Y4ZK4Y).
 
 ## 🔍 Technical Overview
 
-**Raycasting:** Uses the DDA algorithm to traverse the 2D map grid and detect wall intersections. The calculated distance determines the projected wall height for each screen column.
+- **Raycasting:** Uses the DDA algorithm to traverse the 2D map grid and detect wall intersections. The calculated distance determines the projected wall height for each screen column.
 
-**Texture rendering:** Calculates texture coordinates from wall intersection positions and orientations, then draws textured vertical wall slices into MLX42 image buffers.
+- **Texture rendering:** Calculates texture coordinates from wall intersection positions and orientations, then draws textured vertical wall slices into MLX42 image buffers.
 
-**Map validation:** Parses scene files containing map data, texture paths, and floor and ceiling colours. Validates the map structure and checks that it is enclosed by walls before launching the game.
+- **Map validation:** Parses scene files containing map data, texture paths, and floor and ceiling colours. Validates the map structure and checks that it is enclosed by walls before launching the game.
 
 ## My Contributions
 
