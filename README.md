@@ -24,6 +24,16 @@ This project was created with [Yaz](https://github.com/Y4ZK4Y).
 
 **Map validation:** Parses scene files containing map data, texture paths, and floor and ceiling colours. Validates the map structure and checks that it is enclosed by walls before launching the game.
 
+## My Contributions
+
+I primarily worked on the raycasting and rendering pipeline, player movement, and low-level graphics operations.
+
+- Raycasting and wall rendering.
+- Texture mapping and graphics handling.
+- Player movement and collision detection.
+- Image buffer management and resource cleanup.
+
+
 ## 🚀 Build and Run
 **Prerequisites:** A compatible environment with the required MiniLibX/MLX42 dependencies and build tools.
 
